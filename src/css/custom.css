@@ -1,3 +1,5 @@
+@import 'katex/dist/katex.min.css';
+
 :root {
   --ifm-color-primary: #365eaf;
   --ifm-color-primary-dark: #2e529d;
@@ -5,13 +7,16 @@
   --ifm-color-primary-light: #4c70bb;
   --ifm-color-primary-lighter: #587bc1;
   --ifm-background-color: #fff;
-  --ifm-font-family-base: Inter, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --ifm-font-family-base: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --ifm-font-size-base: 16px;
   --ifm-line-height-base: 1.8;
   --ifm-heading-font-weight: 700;
   --ifm-code-font-size: 0.84rem;
   --ifm-navbar-height: 58px;
 }
+
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+.theme-doc-markdown code, pre, .token { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; }
 
 html[data-theme='light'] { --ifm-background-surface-color: #f8f9fb; }
 .navbar { border-bottom: 1px solid #e7eaf0; box-shadow: none; background: rgba(255,255,255,.94); }
