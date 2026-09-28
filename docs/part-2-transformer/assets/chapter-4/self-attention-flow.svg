@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Self-attention computation flow</title>
+  <desc id="desc">The input x is linearly projected into queries, keys and values. Query times transposed key gives token-to-token scores, a lower-triangular causal mask blocks future positions, softmax creates attention weights, and those weights combine the values into the output.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfdf8"/><stop offset="1" stop-color="#f3faeb"/></linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#587b42"/></marker>
+    <style>
+      .text{font-family:Inter,Arial,sans-serif;fill:#263323}.title{font-size:30px;font-weight:750}.subtitle{font-size:17px;fill:#687963}.label{font-size:18px;font-weight:700}.small{font-size:15px;fill:#687963}.formula{font-family:Georgia,serif;font-size:21px;font-weight:650;text-anchor:middle;dominant-baseline:middle}.arrow{fill:none;stroke:#587b42;stroke-width:2;marker-end:url(#arrow)}.softarrow{fill:none;stroke:#8da980;stroke-width:1.8;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="650" rx="24" fill="url(#bg)"/>
+  <g>
+    <rect x="48" y="24" width="352" height="78" rx="14" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="70" y="53" class="text label">Query (Q)</text>
+    <text x="70" y="82" class="text subtitle">What am I looking for?</text>
+
+    <rect x="424" y="24" width="352" height="78" rx="14" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="446" y="53" class="text label">Key (K)</text>
+    <text x="446" y="82" class="text subtitle">What does this token contain?</text>
+
+    <rect x="800" y="24" width="352" height="78" rx="14" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="822" y="53" class="text label">Value (V)</text>
+    <text x="822" y="82" class="text subtitle">What information should I pass on?</text>
+  </g>
+
+  <rect x="48" y="322" width="150" height="94" rx="16" fill="#fff" stroke="#b9cda9" stroke-width="2.5"/>
+  <text x="123" y="358" class="text label" text-anchor="middle">Input x</text>
+  <text x="123" y="389" class="text small" text-anchor="middle">(B, T, C)</text>
+
+  <path d="M198 369 H230 V170 H260" class="arrow"/>
+  <path d="M230 369 H260" class="arrow"/>
+  <path d="M230 369 V570 H260" class="arrow"/>
+  <rect x="262" y="126" width="174" height="88" rx="15" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+  <text x="349" y="162" class="text label" text-anchor="middle">query = Linear(x)</text><text x="349" y="190" class="text small" text-anchor="middle">q · (B, T, 16)</text>
+  <rect x="262" y="325" width="174" height="88" rx="15" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+  <text x="349" y="361" class="text label" text-anchor="middle">key = Linear(x)</text><text x="349" y="389" class="text small" text-anchor="middle">k · (B, T, 16)</text>
+  <rect x="262" y="526" width="174" height="88" rx="15" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+  <text x="349" y="562" class="text label" text-anchor="middle">value = Linear(x)</text><text x="349" y="590" class="text small" text-anchor="middle">v · (B, T, 16)</text>
+
+  <path d="M436 170 H464 V244 H498" class="arrow"/>
+  <path d="M436 369 H464 V280 H498" class="arrow"/>
+  <rect x="500" y="203" width="150" height="120" rx="15" fill="#fff0dc" stroke="#dda65c" stroke-width="2"/>
+  <text x="575" y="241" class="text label" text-anchor="middle">Score matrix</text>
+  <text x="575" y="275" class="text formula">q @ kᵀ</text>
+  <text x="575" y="306" class="text small" text-anchor="middle">(B, T, T)</text>
+
+  <path d="M650 263 H684" class="arrow"/>
+  <rect x="686" y="211" width="142" height="104" rx="15" fill="#fff" stroke="#c9d6be" stroke-width="2"/>
+  <text x="757" y="248" class="text label" text-anchor="middle">Causal mask</text>
+  <text x="757" y="280" class="text small" text-anchor="middle">hide future</text>
+  <g transform="translate(720 326)">
+    <rect x="0" y="0" width="20" height="20" fill="#e7f1dc"/><rect x="22" y="0" width="20" height="20" fill="#f0f1ed"/><rect x="44" y="0" width="20" height="20" fill="#f0f1ed"/><rect x="66" y="0" width="20" height="20" fill="#f0f1ed"/>
+    <rect x="0" y="22" width="20" height="20" fill="#e7f1dc"/><rect x="22" y="22" width="20" height="20" fill="#e7f1dc"/><rect x="44" y="22" width="20" height="20" fill="#f0f1ed"/><rect x="66" y="22" width="20" height="20" fill="#f0f1ed"/>
+    <rect x="0" y="44" width="20" height="20" fill="#e7f1dc"/><rect x="22" y="44" width="20" height="20" fill="#e7f1dc"/><rect x="44" y="44" width="20" height="20" fill="#e7f1dc"/><rect x="66" y="44" width="20" height="20" fill="#f0f1ed"/>
+    <rect x="0" y="66" width="20" height="20" fill="#e7f1dc"/><rect x="22" y="66" width="20" height="20" fill="#e7f1dc"/><rect x="44" y="66" width="20" height="20" fill="#e7f1dc"/><rect x="66" y="66" width="20" height="20" fill="#e7f1dc"/>
+  </g>
+  <text x="762" y="433" class="text small" text-anchor="middle">lower-triangular visibility</text>
+
+  <path d="M828 263 H858" class="arrow"/>
+  <rect x="860" y="211" width="122" height="104" rx="15" fill="#fff0dc" stroke="#dda65c" stroke-width="2"/>
+  <text x="921" y="252" class="text label" text-anchor="middle">Softmax</text>
+  <text x="921" y="283" class="text small" text-anchor="middle">weights</text>
+
+  <path d="M921 315 V518" class="arrow"/>
+  <path d="M436 570 H798" class="softarrow"/>
+  <rect x="800" y="520" width="180" height="94" rx="15" fill="#fff0dc" stroke="#dda65c" stroke-width="2"/>
+  <text x="890" y="558" class="text label" text-anchor="middle">Weighted sum</text>
+  <text x="890" y="588" class="text formula">weights @ v</text>
+  <path d="M980 567 H1030" class="arrow"/>
+  <rect x="1032" y="520" width="128" height="94" rx="16" fill="#e7f1dc" stroke="#9dbb88" stroke-width="2.5"/>
+  <text x="1096" y="558" class="text label" text-anchor="middle">Output out</text>
+  <text x="1096" y="588" class="text small" text-anchor="middle">(B, T, 16)</text>
+</svg>

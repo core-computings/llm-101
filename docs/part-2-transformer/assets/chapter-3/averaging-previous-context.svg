@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="970" viewBox="0 0 1100 970" role="img" aria-labelledby="title desc">
+  <title id="title">Averaging previous context, one vector dimension at a time</title>
+  <desc id="desc">Four token embeddings B0 to B3 are shown as three-dimensional vectors. At each position t, average each vector dimension over B0 through Bt. Four equations show the outputs C0, C1, C2 and C3.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfdf8"/><stop offset="1" stop-color="#f3faeb"/></linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L0,8 L10,4 z" fill="#587b42"/></marker>
+    <style>
+      .text{font-family:Inter,Arial,sans-serif;fill:#263323}.title{font-size:30px;font-weight:750}.section{font-size:21px;font-weight:700}.label{font-size:18px;font-weight:650}.note{font-size:16px;fill:#687963}.math{font-family:Georgia,serif;font-size:18px;font-weight:600;text-anchor:middle;dominant-baseline:middle}.cell{font-family:Georgia,serif;font-size:21px;font-weight:650;text-anchor:middle;dominant-baseline:middle}.rule{stroke:#dae5d1;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1100" height="970" rx="24" fill="url(#bg)"/>
+  <text x="52" y="58" class="text title">Averaging previous context</text>
+  <text x="52" y="91" class="text note">Each token is represented by a fixed-length embedding vector (here, C = 3).</text>
+
+  <text x="75" y="143" class="text label">TOKEN</text>
+  <text x="290" y="143" class="text label">3-D EMBEDDING VECTOR</text>
+  <g>
+    <text x="112" y="195" class="text section" text-anchor="middle">t₀</text>
+    <rect x="198" y="163" width="720" height="58" rx="10" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="238" y="192" class="text label">B₀</text>
+    <text x="396" y="192" class="text cell">b₀₀</text><text x="536" y="192" class="text cell">b₀₁</text><text x="676" y="192" class="text cell">b₀₂</text>
+    <text x="112" y="263" class="text section" text-anchor="middle">t₁</text>
+    <rect x="198" y="231" width="720" height="58" rx="10" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="238" y="260" class="text label">B₁</text>
+    <text x="396" y="260" class="text cell">b₁₀</text><text x="536" y="260" class="text cell">b₁₁</text><text x="676" y="260" class="text cell">b₁₂</text>
+    <text x="112" y="331" class="text section" text-anchor="middle">t₂</text>
+    <rect x="198" y="299" width="720" height="58" rx="10" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="238" y="328" class="text label">B₂</text>
+    <text x="396" y="328" class="text cell">b₂₀</text><text x="536" y="328" class="text cell">b₂₁</text><text x="676" y="328" class="text cell">b₂₂</text>
+    <text x="112" y="399" class="text section" text-anchor="middle">t₃</text>
+    <rect x="198" y="367" width="720" height="58" rx="10" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2"/>
+    <text x="238" y="396" class="text label">B₃</text>
+    <text x="396" y="396" class="text cell">b₃₀</text><text x="536" y="396" class="text cell">b₃₁</text><text x="676" y="396" class="text cell">b₃₂</text>
+  </g>
+
+  <path d="M550 443 V474" stroke="#587b42" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="550" y="510" class="text section" text-anchor="middle">At each position, average each dimension over the available prefix</text>
+  <text x="550" y="536" class="text note" text-anchor="middle">The same coordinate is averaged across tokens; later positions are not included.</text>
+
+  <g>
+    <rect x="54" y="554" width="992" height="76" rx="12" fill="#fff0dc" stroke="#e4c18f" stroke-width="1.5"/>
+    <text x="98" y="592" class="text label">Position 0 · C₀</text>
+    <text x="632" y="592" class="text math">C₀ = B₀ = [ b₀₀, b₀₁, b₀₂ ]</text>
+
+    <rect x="54" y="640" width="992" height="76" rx="12" fill="#fff0dc" stroke="#e4c18f" stroke-width="1.5"/>
+    <text x="98" y="678" class="text label">Position 1 · C₁</text>
+    <text x="632" y="678" class="text math">C₁ = [ (b₀₀+b₁₀)/2, (b₀₁+b₁₁)/2, (b₀₂+b₁₂)/2 ]</text>
+
+    <rect x="54" y="726" width="992" height="76" rx="12" fill="#fff0dc" stroke="#e4c18f" stroke-width="1.5"/>
+    <text x="98" y="764" class="text label">Position 2 · C₂</text>
+    <text x="632" y="764" class="text math">C₂ = [ (b₀₀+b₁₀+b₂₀)/3, (b₀₁+b₁₁+b₂₁)/3, (b₀₂+b₁₂+b₂₂)/3 ]</text>
+
+    <rect x="54" y="812" width="992" height="76" rx="12" fill="#fff0dc" stroke="#e4c18f" stroke-width="1.5"/>
+    <text x="98" y="850" class="text label">Position 3 · C₃</text>
+    <text x="632" y="850" class="text math">C₃ = [ (b₀₀+b₁₀+b₂₀+b₃₀)/4, (b₀₁+b₁₁+b₂₁+b₃₁)/4, (b₀₂+b₁₂+b₂₂+b₃₂)/4 ]</text>
+  </g>
+  <text x="550" y="927" class="text note" text-anchor="middle">The output at each position stays the same length: C = 3.</text>
+</svg>
