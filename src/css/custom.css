@@ -34,6 +34,8 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-markdown h2 { font-size: 1.56rem; letter-spacing: -.035em; margin-top: 3.4rem; }
 .theme-doc-markdown h3 { font-size: 1.18rem; margin-top: 2rem; }
 .theme-doc-markdown p { color: #303b4c; font-size: 1.125rem; line-height: 1.8; }
+.theme-doc-markdown img[alt^='Transformer encoder-decoder architecture'] { display: block; margin: 1.5rem auto; }
+.theme-doc-markdown img[alt^='Transformer encoder-decoder architecture'] + em { display: block; text-align: center; }
 .theme-doc-markdown blockquote { border-left: 0; border-radius: 9px; background: #f3faeb; color: #536176; margin: 1.5rem 0; padding: .8rem 1.1rem; }
 .theme-doc-markdown table {
   display: table;
