@@ -34,7 +34,7 @@ html[data-theme='light'] { --ifm-background-surface-color: #f8f9fb; }
 .theme-doc-markdown h2 { font-size: 1.56rem; letter-spacing: -.035em; margin-top: 3.4rem; }
 .theme-doc-markdown h3 { font-size: 1.18rem; margin-top: 2rem; }
 .theme-doc-markdown p { color: #303b4c; }
-.theme-doc-markdown blockquote { border-left: 3px solid #87a2db; background: #fbfcff; color: #536176; margin: 1.5rem 0; padding: .7rem 1rem; }
+.theme-doc-markdown blockquote { border-left: 4px solid #87a2db; background: #f0f4ff; color: #536176; margin: 1.5rem 0; padding: .8rem 1.1rem; }
 .theme-doc-markdown table { display: table; width: 100%; border: 1px solid #e7eaf0; border-radius: 9px; overflow: hidden; font-size: .9rem; }
 .theme-doc-markdown table th { background: #f6f8fb; }
 .theme-doc-markdown pre { border-radius: 9px; }
