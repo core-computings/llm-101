@@ -35,7 +35,7 @@ const config = {
       items: [{ href: 'https://github.com/core-computings/llm-101', label: 'GitHub ↗', position: 'right' }],
     },
     prism: { additionalLanguages: ['python', 'bash', 'json'] },
-    colorMode: { defaultMode: 'light', disableSwitch: true },
+    colorMode: { defaultMode: 'light', disableSwitch: false, respectPrefersColorScheme: false },
   },
 };
 

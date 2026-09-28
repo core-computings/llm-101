@@ -63,3 +63,37 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-breadcrumbs { font-size: .82rem; }
 .theme-doc-footer { border-top: 1px solid #e1e9d4; }
 @media (max-width: 996px) { .theme-doc-markdown { max-width: none; } }
+
+/* Dark mode keeps the same green accent while increasing contrast for reading. */
+html[data-theme='dark'] {
+  --ifm-background-color: #151b14;
+  --ifm-background-surface-color: #1d261c;
+  --ifm-font-color-base: #e8eee4;
+  --ifm-heading-color: #f4f8f1;
+  --ifm-color-primary: #b8d889;
+  --ifm-color-primary-dark: #a7ca74;
+  --ifm-color-primary-darker: #9cc368;
+  --ifm-color-primary-light: #c6e29e;
+  --ifm-color-primary-lighter: #d3eab3;
+}
+html[data-theme='dark'] body { background: #151b14; color: #e8eee4; }
+html[data-theme='dark'] .navbar { background: rgba(21, 27, 20, .94); border-bottom-color: #34422e; }
+html[data-theme='dark'] .navbar__link,
+html[data-theme='dark'] .navbar__items .clean-btn { color: #d9e5d2; }
+html[data-theme='dark'] .theme-doc-sidebar-container { background: #192119; border-right-color: #34422e; }
+html[data-theme='dark'] .menu__list-item-collapsible > .menu__link { color: #f0f5ed; }
+html[data-theme='dark'] .menu__list-item-collapsible > .menu__link::first-line { color: #b8d889; }
+html[data-theme='dark'] .menu__link,
+html[data-theme='dark'] .menu__link--active,
+html[data-theme='dark'] .menu__link:hover { color: #f0f5ed; }
+html[data-theme='dark'] .menu__link--active,
+html[data-theme='dark'] .menu__link:hover { background: #2b3a26; }
+html[data-theme='dark'] .theme-doc-markdown p { color: #d5dfd0; }
+html[data-theme='dark'] .theme-doc-markdown blockquote { background: #263522; color: #d5dfd0; }
+html[data-theme='dark'] .theme-doc-markdown table { border-color: #536b45; }
+html[data-theme='dark'] .theme-doc-markdown table th { background: #2b3a26; }
+html[data-theme='dark'] .theme-doc-markdown table th,
+html[data-theme='dark'] .theme-doc-markdown table td { border-color: #43583a; }
+html[data-theme='dark'] .table-of-contents__link { color: #b9c8b2; }
+html[data-theme='dark'] .table-of-contents__link--active { color: #c6e29e; }
+html[data-theme='dark'] .theme-doc-footer { border-top-color: #34422e; }
