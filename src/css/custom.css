@@ -23,7 +23,7 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .navbar__title { letter-spacing: -.035em; font-weight: 760; }
 .navbar__title::first-letter { color: #6f9638; }
 .navbar__link { color: #657084; font-size: .88rem; }
-.theme-doc-sidebar-container { background: #f7faef; border-right: 1px solid #e1e9d4; }
+.theme-doc-sidebar-container { background: #fff; border-right: 1px solid #e1e9d4; }
 .theme-doc-sidebar-menu { padding: 1.4rem 1rem 3rem; }
 .menu__list-item-collapsible > .menu__link { text-transform: none; font-size: .95rem; font-weight: 750; color: #172033; }
 .menu__list-item-collapsible > .menu__link::first-line { color: #6f9638; }
