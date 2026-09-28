@@ -35,8 +35,26 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-markdown h3 { font-size: 1.18rem; margin-top: 2rem; }
 .theme-doc-markdown p { color: #303b4c; font-size: 1.125rem; line-height: 1.8; }
 .theme-doc-markdown blockquote { border-left: 0; border-radius: 9px; background: #eaf4d9; color: #536176; margin: 1.5rem 0; padding: .8rem 1.1rem; }
-.theme-doc-markdown table { display: table; width: 100%; border: 1px solid #e1e9d4; border-radius: 9px; overflow: hidden; font-size: .9rem; }
+.theme-doc-markdown table {
+  display: table;
+  width: 100%;
+  border: 1px solid #cfdcb8;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 9px;
+  overflow: hidden;
+  font-size: .9rem;
+}
 .theme-doc-markdown table th { background: #f4f9e9; }
+.theme-doc-markdown table th,
+.theme-doc-markdown table td {
+  border-right: 1px solid #d8e2c6;
+  border-bottom: 1px solid #d8e2c6;
+}
+.theme-doc-markdown table th:last-child,
+.theme-doc-markdown table td:last-child { border-right: 0; }
+.theme-doc-markdown table tr:last-child th,
+.theme-doc-markdown table tr:last-child td { border-bottom: 0; }
 .theme-doc-markdown pre { border-radius: 9px; }
 .theme-doc-toc-desktop { padding-top: 4rem; }
 .table-of-contents { font-size: .82rem; }
