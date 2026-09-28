@@ -5,10 +5,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: ./publish.sh \"commit message\""
-  exit 1
-fi
+COMMIT_MESSAGE="${*:-update}"
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Error: this script must run inside a Git repository."
@@ -27,7 +24,7 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-git commit -m "$*"
+git commit -m "$COMMIT_MESSAGE"
 git push origin "$BRANCH"
 
 echo "Published branch '$BRANCH'."
