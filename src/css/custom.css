@@ -1,0 +1,42 @@
+:root {
+  --ifm-color-primary: #365eaf;
+  --ifm-color-primary-dark: #2e529d;
+  --ifm-color-primary-darker: #2b4d94;
+  --ifm-color-primary-light: #4c70bb;
+  --ifm-color-primary-lighter: #587bc1;
+  --ifm-background-color: #fff;
+  --ifm-font-family-base: Inter, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.8;
+  --ifm-heading-font-weight: 700;
+  --ifm-code-font-size: 0.84rem;
+  --ifm-navbar-height: 58px;
+}
+
+html[data-theme='light'] { --ifm-background-surface-color: #f8f9fb; }
+.navbar { border-bottom: 1px solid #e7eaf0; box-shadow: none; background: rgba(255,255,255,.94); }
+.navbar__title { letter-spacing: -.035em; font-weight: 760; }
+.navbar__title::first-letter { color: #365eaf; }
+.navbar__link { color: #657084; font-size: .88rem; }
+.theme-doc-sidebar-container { background: #f8f9fb; border-right: 1px solid #e7eaf0; }
+.theme-doc-sidebar-menu { padding: 1.4rem 1rem 3rem; }
+.menu__list-item-collapsible > .menu__link { text-transform: none; font-size: .95rem; font-weight: 750; color: #172033; }
+.menu__list-item-collapsible > .menu__link::first-line { color: #365eaf; }
+.menu__link { color: #535f72; font-size: .88rem; border-radius: 6px; padding: .38rem .55rem; }
+.menu__link--active, .menu__link:hover { color: #365eaf; background: #eef3ff; }
+.theme-doc-markdown { max-width: 780px; padding-bottom: 5rem; }
+.theme-doc-markdown h1 { font-size: 2.4rem; letter-spacing: -.048em; line-height: 1.2; margin-bottom: 1.1rem; }
+.theme-doc-markdown h2 { font-size: 1.56rem; letter-spacing: -.035em; margin-top: 3.4rem; }
+.theme-doc-markdown h3 { font-size: 1.18rem; margin-top: 2rem; }
+.theme-doc-markdown p { color: #303b4c; }
+.theme-doc-markdown blockquote { border-left: 3px solid #87a2db; background: #fbfcff; color: #536176; margin: 1.5rem 0; padding: .7rem 1rem; }
+.theme-doc-markdown table { display: table; width: 100%; border: 1px solid #e7eaf0; border-radius: 9px; overflow: hidden; font-size: .9rem; }
+.theme-doc-markdown table th { background: #f6f8fb; }
+.theme-doc-markdown pre { border-radius: 9px; }
+.theme-doc-toc-desktop { padding-top: 4rem; }
+.table-of-contents { font-size: .82rem; }
+.table-of-contents__link { color: #738096; }
+.table-of-contents__link--active { color: #365eaf; font-weight: 650; }
+.theme-doc-breadcrumbs { font-size: .82rem; }
+.theme-doc-footer { border-top: 1px solid #e7eaf0; }
+@media (max-width: 996px) { .theme-doc-markdown { max-width: none; } }

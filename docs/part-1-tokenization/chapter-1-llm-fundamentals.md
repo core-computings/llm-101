@@ -2,6 +2,7 @@
 title: Chapter 1 · LLM Fundamentals
 part: Part 1 · Tokenization
 sidebar_position: 1
+slug: /
 ---
 
 # Chapter 1: LLM Fundamentals
