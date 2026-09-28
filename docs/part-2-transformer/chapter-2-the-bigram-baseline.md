@@ -7,26 +7,44 @@ sidebar_position: 2
 
 Before adding attention, establish a model that only asks: “given this token, what token tends to follow it?”
 
-## A lookup table as a model
+## 1. Bigram model
+
+The Bigram model uses a trainable lookup table with shape `(vocab_size, vocab_size)`. Each character ID selects one row: a fixed-length vector with one score (a logit) for every possible next character. In `forward`, lookup returns one such vector for each input position. Softmax turns those scores into a probability distribution over the vocabulary; during training, cross-entropy compares the scores with the actual next-character targets.
+
+![Bigram model mechanism: a character ID selects its trainable embedding row, producing vocabulary-sized logits that softmax converts to next-character probabilities.](./assets/chapter-2/bigram-embedding.svg)
 
 ```python
+import torch
+import torch.nn as nn
+from torch.nn import functional as F
+torch.manual_seed(1337)
+
 class BigramLanguageModel(nn.Module):
+
     def __init__(self, vocab_size):
         super().__init__()
         self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
 
-    def forward(self, idx, targets=None):
-        logits = self.token_embedding_table(idx)
-        loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1)) if targets is not None else None
+    def forward(self, idx, targets = None):
+        logits = self.token_embedding_table(idx) # (B,T,C)
+
+        if targets is None:
+            loss = None
+        else:
+            B, T, C = logits.shape
+            logits = logits.view(B * T, C)
+            targets = targets.view(B * T)
+            loss = F.cross_entropy(logits, targets)
+
         return logits, loss
+
+model = BigramLanguageModel(vocab_size)
+logits, loss = model(xb, yb)
+print(logits.shape)
+print(loss)
 ```
 
-Each row of the embedding table is a distribution of next-token scores. Cross-entropy compares those scores with the target IDs. Sampling from the final logits generates one token at a time.
-
-## Why keep the weak baseline?
-
-The Bigram model gives us a measurable loss, a generation loop, and a reference point. Every later improvement should lower validation loss or produce more coherent samples instead of adding complexity without evidence.
-
-## Exercise
-
-Train the model for a few hundred steps. Compare greedy decoding with sampling and record how far the generated text remains plausible.
+```text
+torch.Size([32, 62])
+tensor(4.7232, grad_fn=<NllLossBackward0>)
+```

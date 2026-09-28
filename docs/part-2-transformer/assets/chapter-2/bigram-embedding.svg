@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1000" viewBox="0 0 900 1000" role="img" aria-labelledby="title desc">
+  <title id="title">How a Bigram model turns one character into next-character probabilities</title>
+  <desc id="desc">A character selects a row in the trainable vocabulary-by-vocabulary embedding table. The selected vector has one logit for each possible next character. Softmax converts those logits into a probability distribution.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfdf8"/><stop offset="1" stop-color="#f3faeb"/></linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L0,8 L10,4 z" fill="#587b42"/></marker>
+    <style>
+      .text{font-family:Inter,Arial,sans-serif;fill:#263323}.title{font-size:30px;font-weight:750}.section{font-size:23px;font-weight:700}.label{font-size:19px;font-weight:650}.note{font-size:17px;fill:#687963}.cell{font-family:Consolas,monospace;font-size:19px;font-weight:650;text-anchor:middle;dominant-baseline:middle}.arrow{fill:none;stroke:#587b42;stroke-width:4;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="900" height="1000" rx="24" fill="url(#bg)"/>
+  <text x="50" y="58" class="text title">One character in → next-character probabilities</text>
+
+  <rect x="335" y="92" width="230" height="84" rx="18" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2.5"/>
+  <text x="450" y="123" class="text note" text-anchor="middle">input character</text>
+  <text x="450" y="158" class="text" font-size="30" font-weight="750" text-anchor="middle">a</text>
+  <path d="M450 178 V224" class="arrow"/>
+
+  <text x="450" y="260" class="text section" text-anchor="middle">nn.Embedding(V, V)</text>
+  <text x="450" y="287" class="text note" text-anchor="middle">trainable lookup table · shape V × V</text>
+  <rect x="105" y="307" width="690" height="278" rx="16" fill="#fff" stroke="#afc69b" stroke-width="2.5"/>
+
+  <text x="165" y="344" class="text note" text-anchor="middle">input ID</text>
+  <text x="487" y="344" class="text note" text-anchor="middle">one weight for each possible next character</text>
+
+  <g fill="#eff6e8" stroke="#d1dfc5" stroke-width="1.5">
+    <rect x="130" y="363" width="650" height="45" rx="7"/>
+    <rect x="130" y="416" width="650" height="54" rx="8" fill="#fff0dc" stroke="#dda65c" stroke-width="2.5"/>
+    <rect x="130" y="478" width="650" height="45" rx="7"/>
+    <rect x="130" y="531" width="650" height="38" rx="7"/>
+  </g>
+  <text x="165" y="385" class="text label" text-anchor="middle">0</text>
+  <text x="165" y="444" class="text label" text-anchor="middle">a</text>
+  <text x="165" y="500" class="text label" text-anchor="middle">2</text>
+  <text x="165" y="550" class="text label" text-anchor="middle">⋮</text>
+  <g class="text cell">
+    <text x="296" y="385">···</text><text x="390" y="385">···</text><text x="484" y="385">···</text><text x="578" y="385">···</text><text x="700" y="385">···</text>
+    <text x="296" y="443">w₀</text><text x="390" y="443">w₁</text><text x="484" y="443">w₂</text><text x="578" y="443">···</text><text x="700" y="443">wᵥ₋₁</text>
+    <text x="296" y="500">···</text><text x="390" y="500">···</text><text x="484" y="500">···</text><text x="578" y="500">···</text><text x="700" y="500">···</text>
+  </g>
+  <text x="450" y="612" class="text note" text-anchor="middle">The selected row is a trainable vector of length V.</text>
+  <path d="M450 628 V675" class="arrow"/>
+
+  <rect x="170" y="694" width="560" height="91" rx="17" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2.5"/>
+  <text x="450" y="732" class="text section" text-anchor="middle">V logits → softmax</text>
+  <text x="450" y="762" class="text note" text-anchor="middle">one score becomes one probability per vocabulary character</text>
+  <path d="M450 789 V836" class="arrow"/>
+
+  <rect x="105" y="853" width="690" height="106" rx="16" fill="#fff8ed" stroke="#ddb574" stroke-width="2.5"/>
+  <text x="450" y="882" class="text label" text-anchor="middle">Next-character probability distribution</text>
+  <g>
+    <rect x="155" y="905" width="100" height="34" rx="7" fill="#e8f2fb"/><text x="205" y="922" class="text cell">a</text>
+    <rect x="275" y="905" width="100" height="34" rx="7" fill="#fff0dc"/><text x="325" y="922" class="text cell">b</text>
+    <rect x="395" y="905" width="100" height="34" rx="7" fill="#e7f1dc"/><text x="445" y="922" class="text cell">c</text>
+    <text x="550" y="928" class="text section" text-anchor="middle">···</text>
+    <rect x="625" y="905" width="120" height="34" rx="7" fill="#fce3bd"/><text x="685" y="922" class="text cell">V − 1</text>
+  </g>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850" role="img" aria-labelledby="title desc">
+  <title id="title">Next-character prediction with block size eight</title>
+  <desc id="desc">Four sequential model calls show a one-character context predicting h, then the expanded context predicting e, then the expanded context predicting a space, then predicting c. Each prediction is appended for the next call. At a block size of eight, only the latest eight characters remain in the context window.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfdf8"/><stop offset="1" stop-color="#f3faeb"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#557746" flood-opacity=".12"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#4c6a3f"/></marker>
+    <marker id="softArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7ca466"/></marker>
+    <style>
+      .text{font-family:Inter,Arial,sans-serif;fill:#23311f}.heading{font-size:27px;font-weight:750}.sub{font-size:15px;fill:#5b7052}.label{font-size:13px;font-weight:700;fill:#597a43;letter-spacing:.04em}.small{font-size:13px;fill:#64765c}.body{font-size:15px;fill:#53644c}.cell{font-size:20px;font-weight:700;text-anchor:middle;dominant-baseline:middle}.flow{fill:none;stroke:#4c6a3f;stroke-width:3;marker-end:url(#arrow)}.feedback{fill:none;stroke:#7ca466;stroke-width:2.5;stroke-dasharray:7 6;marker-end:url(#softArrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="850" rx="24" fill="url(#bg)"/>
+  <text x="56" y="58" class="text heading">Next-token prediction: predict, append, repeat</text>
+  <text x="56" y="87" class="text sub">Character-level example · block_size = 8 · predicted characters below are illustrative</text>
+  <text x="66" y="128" class="text label">STEP</text><text x="178" y="128" class="text label">CONTEXT SENT TO MODEL</text><text x="720" y="128" class="text label">MODEL</text><text x="1010" y="128" class="text label">PREDICTED NEXT CHARACTER</text>
+
+  <!-- Each new row includes the preceding row's prediction. -->
+  <g>
+    <rect x="44" y="144" width="1112" height="91" rx="14" fill="#fff" stroke="#d5e3c9"/>
+    <text x="72" y="193" class="text label">1</text>
+    <rect x="178" y="163" width="48" height="50" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="202" y="188" class="text cell">t</text>
+    <path d="M246 188 H672" class="flow"/>
+    <rect x="692" y="158" width="210" height="60" rx="12" fill="#d9ebc9" stroke="#8caf70" stroke-width="1.6" filter="url(#shadow)"/><text x="797" y="184" class="text" font-size="16" font-weight="700" text-anchor="middle">Language model</text><text x="797" y="204" class="text small" text-anchor="middle">predict from context</text>
+    <path d="M902 188 H1004" class="flow"/><rect x="1022" y="163" width="62" height="50" rx="8" fill="#f9e8bf" stroke="#d6b66d" stroke-width="1.5"/><text x="1053" y="188" class="text cell">h</text>
+  </g>
+  <g>
+    <rect x="44" y="247" width="1112" height="91" rx="14" fill="#fff" stroke="#d5e3c9"/>
+    <text x="72" y="296" class="text label">2</text>
+    <rect x="178" y="266" width="48" height="50" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="202" y="291" class="text cell">t</text><rect x="234" y="266" width="48" height="50" rx="8" fill="#d5e9c4" stroke="#8caf70" stroke-width="1.7"/><text x="258" y="291" class="text cell">h</text>
+    <path d="M302 291 H672" class="flow"/><rect x="692" y="261" width="210" height="60" rx="12" fill="#d9ebc9" stroke="#8caf70" stroke-width="1.6" filter="url(#shadow)"/><text x="797" y="287" class="text" font-size="16" font-weight="700" text-anchor="middle">Language model</text><text x="797" y="307" class="text small" text-anchor="middle">the prior h is now input</text>
+    <path d="M902 291 H1004" class="flow"/><rect x="1022" y="266" width="62" height="50" rx="8" fill="#f9e8bf" stroke="#d6b66d" stroke-width="1.5"/><text x="1053" y="291" class="text cell">e</text>
+  </g>
+  <g>
+    <rect x="44" y="350" width="1112" height="91" rx="14" fill="#fff" stroke="#d5e3c9"/>
+    <text x="72" y="399" class="text label">3</text>
+    <rect x="178" y="369" width="48" height="50" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="202" y="394" class="text cell">t</text><rect x="234" y="369" width="48" height="50" rx="8" fill="#d5e9c4" stroke="#8caf70" stroke-width="1.7"/><text x="258" y="394" class="text cell">h</text><rect x="290" y="369" width="48" height="50" rx="8" fill="#d5e9c4" stroke="#8caf70" stroke-width="1.7"/><text x="314" y="394" class="text cell">e</text>
+    <path d="M358 394 H672" class="flow"/><rect x="692" y="364" width="210" height="60" rx="12" fill="#d9ebc9" stroke="#8caf70" stroke-width="1.6" filter="url(#shadow)"/><text x="797" y="390" class="text" font-size="16" font-weight="700" text-anchor="middle">Language model</text><text x="797" y="410" class="text small" text-anchor="middle">context is now “the”</text>
+    <path d="M902 394 H1004" class="flow"/><rect x="1022" y="369" width="62" height="50" rx="8" fill="#f9e8bf" stroke="#d6b66d" stroke-width="1.5"/><text x="1053" y="394" class="text cell">·</text>
+    <text x="1100" y="399" class="text small">space</text>
+  </g>
+  <g>
+    <rect x="44" y="453" width="1112" height="91" rx="14" fill="#fff" stroke="#d5e3c9"/>
+    <text x="72" y="502" class="text label">4</text>
+    <rect x="178" y="472" width="48" height="50" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="202" y="497" class="text cell">t</text><rect x="234" y="472" width="48" height="50" rx="8" fill="#d5e9c4" stroke="#8caf70" stroke-width="1.7"/><text x="258" y="497" class="text cell">h</text><rect x="290" y="472" width="48" height="50" rx="8" fill="#d5e9c4" stroke="#8caf70" stroke-width="1.7"/><text x="314" y="497" class="text cell">e</text><rect x="346" y="472" width="48" height="50" rx="8" fill="#d5e9c4" stroke="#8caf70" stroke-width="1.7"/><text x="370" y="497" class="text cell">·</text>
+    <path d="M414 497 H672" class="flow"/><rect x="692" y="467" width="210" height="60" rx="12" fill="#d9ebc9" stroke="#8caf70" stroke-width="1.6" filter="url(#shadow)"/><text x="797" y="493" class="text" font-size="16" font-weight="700" text-anchor="middle">Language model</text><text x="797" y="513" class="text small" text-anchor="middle">the space is now input</text>
+    <path d="M902 497 H1004" class="flow"/><rect x="1022" y="472" width="62" height="50" rx="8" fill="#f9e8bf" stroke="#d6b66d" stroke-width="1.5"/><text x="1053" y="497" class="text cell">c</text>
+  </g>
+  <path d="M1053 213 V259 M1053 316 V362 M1053 419 V465" class="feedback"/>
+  <text x="56" y="584" class="text" font-size="16" font-weight="700">Keep repeating: append the prediction to the context and ask for one more character.</text>
+  <text x="56" y="610" class="text body">After a few more steps, this toy example could have an 8-character context such as “the char”.</text>
+
+  <rect x="44" y="644" width="1112" height="166" rx="18" fill="#fff" stroke="#b8cda9" stroke-width="2"/>
+  <text x="70" y="680" class="text label">BLOCK SIZE = 8 · THE CONTEXT WINDOW HAS EIGHT SLOTS</text>
+  <g>
+    <rect x="74" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="98" y="728" class="text cell">t</text>
+    <rect x="130" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="154" y="728" class="text cell">h</text>
+    <rect x="186" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="210" y="728" class="text cell">e</text>
+    <rect x="242" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="266" y="728" class="text cell">·</text>
+    <rect x="298" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="322" y="728" class="text cell">c</text>
+    <rect x="354" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="378" y="728" class="text cell">h</text>
+    <rect x="410" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="434" y="728" class="text cell">a</text>
+    <rect x="466" y="704" width="48" height="48" rx="8" fill="#e3f0d7" stroke="#a9c796"/><text x="490" y="728" class="text cell">r</text>
+  </g>
+  <path d="M540 728 H614" class="flow"/>
+  <text x="638" y="720" class="text body">When a new character is appended,</text><text x="638" y="745" class="text body">drop the oldest one for the next call:</text>
+  <text x="638" y="779" class="text" font-size="17" font-weight="700" fill="#5f832e">h e · c h a r a</text>
+  <text x="846" y="779" class="text small">still 8 characters</text>
+  <text x="70" y="787" class="text small">Block size limits context length, not how many characters can be generated.</text>
+</svg>
