@@ -30,7 +30,6 @@ const config = {
   themeConfig: {
     image: 'img/llm-101-social.svg',
     navbar: {
-      title: 'LLM 101',
       logo: { alt: 'LLM 101', src: 'img/logo.svg' },
       items: [{ href: 'https://github.com/core-computings/llm-101', label: 'GitHub ↗', position: 'right' }],
     },
