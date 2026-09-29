@@ -78,3 +78,18 @@ for i in range(num_return_sequences):
 ```
 
 The seed makes this particular run reproducible. The five outputs differ because they independently sample from the same top-50 candidate distribution at every step. Once the sequence reaches `max_length`, `enc.decode` converts the token IDs back into readable text.
+
+If we build our model using default configs without loading from pretrained weights, then we will get random results.
+
+```python
+model = GPT(GPTConfig())
+model.eval()
+```
+
+```text
+> hello, i am_{Personal commuting array karmasecondary emerge user diverted essence mort bedmesBoth sprayed arthritis investing TypicalIslamSure Quin Vill Mild vile transitardi
+> hello, i amfil imperial SunIre continuity Confederacy Blizz tougherFord readings threw Hit omit ins Sgtomaly expenseifiersobi ropes jerseys Sites ✓ deterioration 78 Slater
+> hello, i amurer Format symptom motives deceive infantomers Found MVP lensesILLE Ms itching Santosheedatch 192Streamer ~/. IslamistsDoc melan ChandraHOW Blood LIMITED
+> hello, i am smells susceptibility stirred sparklingirtual Samoa timid 19600001 Monitor IshVenFire \(\ Xer savvy acoustic Star bubbles snag Copper Ancients bundles Belfast DARyz
+> hello, i amafi EXP egregious invoking punishinganuts vaccinationSequ dental Ep looted racialnam phenomenoncolm revol CODE simplistic beneficiary lockdown supernaturalverb Introduction da nearby Impact
+```
