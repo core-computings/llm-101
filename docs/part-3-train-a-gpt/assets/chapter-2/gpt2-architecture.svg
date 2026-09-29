@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 4550" role="img" aria-labelledby="title desc">
+  <title id="title">GPT-2 small architecture and tensor shapes</title>
+  <desc id="desc">A vertical diagram of GPT-2 small: token and position embeddings feed twelve Transformer blocks, followed by a final layer normalization and a language-model head.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" markerWidth="6" markerHeight="6" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#607080"/>
+    </marker>
+    <marker id="arrow-small" markerWidth="5" markerHeight="5" refX="4.5" refY="2.5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L5,2.5 L0,5 Z" fill="#8291a0"/>
+    </marker>
+    <style>
+      .title { font: 700 28px system-ui, -apple-system, sans-serif; fill: #22303d; }
+      .section { font: 700 18px system-ui, -apple-system, sans-serif; fill: #22303d; }
+      .node { font: 650 16px system-ui, -apple-system, sans-serif; fill: #22303d; }
+      .shape { font: 500 14px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #445363; }
+      .small { font: 500 13px system-ui, -apple-system, sans-serif; fill: #526273; }
+      .card { fill: #ffffff; stroke: #9fb0bf; stroke-width: 2; }
+      .ln { fill: #f3faeb; stroke: #b6d492; stroke-width: 1.5; }
+      .attention { fill: #eaf4ff; stroke: #9fc2e7; stroke-width: 1.5; }
+      .mlp { fill: #fff1df; stroke: #e8bd83; stroke-width: 1.5; }
+      .residual { fill: #f4f6f8; stroke: #c4cdd5; stroke-width: 1.5; }
+      .embedding { fill: #fff1df; stroke: #e8bd83; stroke-width: 2; }
+      .input { fill: #eaf4ff; stroke: #9fc2e7; stroke-width: 2; }
+      .output { fill: #f3faeb; stroke: #b6d492; stroke-width: 2; }
+      .flow { stroke: #607080; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .thin-flow { stroke: #8291a0; stroke-width: 1.25; fill: none; marker-end: url(#arrow-small); }
+    </style>
+    <g id="block">
+      <rect class="card" x="90" y="0" width="720" height="295" rx="16"/>
+      <line class="thin-flow" x1="450" y1="63" x2="450" y2="75"/>
+      <line class="thin-flow" x1="450" y1="106" x2="450" y2="118"/>
+      <line class="thin-flow" x1="450" y1="149" x2="450" y2="161"/>
+      <line class="thin-flow" x1="450" y1="192" x2="450" y2="204"/>
+      <line class="thin-flow" x1="450" y1="235" x2="450" y2="247"/>
+      <rect class="ln" x="125" y="35" width="650" height="28" rx="8"/>
+      <rect class="attention" x="125" y="78" width="650" height="28" rx="8"/>
+      <rect class="residual" x="125" y="121" width="650" height="28" rx="8"/>
+      <rect class="ln" x="125" y="164" width="650" height="28" rx="8"/>
+      <rect class="mlp" x="125" y="207" width="650" height="28" rx="8"/>
+      <rect class="residual" x="125" y="250" width="650" height="28" rx="8"/>
+      <text class="node" x="450" y="55" text-anchor="middle">LayerNorm · <tspan class="shape">[B, T, 768]</tspan></text>
+      <text class="node" x="450" y="98" text-anchor="middle">Causal self-attention · <tspan class="shape">Q,K,V [B, 12, T, 64] → [B, T, 768]</tspan></text>
+      <text class="node" x="450" y="141" text-anchor="middle">Residual add · <tspan class="shape">[B, T, 768]</tspan></text>
+      <text class="node" x="450" y="184" text-anchor="middle">LayerNorm · <tspan class="shape">[B, T, 768]</tspan></text>
+      <text class="node" x="450" y="227" text-anchor="middle">Feed-forward MLP · <tspan class="shape">[B, T, 768] → [B, T, 3072] → [B, T, 768]</tspan></text>
+      <text class="node" x="450" y="270" text-anchor="middle">Residual add · <tspan class="shape">[B, T, 768]</tspan></text>
+    </g>
+  </defs>
+
+  <rect width="900" height="4550" fill="#ffffff"/>
+  <text class="title" x="450" y="38" text-anchor="middle">GPT-2 small · vertical tensor flow</text>
+  <text class="small" x="450" y="61" text-anchor="middle">B = batch size · T ≤ 1024 = sequence length · hidden size = 768</text>
+
+  <rect class="input" x="85" y="80" width="300" height="62" rx="12"/>
+  <rect class="input" x="515" y="80" width="300" height="62" rx="12"/>
+  <text class="node" x="235" y="106" text-anchor="middle">Token IDs</text>
+  <text class="shape" x="235" y="128" text-anchor="middle">[B, T]</text>
+  <text class="node" x="665" y="106" text-anchor="middle">Position IDs</text>
+  <text class="shape" x="665" y="128" text-anchor="middle">[B, T]</text>
+
+  <path class="flow" d="M235 142 V165"/>
+  <path class="flow" d="M665 142 V165"/>
+  <rect class="embedding" x="55" y="172" width="360" height="76" rx="12"/>
+  <rect class="embedding" x="485" y="172" width="360" height="76" rx="12"/>
+  <text class="node" x="235" y="202" text-anchor="middle">Token embedding · wte</text>
+  <text class="shape" x="235" y="226" text-anchor="middle">[50257, 768]</text>
+  <text class="node" x="665" y="202" text-anchor="middle">Position embedding · wpe</text>
+  <text class="shape" x="665" y="226" text-anchor="middle">[1024, 768]</text>
+  <path class="flow" d="M235 248 V272 H380 V286"/>
+  <path class="flow" d="M665 248 V272 H520 V286"/>
+
+  <rect class="output" x="250" y="294" width="400" height="62" rx="12"/>
+  <text class="node" x="450" y="320" text-anchor="middle">Embedding sum</text>
+  <text class="shape" x="450" y="342" text-anchor="middle">[B, T, 768]</text>
+  <path class="flow" d="M450 356 V388"/>
+
+  <g transform="translate(0,400)"><use href="#block"/><text class="section" x="110" y="23">Block 1 / 12</text></g>
+  <path class="flow" d="M450 695 V710"/>
+  <g transform="translate(0,720)"><use href="#block"/><text class="section" x="110" y="23">Block 2 / 12</text></g>
+  <path class="flow" d="M450 1015 V1030"/>
+  <g transform="translate(0,1040)"><use href="#block"/><text class="section" x="110" y="23">Block 3 / 12</text></g>
+  <path class="flow" d="M450 1335 V1350"/>
+  <g transform="translate(0,1360)"><use href="#block"/><text class="section" x="110" y="23">Block 4 / 12</text></g>
+  <path class="flow" d="M450 1655 V1670"/>
+  <g transform="translate(0,1680)"><use href="#block"/><text class="section" x="110" y="23">Block 5 / 12</text></g>
+  <path class="flow" d="M450 1975 V1990"/>
+  <g transform="translate(0,2000)"><use href="#block"/><text class="section" x="110" y="23">Block 6 / 12</text></g>
+  <path class="flow" d="M450 2295 V2310"/>
+  <g transform="translate(0,2320)"><use href="#block"/><text class="section" x="110" y="23">Block 7 / 12</text></g>
+  <path class="flow" d="M450 2615 V2630"/>
+  <g transform="translate(0,2640)"><use href="#block"/><text class="section" x="110" y="23">Block 8 / 12</text></g>
+  <path class="flow" d="M450 2935 V2950"/>
+  <g transform="translate(0,2960)"><use href="#block"/><text class="section" x="110" y="23">Block 9 / 12</text></g>
+  <path class="flow" d="M450 3255 V3270"/>
+  <g transform="translate(0,3280)"><use href="#block"/><text class="section" x="110" y="23">Block 10 / 12</text></g>
+  <path class="flow" d="M450 3575 V3590"/>
+  <g transform="translate(0,3600)"><use href="#block"/><text class="section" x="110" y="23">Block 11 / 12</text></g>
+  <path class="flow" d="M450 3895 V3910"/>
+  <g transform="translate(0,3920)"><use href="#block"/><text class="section" x="110" y="23">Block 12 / 12</text></g>
+
+  <path class="flow" d="M450 4215 V4255"/>
+  <rect class="output" x="160" y="4270" width="580" height="58" rx="12"/>
+  <text class="node" x="450" y="4295" text-anchor="middle">Final LayerNorm</text>
+  <text class="shape" x="450" y="4315" text-anchor="middle">[B, T, 768]</text>
+  <path class="flow" d="M450 4328 V4365"/>
+  <rect class="output" x="160" y="4380" width="580" height="66" rx="12"/>
+  <text class="node" x="450" y="4407" text-anchor="middle">Language-model head · lm_head</text>
+  <text class="shape" x="450" y="4430" text-anchor="middle">[B, T, 768] → [B, T, 50257]</text>
+  <text class="small" x="450" y="4490" text-anchor="middle">One logit for every vocabulary token at every sequence position</text>
+</svg>
