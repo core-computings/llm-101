@@ -5,8 +5,6 @@ sidebar_position: 4
 
 # Chapter 4: Forward Pass and Logits
 
-## 1. The `forward` function
-
 The new `forward` function defines what happens when the GPT model receives a batch of token IDs. Its input, `idx`, has shape `[B, T]`, where `B` is the batch size and `T` is the sequence length. The first assertion ensures that the sequence fits inside GPT-2's context window: `T` cannot exceed `block_size` (1,024 for the GPT-2 checkpoint used here).
 
 For every position from `0` to `T - 1`, the function looks up a positional embedding with shape `[T, n_embd]`. It also looks up the token embedding for every token ID, producing `[B, T, n_embd]`. Adding the two creates `x`, the initial representation of each token together with its position. PyTorch broadcasts the positional embeddings across the batch dimension, so the same position indices are used for every sequence in the batch.
