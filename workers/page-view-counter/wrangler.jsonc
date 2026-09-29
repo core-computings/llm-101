@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "llm-101-page-views",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-29",
+  "vars": {
+    "SITE_ORIGIN": "https://core-computings.github.io"
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "PAGE_VIEW_COUNTER",
+        "class_name": "PageViewCounter"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["PageViewCounter"]
+    }
+  ]
+}

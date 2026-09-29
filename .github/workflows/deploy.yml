@@ -29,6 +29,9 @@ jobs:
         run: npm ci
       - name: Build site
         run: npm run build
+        env:
+          CLOUDFLARE_ANALYTICS_TOKEN: ${{ secrets.CLOUDFLARE_ANALYTICS_TOKEN }}
+          PAGE_VIEW_COUNTER_URL: ${{ vars.PAGE_VIEW_COUNTER_URL }}
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

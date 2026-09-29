@@ -40,6 +40,10 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-markdown img[alt^='Bigram model mechanism'] { display: block; width: 100%; height: auto; margin: 1.5rem auto; }
 .theme-doc-markdown img[alt^='Self-attention computation flow'] { display: block; width: 100%; height: auto; margin: 1.5rem auto; }
 .theme-doc-markdown img[alt^='Multi-head attention architecture'] { display: block; max-width: 100%; height: auto; margin: 1.5rem auto; }
+.page-view-counter { border-top: 1px solid #dfe8d6; background: #f3faeb; color: #536176; padding: .8rem 1rem; text-align: center; font-size: .88rem; }
+.page-view-counter strong { color: #26332d; font-variant-numeric: tabular-nums; }
+html[data-theme='dark'] .page-view-counter { border-color: #3f4f44; background: #202c25; color: #c5d2ca; }
+html[data-theme='dark'] .page-view-counter strong { color: #f1f7f1; }
 .theme-doc-markdown blockquote { border-left: 0; border-radius: 9px; background: #f3faeb; color: #536176; margin: 1.5rem 0; padding: .8rem 1.1rem; }
 .theme-doc-markdown table {
   display: table;

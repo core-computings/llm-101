@@ -1,3 +1,6 @@
+const cloudflareAnalyticsToken = process.env.CLOUDFLARE_ANALYTICS_TOKEN;
+const pageViewCounterUrl = process.env.PAGE_VIEW_COUNTER_URL;
+
 const config = {
   title: 'LLM 101',
   tagline: 'A visual, practical guide to large language models.',
@@ -9,6 +12,19 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   i18n: { defaultLocale: 'en', locales: ['en'] },
+  customFields: { pageViewCounterUrl },
+  headTags: cloudflareAnalyticsToken
+    ? [
+        {
+          tagName: 'script',
+          attributes: {
+            defer: true,
+            src: 'https://static.cloudflareinsights.com/beacon.min.js',
+            'data-cf-beacon': JSON.stringify({ token: cloudflareAnalyticsToken }),
+          },
+        },
+      ]
+    : [],
   presets: [
     [
       'classic',
