@@ -26,14 +26,20 @@ export class PageViewCounter {
     this.ctx = ctx;
   }
 
-  async get() {
-    return (await this.ctx.storage.get('pageViews')) ?? 0;
-  }
+  async fetch(request) {
+    if (request.method === 'GET') {
+      const pageViews = (await this.ctx.storage.get('pageViews')) ?? 0;
+      return new Response(JSON.stringify({ pageViews }), { headers: JSON_HEADERS });
+    }
 
-  async increment() {
-    const pageViews = (await this.get()) + 1;
-    await this.ctx.storage.put('pageViews', pageViews);
-    return pageViews;
+    if (request.method === 'POST') {
+      const current = (await this.ctx.storage.get('pageViews')) ?? 0;
+      const pageViews = current + 1;
+      await this.ctx.storage.put('pageViews', pageViews);
+      return new Response(JSON.stringify({ pageViews }), { headers: JSON_HEADERS });
+    }
+
+    return new Response('Method not allowed', { status: 405 });
   }
 }
 
@@ -44,14 +50,17 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
 
     const path = new URL(request.url).pathname;
-    const counter = env.PAGE_VIEW_COUNTER.getByName('llm-101');
+    const counterId = env.PAGE_VIEW_COUNTER.idFromName('llm-101');
+    const counter = env.PAGE_VIEW_COUNTER.get(counterId);
 
     if (request.method === 'GET' && path === '/count') {
-      return json({ pageViews: await counter.get() }, 200, corsHeaders);
+      const response = await counter.fetch('https://counter/count');
+      return json(await response.json(), response.status, corsHeaders);
     }
 
     if (request.method === 'POST' && path === '/view') {
-      return json({ pageViews: await counter.increment() }, 200, corsHeaders);
+      const response = await counter.fetch('https://counter/view', { method: 'POST' });
+      return json(await response.json(), response.status, corsHeaders);
     }
 
     return json({ error: 'Not found' }, 404, corsHeaders);
