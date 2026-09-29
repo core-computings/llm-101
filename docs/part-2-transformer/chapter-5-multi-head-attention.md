@@ -7,22 +7,44 @@ sidebar_position: 5
 
 One attention head learns one communication pattern. Multi-head attention runs several smaller heads in parallel, allowing different heads to specialize in different relationships.
 
+![Multi-head attention architecture: several scaled dot-product attention heads run in parallel, their outputs are concatenated, and a final linear layer combines them.](./assets/chapter-5/multi-head-attention.png)
+
 ```python
-heads = [Head(head_size) for _ in range(num_heads)]
-x = torch.cat([h(x) for h in heads], dim=-1)
-x = self.proj(x)
+class Head(nn.Module):
+    """ one head of self-attention """
+
+    def __init__(self, head_size):
+        super().__init__()
+        self.key = nn.Linear(n_embd, head_size, bias=False)
+        self.query = nn.Linear(n_embd, head_size, bias=False)
+        self.value = nn.Linear(n_embd, head_size, bias=False)
+        self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size)))
+
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x):
+        B,T,C = x.shape
+        k = self.key(x)   # (B,T,C)
+        q = self.query(x) # (B,T,C)
+        wei = q @ k.transpose(-2,-1) * C**-0.5 # (B, T, C) @ (B, C, T) -> (B, T, T)
+        wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf')) # (B, T, T)
+        wei = F.softmax(wei, dim=-1) # (B, T, T)
+        wei = self.dropout(wei)
+        v = self.value(x) # (B,T,C)
+        out = wei @ v # (B, T, T) @ (B, T, C) -> (B, T, C)
+        return out
+
+class MultiHeadAttention(nn.Module):
+    """ multiple heads of self-attention in parallel """
+
+    def __init__(self, num_heads, head_size):
+        super().__init__()
+        self.heads = nn.ModuleList([Head(head_size) for _ in range(num_heads)])
+        self.proj = nn.Linear(n_embd, n_embd)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x):
+        out = torch.cat([h(x) for h in self.heads], dim=-1) # on channel dimension
+        out = self.dropout(self.proj(out))
+        return out
 ```
-
-The projection mixes the concatenated head outputs back into the model's embedding size. The computation remains parallel over the batch, sequence positions, and heads.
-
-## Position matters
-
-Attention alone operates on a set of vectors and has no inherent notion of order. Add token embeddings to learned positional embeddings so the same token at two positions can receive different representations.
-
-$$
-x_{t}=E_{\text{token}}(\text{token}_t)+E_{\text{position}}(t)
-$$
-
-## Exercise
-
-Change the number of heads while keeping the total embedding size fixed. Explain why each head receives a smaller `head_size` and why concatenation restores the original width.
