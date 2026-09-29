@@ -1,19 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { useLocation } from '@docusaurus/router';
 import DocSidebarDesktop from '@theme-original/DocSidebar/Desktop';
 
 function PageViewCounter() {
   const { siteConfig } = useDocusaurusContext();
-  const { pathname } = useLocation();
   const counterUrl = siteConfig.customFields.pageViewCounterUrl;
-  const lastTrackedPath = useRef();
   const [pageViews, setPageViews] = useState();
 
   useEffect(() => {
-    if (!counterUrl || lastTrackedPath.current === pathname) return undefined;
+    if (!counterUrl) return undefined;
 
-    lastTrackedPath.current = pathname;
     const controller = new AbortController();
     const endpoint = `${counterUrl.replace(/\/$/, '')}/view`;
 
@@ -23,7 +19,7 @@ function PageViewCounter() {
       .catch(() => {});
 
     return () => controller.abort();
-  }, [counterUrl, pathname]);
+  }, [counterUrl]);
 
   if (!counterUrl) return null;
 
