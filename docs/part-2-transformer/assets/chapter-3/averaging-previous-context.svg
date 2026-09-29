@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="970" viewBox="0 0 1100 970" role="img" aria-labelledby="title desc">
-  <title id="title">Averaging previous context, one vector dimension at a time</title>
+  <title id="title">Efficient context mixing, one vector dimension at a time</title>
   <desc id="desc">Four token embeddings B0 to B3 are shown as three-dimensional vectors. At each position t, average each vector dimension over B0 through Bt. Four equations show the outputs C0, C1, C2 and C3.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfdf8"/><stop offset="1" stop-color="#f3faeb"/></linearGradient>
@@ -9,7 +9,6 @@
     </style>
   </defs>
   <rect width="1100" height="970" rx="24" fill="url(#bg)"/>
-  <text x="52" y="58" class="text title">Averaging previous context</text>
   <text x="52" y="91" class="text note">Each token is represented by a fixed-length embedding vector (here, C = 3).</text>
 
   <text x="75" y="143" class="text label">TOKEN</text>
