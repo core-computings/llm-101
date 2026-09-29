@@ -24,7 +24,6 @@ module.exports = {
         'part-2-transformer/chapter-4-self-attention',
         'part-2-transformer/chapter-5-multi-head-attention',
         'part-2-transformer/chapter-6-transformer-block',
-        'part-2-transformer/chapter-7-scaling-and-regularization',
       ],
     },
   ],
