@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+  <title id="title">Linear learning-rate warmup followed by cosine decay</title>
+  <desc id="desc">The learning rate starts at 6e-5 on step zero, increases linearly to 6e-4 by step ten, then follows a cosine curve back to 6e-5 at step one hundred.</desc>
+  <style>
+    .axis { fill: none; stroke: #8796a5; stroke-width: 2; }
+    .grid { fill: none; stroke: #d9e3d5; stroke-width: 1.5; stroke-dasharray: 5 6; }
+    .guide { fill: none; stroke: #9ab5d3; stroke-width: 1.5; stroke-dasharray: 5 5; }
+    .warm-line { fill: none; stroke: #588dc5; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .decay-line { fill: none; stroke: #669b4c; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .axis-text { font: 500 18px Inter, Arial, sans-serif; fill: #506174; }
+    .label { font: 650 18px Inter, Arial, sans-serif; fill: #243344; }
+    .phase { font: 650 17px Inter, Arial, sans-serif; fill: #506174; }
+  </style>
+  <rect width="1000" height="500" rx="18" fill="#fff"/>
+  <rect x="22" y="22" width="956" height="456" rx="14" fill="#fcfdf9" stroke="#e2e9dc" stroke-width="2"/>
+  <text class="label" x="95" y="76">Learning rate</text>
+
+  <path class="grid" d="M95 120 H915 M95 245 H915 M95 370 H915"/>
+  <path class="guide" d="M177 120 V370"/>
+  <path class="axis" d="M95 112 V370 H923"/>
+
+  <path d="M95 370 L103.2 342.2 L111.4 314.4 L119.6 286.7 L127.8 258.9 L136 231.1 L144.2 203.3 L152.4 175.6 L160.6 147.8 L168.8 120 L177 120 L177 370 Z" fill="#e8f1fb"/>
+  <path d="M177 120 L193.4 120.3 L209.8 121.2 L226.2 122.7 L242.6 124.8 L259 127.5 L275.4 130.8 L291.8 134.6 L308.2 139 L324.6 143.9 L341 149.2 L357.4 155.1 L373.8 161.4 L390.2 168 L406.6 175.1 L423 182.5 L439.4 190.2 L455.8 198.2 L472.2 206.4 L488.6 214.8 L505 223.3 L521.4 231.9 L537.8 240.6 L554.2 249.4 L570.6 258.1 L587 266.7 L603.4 275.2 L619.8 283.6 L636.2 291.8 L652.6 299.8 L669 307.5 L685.4 314.9 L701.8 322 L718.2 328.6 L734.6 334.9 L751 340.8 L767.4 346.1 L783.8 351 L800.2 355.4 L816.6 359.2 L833 362.5 L849.4 365.2 L865.8 367.3 L882.2 368.8 L898.6 369.7 L915 370 L177 370 Z" fill="#eff7e9"/>
+  <path class="warm-line" d="M95 370 L103.2 342.2 L111.4 314.4 L119.6 286.7 L127.8 258.9 L136 231.1 L144.2 203.3 L152.4 175.6 L160.6 147.8 L168.8 120 L177 120"/>
+  <path class="decay-line" d="M177 120 L193.4 120.3 L209.8 121.2 L226.2 122.7 L242.6 124.8 L259 127.5 L275.4 130.8 L291.8 134.6 L308.2 139 L324.6 143.9 L341 149.2 L357.4 155.1 L373.8 161.4 L390.2 168 L406.6 175.1 L423 182.5 L439.4 190.2 L455.8 198.2 L472.2 206.4 L488.6 214.8 L505 223.3 L521.4 231.9 L537.8 240.6 L554.2 249.4 L570.6 258.1 L587 266.7 L603.4 275.2 L619.8 283.6 L636.2 291.8 L652.6 299.8 L669 307.5 L685.4 314.9 L701.8 322 L718.2 328.6 L734.6 334.9 L751 340.8 L767.4 346.1 L783.8 351 L800.2 355.4 L816.6 359.2 L833 362.5 L849.4 365.2 L865.8 367.3 L882.2 368.8 L898.6 369.7 L915 370"/>
+  <circle cx="177" cy="120" r="6" fill="#477ead"/>
+  <circle cx="915" cy="370" r="6" fill="#5e9147"/>
+
+  <text class="axis-text" x="80" y="126" text-anchor="end">6e-4</text>
+  <text class="axis-text" x="80" y="251" text-anchor="end">3.3e-4</text>
+  <text class="axis-text" x="80" y="376" text-anchor="end">6e-5</text>
+  <text class="axis-text" x="95" y="402" text-anchor="middle">0</text>
+  <text class="axis-text" x="177" y="402" text-anchor="middle">10</text>
+  <text class="axis-text" x="505" y="402" text-anchor="middle">50</text>
+  <text class="axis-text" x="915" y="402" text-anchor="middle">100</text>
+  <text class="label" x="915" y="438" text-anchor="end">Training step</text>
+
+  <path d="M120 442 H154" stroke="#588dc5" stroke-width="4" stroke-linecap="round"/>
+  <text class="phase" x="164" y="448">linear warmup</text>
+  <path d="M338 442 H372" stroke="#669b4c" stroke-width="4" stroke-linecap="round"/>
+  <text class="phase" x="382" y="448">cosine decay</text>
+</svg>

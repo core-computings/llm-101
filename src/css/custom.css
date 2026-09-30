@@ -44,6 +44,7 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-markdown img[alt^='NVIDIA A100 precision and performance specifications'] { display: block; width: min(100%, 620px); height: auto; margin: 1.75rem auto .55rem; }
 .theme-doc-markdown img[alt^='GPU HBM memory traffic before and after compilation'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
 .theme-doc-markdown img[alt^='FlashAttention tiled computation across HBM'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
+.theme-doc-markdown img[alt^='Learning rate warmup and cosine decay schedule'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
 .page-view-sidebar-wrapper { display: none; }
 .page-view-counter { border-top: 1px solid #dfe8d6; background: #fff; color: #536176; padding: .65rem 1.4rem; text-align: left; font-size: .78rem; }
 .page-view-counter strong { color: #26332d; font-variant-numeric: tabular-nums; }
