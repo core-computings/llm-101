@@ -243,3 +243,19 @@ step 90, loss: 6.314033508300781, epoch time: 28.69ms, token_per_second: 17847.8
 ```
 
 This bfloat16 run reaches about 17–18K tokens/s and follows a similar loss trend. It is faster than the FP32 baseline in this small experiment, though TF32 is faster for this particular model and batch size. Real workloads should benchmark both modes rather than assuming one is always best.
+
+## 5. Ops and autocast
+
+`torch.autocast` does **not** convert every operation in its block to a low-precision type. It applies a per-operation policy. The following CUDA lists are the relevant categories from the [PyTorch AMP CUDA op reference](https://docs.pytorch.org/docs/2.14/amp.html#cuda-ops-that-can-autocast-to-float16). The reference labels the low-precision list as `float16`; when this chapter uses `dtype=torch.bfloat16`, the same policy selects bfloat16 for eligible operations.
+
+### Operations eligible for low precision
+
+These are primarily the high-throughput matrix and convolution operations: `__matmul__`, `addbmm`, `addmm`, `addmv`, `addr`, `baddbmm`, `bmm`, `chain_matmul`, `multi_dot`, `conv1d`, `conv2d`, `conv3d`, `conv_transpose1d`, `conv_transpose2d`, `conv_transpose3d`, `GRUCell`, `linear`, `LSTMCell`, `matmul`, `mm`, `mv`, `prelu`, and `RNNCell`.
+
+### Operations that autocast to FP32
+
+These operations are kept in FP32 because they are more sensitive to numerical range or precision: `__pow__`, `__rdiv__`, `__rpow__`, `__rtruediv__`, `acos`, `asin`, `binary_cross_entropy_with_logits`, `cosh`, `cosine_embedding_loss`, `cdist`, `cosine_similarity`, `cross_entropy`, `cumprod`, `cumsum`, `dist`, `erfinv`, `exp`, `expm1`, `group_norm`, `hinge_embedding_loss`, `kl_div`, `l1_loss`, `layer_norm`, `log`, `log_softmax`, `log10`, `log1p`, `log2`, `margin_ranking_loss`, `mse_loss`, `multilabel_margin_loss`, `multi_margin_loss`, `nll_loss`, `norm`, `normalize`, `pdist`, `poisson_nll_loss`, `pow`, `prod`, `reciprocal`, `rsqrt`, `sinh`, `smooth_l1_loss`, `soft_margin_loss`, `softmax`, `softmin`, `softplus`, `sum`, `renorm`, `tan`, and `triplet_margin_loss`.
+
+### Operations that promote to the widest input type
+
+For `addcdiv`, `addcmul`, `atan2`, `bilinear`, `cross`, `dot`, `grid_sample`, `index_put`, `scatter_add`, and `tensordot`, all inputs are promoted to match the widest input type. For example, if any input is FP32, the operation runs in FP32. Operations outside these eligibility lists keep the dtype determined by their inputs. This is why autocast is genuinely mixed precision: it accelerates the expensive matrix multiplications while preserving FP32 where stability matters.
