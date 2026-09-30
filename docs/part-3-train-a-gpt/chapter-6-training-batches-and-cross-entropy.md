@@ -9,6 +9,8 @@ sidebar_position: 6
 
 Language-model training turns one long token stream into many next-token prediction examples. After encoding the text with the GPT-2 tokenizer, this example takes `B × T + 1` consecutive tokens. The extra token is necessary because the target sequence is the input sequence shifted one position to the left.
 
+![Preparing shifted input and target tokens for training](./assets/chapter-6/shifted-training-data.svg)
+
 ```python
 # tiny shakespeare dataset
 # !wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt

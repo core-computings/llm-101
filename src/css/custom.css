@@ -40,6 +40,7 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-markdown img[alt^='Bigram model mechanism'] { display: block; width: 100%; height: auto; margin: 1.5rem auto; }
 .theme-doc-markdown img[alt^='Self-attention computation flow'] { display: block; width: 100%; height: auto; margin: 1.5rem auto; }
 .theme-doc-markdown img[alt^='Multi-head attention architecture'] { display: block; max-width: 100%; height: auto; margin: 1.5rem auto; }
+.theme-doc-markdown img[alt^='Preparing shifted input and target tokens'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
 .page-view-sidebar-wrapper { display: none; }
 .page-view-counter { border-top: 1px solid #dfe8d6; background: #fff; color: #536176; padding: .65rem 1.4rem; text-align: left; font-size: .78rem; }
 .page-view-counter strong { color: #26332d; font-variant-numeric: tabular-nums; }

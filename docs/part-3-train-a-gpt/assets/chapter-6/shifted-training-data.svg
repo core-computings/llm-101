@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Preparing shifted input and target tokens for language-model training</title>
+  <desc id="desc">Characters are tokenized into IDs, then a seven-token buffer is shifted by one position to create two input rows and their corresponding target rows.</desc>
+  <style>
+    .title { font: 700 25px Inter, Arial, sans-serif; fill: #172033; }
+    .label { font: 700 18px Inter, Arial, sans-serif; fill: #344054; }
+    .small { font: 500 16px Inter, Arial, sans-serif; fill: #536176; }
+    .token { font: 700 20px Inter, Arial, sans-serif; fill: #172033; text-anchor: middle; dominant-baseline: middle; }
+    .id { font: 700 20px Inter, Arial, sans-serif; fill: #1e5138; text-anchor: middle; dominant-baseline: middle; }
+    .arrow { stroke: #71815e; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    .brace { stroke: #91a47a; stroke-width: 2; fill: none; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#71815e"/></marker>
+  </defs>
+
+  <rect width="1200" height="620" rx="18" fill="#fbfdf8"/>
+  <text x="60" y="116" class="label">Raw text</text>
+  <g fill="#eaf3df" stroke="#b8cda2" stroke-width="1.5">
+    <rect x="200" y="88" width="74" height="56" rx="10"/><rect x="286" y="88" width="74" height="56" rx="10"/>
+    <rect x="372" y="88" width="74" height="56" rx="10"/><rect x="458" y="88" width="74" height="56" rx="10"/>
+    <rect x="544" y="88" width="74" height="56" rx="10"/><rect x="630" y="88" width="74" height="56" rx="10"/>
+    <rect x="716" y="88" width="74" height="56" rx="10"/>
+  </g>
+  <g class="token"><text x="237" y="116">a</text><text x="323" y="116">b</text><text x="409" y="116">c</text><text x="495" y="116">d</text><text x="581" y="116">e</text><text x="667" y="116">f</text><text x="753" y="116">g</text></g>
+
+  <path class="arrow" d="M495 156 V201"/>
+  <text x="520" y="184" class="small">tokenize</text>
+
+  <text x="60" y="239" class="label">Token IDs</text>
+  <text x="200" y="267" class="small">buffer: 7 consecutive tokens = B × T + 1</text>
+  <g fill="#dff0e7" stroke="#9cc9ae" stroke-width="1.5">
+    <rect x="200" y="286" width="74" height="56" rx="10"/><rect x="286" y="286" width="74" height="56" rx="10"/>
+    <rect x="372" y="286" width="74" height="56" rx="10"/><rect x="458" y="286" width="74" height="56" rx="10"/>
+    <rect x="544" y="286" width="74" height="56" rx="10"/><rect x="630" y="286" width="74" height="56" rx="10"/>
+    <rect x="716" y="286" width="74" height="56" rx="10"/>
+  </g>
+  <g class="id"><text x="237" y="314">12</text><text x="323" y="314">24</text><text x="409" y="314">31</text><text x="495" y="314">48</text><text x="581" y="314">53</text><text x="667" y="314">67</text><text x="753" y="314">72</text></g>
+
+  <path class="arrow" d="M495 354 V397"/>
+  <text x="520" y="382" class="small">shift by one token</text>
+
+  <text x="60" y="438" class="label">Training batch</text>
+  <text x="200" y="427" class="small">B = 2, T = 3</text>
+  <text x="200" y="468" class="label">input x</text>
+  <text x="200" y="539" class="label">target y</text>
+  <g fill="#eaf3df" stroke="#b8cda2" stroke-width="1.5">
+    <rect x="340" y="441" width="72" height="50" rx="9"/><rect x="424" y="441" width="72" height="50" rx="9"/><rect x="508" y="441" width="72" height="50" rx="9"/>
+    <rect x="640" y="441" width="72" height="50" rx="9"/><rect x="724" y="441" width="72" height="50" rx="9"/><rect x="808" y="441" width="72" height="50" rx="9"/>
+  </g>
+  <g fill="#fcebd7" stroke="#edbf84" stroke-width="1.5">
+    <rect x="340" y="512" width="72" height="50" rx="9"/><rect x="424" y="512" width="72" height="50" rx="9"/><rect x="508" y="512" width="72" height="50" rx="9"/>
+    <rect x="640" y="512" width="72" height="50" rx="9"/><rect x="724" y="512" width="72" height="50" rx="9"/><rect x="808" y="512" width="72" height="50" rx="9"/>
+  </g>
+  <g class="id"><text x="376" y="466">12</text><text x="460" y="466">24</text><text x="544" y="466">31</text><text x="676" y="466">48</text><text x="760" y="466">53</text><text x="844" y="466">67</text></g>
+  <g class="id"><text x="376" y="537">24</text><text x="460" y="537">31</text><text x="544" y="537">48</text><text x="676" y="537">53</text><text x="760" y="537">67</text><text x="844" y="537">72</text></g>
+  <path class="brace" d="M324 442 h-12 v120 h12 M596 442 h12 v120 h-12"/>
+  <path class="brace" d="M624 442 h-12 v120 h12 M896 442 h12 v120 h-12"/>
+  <text x="454" y="594" class="small" text-anchor="middle">example 1</text><text x="760" y="594" class="small" text-anchor="middle">example 2</text>
+</svg>
