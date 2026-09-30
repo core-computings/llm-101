@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="790" viewBox="0 0 1100 790" role="img" aria-labelledby="title desc">
+  <title id="title">Attention matrix materialization compared with FlashAttention tiling</title>
+  <desc id="desc">The upper path writes full score and probability matrices to GPU high bandwidth memory. The lower path loads query, key, and value tiles into on-chip SRAM, updates an online softmax and output tile, and writes only the final output to HBM.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" markerWidth="7" markerHeight="7" refX="6.6" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#60758a"/>
+    </marker>
+    <style>
+      .panel { fill: #fcfdfb; stroke: #dce5d9; stroke-width: 2; }
+      .hbm { fill: #eaf1fa; stroke: #a9bfdc; stroke-width: 2; }
+      .sram { fill: #f2f9ec; stroke: #afc99d; stroke-width: 2; }
+      .tile { fill: #fff; stroke: #a9bfdc; stroke-width: 2; }
+      .compute { fill: #fff0dd; stroke: #e3b274; stroke-width: 2; }
+      .online { fill: #e8f4df; stroke: #93bd79; stroke-width: 2; }
+      .path { fill: none; stroke: #60758a; stroke-width: 2.6; marker-end: url(#arrow); }
+      .section { font: 700 24px Inter, Arial, sans-serif; fill: #202c37; }
+      .label { font: 700 20px Inter, Arial, sans-serif; fill: #253447; text-anchor: middle; }
+      .detail { font: 500 17px Inter, Arial, sans-serif; fill: #526274; text-anchor: middle; }
+      .memory { font: 700 18px Inter, Arial, sans-serif; fill: #344b62; }
+      .note { font: 600 18px Inter, Arial, sans-serif; fill: #586c7e; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1100" height="790" rx="18" fill="#fff"/>
+
+  <rect class="panel" x="22" y="20" width="1056" height="250" rx="16"/>
+  <text class="section" x="52" y="60">Materialized attention</text>
+  <rect class="hbm" x="50" y="83" width="1000" height="150" rx="13"/>
+  <text class="memory" x="72" y="110">HBM · GPU global memory</text>
+  <rect class="tile" x="72" y="130" width="150" height="75" rx="10"/>
+  <rect class="compute" x="291" y="130" width="190" height="75" rx="10"/>
+  <rect class="compute" x="550" y="130" width="190" height="75" rx="10"/>
+  <rect class="tile" x="809" y="130" width="150" height="75" rx="10"/>
+  <text class="label" x="147" y="163">Q, K, V</text>
+  <text class="label" x="386" y="159">Scores</text>
+  <text class="detail" x="386" y="186">QKᵀ · N × N</text>
+  <text class="label" x="645" y="159">Softmax P</text>
+  <text class="detail" x="645" y="186">N × N</text>
+  <text class="label" x="884" y="159">Output</text>
+  <text class="detail" x="884" y="186">PV</text>
+  <path class="path" d="M222 168 H279"/>
+  <path class="path" d="M481 168 H538"/>
+  <path class="path" d="M740 168 H797"/>
+  <text class="note" x="550" y="253">Full N × N intermediates are written to and read from HBM</text>
+
+  <rect class="panel" x="22" y="290" width="1056" height="470" rx="16"/>
+  <text class="section" x="52" y="330">FlashAttention</text>
+
+  <text class="memory" x="72" y="370">HBM · GPU global memory</text>
+  <rect class="hbm" x="50" y="382" width="1000" height="103" rx="13"/>
+  <rect class="tile" x="88" y="404" width="250" height="60" rx="10"/>
+  <rect class="tile" x="812" y="404" width="200" height="60" rx="10"/>
+  <text class="label" x="213" y="431">Q, K, V tiles</text>
+  <text class="detail" x="213" y="452">Qᵢ, Kⱼ, Vⱼ</text>
+  <text class="detail" x="555" y="443">repeat for each K/V tile j</text>
+  <text class="label" x="912" y="440">Final Oᵢ</text>
+
+  <text class="memory" x="365" y="527">SRAM · on-chip memory</text>
+  <rect class="sram" x="50" y="540" width="1000" height="165" rx="13"/>
+  <rect class="tile" x="78" y="575" width="205" height="95" rx="10"/>
+  <rect class="compute" x="333" y="575" width="175" height="95" rx="10"/>
+  <rect class="online" x="558" y="575" width="225" height="95" rx="10"/>
+  <rect class="tile" x="833" y="575" width="175" height="95" rx="10"/>
+  <text class="label" x="180" y="610">Current tiles</text>
+  <text class="detail" x="180" y="639">Qᵢ, Kⱼ, Vⱼ</text>
+  <text class="label" x="420" y="610">Score tile</text>
+  <text class="detail" x="420" y="639">QᵢKⱼᵀ</text>
+  <text class="label" x="670" y="602">Online softmax</text>
+  <text class="detail" x="670" y="630">running max + sum</text>
+  <text class="detail" x="670" y="651">and output</text>
+  <text class="label" x="920" y="610">Output tile</text>
+  <text class="detail" x="920" y="639">Oᵢ</text>
+  <path class="path" d="M213 464 V563"/>
+  <path class="path" d="M283 622 H321"/>
+  <path class="path" d="M508 622 H546"/>
+  <path class="path" d="M783 622 H821"/>
+  <path class="path" d="M920 575 V476"/>
+  <text class="note" x="550" y="735">Score tiles stay on chip; only the finished output returns to HBM</text>
+</svg>

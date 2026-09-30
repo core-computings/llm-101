@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">GPU global-memory traffic before and after kernel fusion</title>
+  <desc id="desc">The eager path repeatedly transfers intermediate tensors between GPU compute units and HBM. The compiled path uses one fused kernel and transfers only the input and final output.</desc>
+  <defs>
+    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c96954"/></marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#5f8e48"/></marker>
+    <style>
+      .panel { fill: #fbfcf8; stroke: #dce5d2; stroke-width: 2; }
+      .hbm { fill: #e7eef8; stroke: #9eb7d7; stroke-width: 2; }
+      .gpu { fill: #f3faeb; stroke: #a9c98a; stroke-width: 2; }
+      .kernel { fill: #fff4e7; stroke: #edbd82; stroke-width: 2; }
+      .fused { fill: #e5f3df; stroke: #88b56f; stroke-width: 2; }
+      .main { font: 700 21px Inter, Arial, sans-serif; fill: #172033; }
+      .label { font: 700 17px Inter, Arial, sans-serif; fill: #253447; }
+      .small { font: 500 15px Inter, Arial, sans-serif; fill: #536176; }
+      .arrow-red { fill: none; stroke: #c96954; stroke-width: 3; marker-end: url(#arrow-red); }
+      .arrow-green { fill: none; stroke: #5f8e48; stroke-width: 3; marker-end: url(#arrow-green); }
+      .note { font: 600 15px Inter, Arial, sans-serif; fill: #8e4739; }
+      .good { font: 600 15px Inter, Arial, sans-serif; fill: #3f6c2b; }
+    </style>
+  </defs>
+
+  <rect class="panel" x="20" y="20" width="558" height="500" rx="16"/>
+  <text class="main" x="54" y="63">Eager execution</text>
+  <text class="small" x="54" y="89">separate GPU kernels</text>
+  <rect class="hbm" x="58" y="125" width="162" height="338" rx="14"/>
+  <text class="label" x="139" y="166" text-anchor="middle">HBM</text>
+  <text class="small" x="139" y="191" text-anchor="middle">GPU global memory</text>
+  <rect x="84" y="224" width="110" height="37" rx="7" fill="#fff"/>
+  <rect x="84" y="282" width="110" height="37" rx="7" fill="#fff"/>
+  <rect x="84" y="340" width="110" height="37" rx="7" fill="#fff"/>
+  <rect x="84" y="398" width="110" height="37" rx="7" fill="#fff"/>
+  <text class="small" x="139" y="248" text-anchor="middle">input</text>
+  <text class="small" x="139" y="306" text-anchor="middle">intermediate 1</text>
+  <text class="small" x="139" y="364" text-anchor="middle">intermediate 2</text>
+  <text class="small" x="139" y="422" text-anchor="middle">output</text>
+
+  <rect class="gpu" x="304" y="125" width="224" height="338" rx="14"/>
+  <text class="label" x="416" y="166" text-anchor="middle">GPU compute</text>
+  <text class="small" x="416" y="191" text-anchor="middle">SMs / registers</text>
+  <rect class="kernel" x="342" y="219" width="148" height="48" rx="9"/>
+  <rect class="kernel" x="342" y="291" width="148" height="48" rx="9"/>
+  <rect class="kernel" x="342" y="363" width="148" height="48" rx="9"/>
+  <text class="label" x="416" y="249" text-anchor="middle">bias add</text>
+  <text class="label" x="416" y="321" text-anchor="middle">activation</text>
+  <text class="label" x="416" y="393" text-anchor="middle">residual add</text>
+  <path class="arrow-red" d="M194 243 L342 243"/>
+  <path class="arrow-red" d="M342 260 L194 300"/>
+  <path class="arrow-red" d="M194 300 L342 315"/>
+  <path class="arrow-red" d="M342 332 L194 358"/>
+  <path class="arrow-red" d="M194 358 L342 387"/>
+  <path class="arrow-red" d="M342 404 L194 416"/>
+  <text class="note" x="300" y="492" text-anchor="middle">repeated HBM reads + writes</text>
+
+  <rect class="panel" x="622" y="20" width="558" height="500" rx="16"/>
+  <text class="main" x="656" y="63">Compiled execution</text>
+  <text class="small" x="656" y="89">one fused GPU kernel</text>
+  <rect class="hbm" x="660" y="125" width="162" height="338" rx="14"/>
+  <text class="label" x="741" y="166" text-anchor="middle">HBM</text>
+  <text class="small" x="741" y="191" text-anchor="middle">GPU global memory</text>
+  <rect x="686" y="232" width="110" height="48" rx="7" fill="#fff"/>
+  <rect x="686" y="365" width="110" height="48" rx="7" fill="#fff"/>
+  <text class="small" x="741" y="262" text-anchor="middle">input</text>
+  <text class="small" x="741" y="395" text-anchor="middle">final output</text>
+
+  <rect class="gpu" x="906" y="125" width="224" height="338" rx="14"/>
+  <text class="label" x="1018" y="166" text-anchor="middle">GPU compute</text>
+  <text class="small" x="1018" y="191" text-anchor="middle">SMs / registers</text>
+  <rect class="fused" x="944" y="238" width="148" height="136" rx="11"/>
+  <text class="label" x="1018" y="277" text-anchor="middle">fused kernel</text>
+  <text class="small" x="1018" y="306" text-anchor="middle">bias add</text>
+  <text class="small" x="1018" y="331" text-anchor="middle">activation</text>
+  <text class="small" x="1018" y="356" text-anchor="middle">residual add</text>
+  <path class="arrow-green" d="M796 256 L944 306"/>
+  <path class="arrow-green" d="M944 341 L796 389"/>
+  <text class="good" x="902" y="492" text-anchor="middle">only input + final output touch HBM</text>
+</svg>
