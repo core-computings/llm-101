@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="830" viewBox="0 0 1200 830" role="img" aria-labelledby="title desc">
+  <title id="title">Distributed training across eight GPUs</title>
+  <desc id="desc">Each rank reads a different sequence of token chunks, accumulates four scaled micro-batch gradients locally, then DDP averages gradients across eight GPUs before each replica updates its model. A separate scalar all-reduce averages losses for logging.</desc>
+  <style>
+    .head { font: 650 20px Inter, Arial, sans-serif; fill: #3c4e5c; }
+    .main { font: 650 21px Inter, Arial, sans-serif; fill: #233443; }
+    .small { font: 500 18px Inter, Arial, sans-serif; fill: #536473; }
+    .chunk { font: 650 22px Inter, Arial, sans-serif; fill: #2e5637; }
+    .line { fill: none; stroke: #5d6c78; stroke-width: 2.2; stroke-linecap: round; }
+    .arrowhead { fill: none; stroke: #5d6c78; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .divider { stroke: #d8e1df; stroke-width: 2; }
+  </style>
+
+  <rect width="1200" height="830" rx="20" fill="#ffffff"/>
+  <rect x="16" y="16" width="1168" height="798" rx="16" fill="#fcfdf9" stroke="#e1e9dc" stroke-width="2"/>
+
+  <rect x="50" y="37" width="334" height="50" rx="12" fill="#edf5e8" stroke="#c6ddbd"/>
+  <text class="small" x="217" y="69" text-anchor="middle">1 chunk = 16,384 tokens</text>
+  <rect x="410" y="37" width="334" height="50" rx="12" fill="#eaf2fb" stroke="#bfd5ec"/>
+  <text class="small" x="577" y="69" text-anchor="middle">world_size = 8 GPUs</text>
+  <rect x="770" y="37" width="378" height="50" rx="12" fill="#fff1e6" stroke="#e9c8a9"/>
+  <text class="small" x="959" y="69" text-anchor="middle">4 micro-steps per GPU and update</text>
+
+  <text class="head" x="54" y="128">Model replica</text>
+  <text class="head" x="219" y="128">Token chunks</text>
+  <text class="head" x="725" y="128">Local loss and backward</text>
+
+  <rect x="50" y="147" width="130" height="82" rx="13" fill="#f4f6f7" stroke="#d4dce0" stroke-width="2"/>
+  <text class="main" x="115" y="181" text-anchor="middle">GPU 0</text>
+  <text class="small" x="115" y="208" text-anchor="middle">rank 0</text>
+  <rect x="219" y="153" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="329" y="153" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="439" y="153" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="549" y="153" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <text class="chunk" x="265.5" y="196" text-anchor="middle">0</text>
+  <text class="chunk" x="375.5" y="196" text-anchor="middle">8</text>
+  <text class="chunk" x="485.5" y="196" text-anchor="middle">16</text>
+  <text class="chunk" x="595.5" y="196" text-anchor="middle">24</text>
+  <path class="line" d="M655 188 H703"/>
+  <path class="arrowhead" d="M696 181 L703 188 L696 195"/>
+  <rect x="720" y="147" width="428" height="82" rx="13" fill="#eaf2fb" stroke="#b9d3eb" stroke-width="2"/>
+  <text class="main" x="934" y="180" text-anchor="middle">4 distinct mean losses, each / 4</text>
+  <text class="small" x="934" y="208" text-anchor="middle">backward → local gradient g₀</text>
+
+  <rect x="50" y="250" width="130" height="82" rx="13" fill="#f4f6f7" stroke="#d4dce0" stroke-width="2"/>
+  <text class="main" x="115" y="284" text-anchor="middle">GPU 1</text>
+  <text class="small" x="115" y="311" text-anchor="middle">rank 1</text>
+  <rect x="219" y="256" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="329" y="256" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="439" y="256" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="549" y="256" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <text class="chunk" x="265.5" y="299" text-anchor="middle">1</text>
+  <text class="chunk" x="375.5" y="299" text-anchor="middle">9</text>
+  <text class="chunk" x="485.5" y="299" text-anchor="middle">17</text>
+  <text class="chunk" x="595.5" y="299" text-anchor="middle">25</text>
+  <path class="line" d="M655 291 H703"/>
+  <path class="arrowhead" d="M696 284 L703 291 L696 298"/>
+  <rect x="720" y="250" width="428" height="82" rx="13" fill="#eaf2fb" stroke="#b9d3eb" stroke-width="2"/>
+  <text class="main" x="934" y="283" text-anchor="middle">4 distinct mean losses, each / 4</text>
+  <text class="small" x="934" y="311" text-anchor="middle">backward → local gradient g₁</text>
+
+  <text class="main" x="115" y="380" text-anchor="middle">⋮</text>
+  <text class="main" x="430" y="380" text-anchor="middle">⋮</text>
+  <text class="main" x="934" y="380" text-anchor="middle">⋮</text>
+
+  <rect x="50" y="415" width="130" height="82" rx="13" fill="#f4f6f7" stroke="#d4dce0" stroke-width="2"/>
+  <text class="main" x="115" y="449" text-anchor="middle">GPU 7</text>
+  <text class="small" x="115" y="476" text-anchor="middle">rank 7</text>
+  <rect x="219" y="421" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="329" y="421" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="439" y="421" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <rect x="549" y="421" width="93" height="70" rx="11" fill="#edf5e8" stroke="#b9d4ae" stroke-width="2"/>
+  <text class="chunk" x="265.5" y="464" text-anchor="middle">7</text>
+  <text class="chunk" x="375.5" y="464" text-anchor="middle">15</text>
+  <text class="chunk" x="485.5" y="464" text-anchor="middle">23</text>
+  <text class="chunk" x="595.5" y="464" text-anchor="middle">31</text>
+  <path class="line" d="M655 456 H703"/>
+  <path class="arrowhead" d="M696 449 L703 456 L696 463"/>
+  <rect x="720" y="415" width="428" height="82" rx="13" fill="#eaf2fb" stroke="#b9d3eb" stroke-width="2"/>
+  <text class="main" x="934" y="448" text-anchor="middle">4 distinct mean losses, each / 4</text>
+  <text class="small" x="934" y="476" text-anchor="middle">backward → local gradient g₇</text>
+
+  <path class="divider" d="M50 529 H1148"/>
+
+  <rect x="50" y="564" width="220" height="84" rx="13" fill="#fff1e6" stroke="#e8c8aa" stroke-width="2"/>
+  <text class="main" x="160" y="598" text-anchor="middle">Local gradients</text>
+  <text class="small" x="160" y="628" text-anchor="middle">g₀, g₁, …, g₇</text>
+  <path class="line" d="M283 606 H315"/>
+  <path class="arrowhead" d="M308 599 L315 606 L308 613"/>
+  <rect x="330" y="564" width="255" height="84" rx="13" fill="#fff1e6" stroke="#e8c8aa" stroke-width="2"/>
+  <text class="main" x="457.5" y="598" text-anchor="middle">DDP all-reduce AVG</text>
+  <text class="small" x="457.5" y="628" text-anchor="middle">last backward only</text>
+  <path class="line" d="M598 606 H635"/>
+  <path class="arrowhead" d="M628 599 L635 606 L628 613"/>
+  <rect x="650" y="564" width="230" height="84" rx="13" fill="#fff1e6" stroke="#e8c8aa" stroke-width="2"/>
+  <text class="main" x="765" y="598" text-anchor="middle">Global gradient</text>
+  <text class="small" x="765" y="628" text-anchor="middle">same on all 8 GPUs</text>
+  <path class="line" d="M893 606 H920"/>
+  <path class="arrowhead" d="M913 599 L920 606 L913 613"/>
+  <rect x="935" y="564" width="213" height="84" rx="13" fill="#f0f5e9" stroke="#bcd5af" stroke-width="2"/>
+  <text class="main" x="1041.5" y="598" text-anchor="middle">Clip and AdamW</text>
+  <text class="small" x="1041.5" y="628" text-anchor="middle">on each GPU</text>
+
+  <rect x="50" y="688" width="220" height="84" rx="13" fill="#eaf2fb" stroke="#b9d3eb" stroke-width="2"/>
+  <text class="main" x="160" y="722" text-anchor="middle">Local losses</text>
+  <text class="small" x="160" y="752" text-anchor="middle">L₀, L₁, …, L₇</text>
+  <path class="line" d="M283 730 H315"/>
+  <path class="arrowhead" d="M308 723 L315 730 L308 737"/>
+  <rect x="330" y="688" width="255" height="84" rx="13" fill="#eaf2fb" stroke="#b9d3eb" stroke-width="2"/>
+  <text class="main" x="457.5" y="722" text-anchor="middle">Scalar all-reduce AVG</text>
+  <text class="small" x="457.5" y="752" text-anchor="middle">separate operation</text>
+  <path class="line" d="M598 730 H635"/>
+  <path class="arrowhead" d="M628 723 L635 730 L628 737"/>
+  <rect x="650" y="688" width="498" height="84" rx="13" fill="#eaf2fb" stroke="#b9d3eb" stroke-width="2"/>
+  <text class="main" x="899" y="722" text-anchor="middle">Global mean loss</text>
+  <text class="small" x="899" y="752" text-anchor="middle">logging only, no gradient synchronization</text>
+</svg>

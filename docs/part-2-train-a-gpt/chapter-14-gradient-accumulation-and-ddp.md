@@ -102,3 +102,25 @@ for i in range(100):
     if i % 10 == 0:
         print(f"step {i}, loss: {loss_accum:.6f}, norm: {norm:.2f}, lr: {lr:.9f}, epoch time: {epoch_time:.2f}ms, token/sec: {tokens_per_second:.2f}")
 ```
+
+
+## 2. Distributed training
+
+`torchrun` starts one process per GPU. This configuration keeps the effective batch at `524,288` tokens while distributing the work across eight GPUs.
+
+| Setting | Value | Meaning |
+| --- | ---: | --- |
+| GPUs (`world_size`) | `8` | Eight processes, each with one model replica |
+| Micro-batch size (`B`) | `16` | Sequences per GPU in one micro-step |
+| Context length (`T`) | `1024` | Token positions per sequence |
+| Tokens per micro-batch per GPU | `B × T = 16,384` | Work processed by one GPU in one micro-step |
+| Gradient accumulation steps | `524,288 / (8 × 16,384) = 4` | Micro-steps per GPU before one optimizer update |
+| Effective batch size | `8 × 4 × 16,384 = 524,288` tokens | Tokens contributing to one optimizer update across all GPUs |
+
+Every process has its own copy of the model and its own `DataLoaderLite`. Each loader reads the same token file, but rank `r` starts at token offset `B × T × r` and advances by `B × T × world_size` after each batch. This gives the ranks different, non-overlapping chunks at the same micro-step. When a loader reaches the end of the file, it resets to its rank-specific starting offset. The chunk numbers in the diagram illustrate the stride before such a reset. Within each chunk, `x` contains the input tokens and `y` contains the same sequence shifted one token forward.
+
+Each micro-batch returns a mean loss, which is divided by 4 before `backward()`. The four backward calls accumulate a local gradient on each GPU. DDP skips gradient synchronization for the first three micro-steps and synchronizes on the last one. Its gradient all-reduce averages the eight local gradients, so every GPU receives the same global gradient and can apply the same optimizer update.
+
+The detached `loss_accum` values are also averaged across ranks with a separate `dist.all_reduce(..., AVG)`. This produces the global mean loss for logging. It is not the operation that synchronizes gradients.
+
+![Data chunks, local loss and gradient accumulation, and separate DDP reductions across eight GPUs](./assets/chapter-14/ddp-training-flow.svg)
