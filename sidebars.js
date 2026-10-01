@@ -34,5 +34,12 @@ module.exports = {
         'part-2-train-a-gpt/chapter-16-results-and-summary',
       ],
     },
+    {
+      type: 'category',
+      label: 'Part 3 — LLM Must-Knows',
+      items: [
+        'part-3-llm-must-knows/chapter-1-batch-normalization',
+      ],
+    },
   ],
 };

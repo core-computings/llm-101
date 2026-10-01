@@ -8,6 +8,8 @@ docs/
     chapter-1-building-the-dataset.md
   part-2-train-a-gpt/
     chapter-1-reproducing-gpt-2.md
+  part-3-llm-must-knows/
+    chapter-1-batch-normalization.md
 ```
 
 Use the front matter at the top for the title and chapter order. The body supports normal Markdown, code fences, tables, blockquotes, and LaTeX math.
