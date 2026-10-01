@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 510" role="img" aria-labelledby="desc">
+  <title id="desc">Layer normalization computes a mean and sample variance across each input row. Training and inference use the same input statistics, without a moving average.</title>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #26374b; }
+    .label { font-size: 22px; font-weight: 700; }
+    .small { font-size: 18px; }
+    .cell { font-size: 21px; font-weight: 600; }
+    .formula { font-size: 20px; }
+    .line { stroke: #6b7e8e; stroke-width: 2.5; fill: none; stroke-linecap: round; }
+  </style>
+  <rect x="6" y="6" width="1088" height="498" rx="22" fill="#fcfdf9" stroke="#dce7d2" stroke-width="2"/>
+
+  <text class="label" x="205" y="57" text-anchor="middle">Input x</text>
+  <text class="small" x="205" y="87" text-anchor="middle">32 inputs × 100 features</text>
+  <text class="label" x="573" y="57" text-anchor="middle">Statistics per input</text>
+  <text class="small" x="573" y="87" text-anchor="middle">mean and variance across 100 features</text>
+  <text class="label" x="912" y="57" text-anchor="middle">Normalized output y</text>
+
+  <text class="small" x="108" y="128" text-anchor="middle">f₀</text>
+  <text class="small" x="182" y="128" text-anchor="middle">f₁</text>
+  <text class="small" x="256" y="128" text-anchor="middle">⋯</text>
+  <text class="small" x="330" y="128" text-anchor="middle">f₉₉</text>
+  <text class="small" x="791" y="128" text-anchor="middle">f₀</text>
+  <text class="small" x="865" y="128" text-anchor="middle">f₁</text>
+  <text class="small" x="939" y="128" text-anchor="middle">⋯</text>
+  <text class="small" x="1013" y="128" text-anchor="middle">f₉₉</text>
+
+  <g fill="#e8f1fb" stroke="#b7d4f2" stroke-width="2">
+    <rect x="61" y="145" width="316" height="63" rx="12"/>
+    <rect x="61" y="220" width="316" height="63" rx="12"/>
+    <rect x="61" y="328" width="316" height="63" rx="12"/>
+  </g>
+  <g fill="#eef6e8" stroke="#c6dfb8" stroke-width="2">
+    <rect x="744" y="145" width="316" height="63" rx="12"/>
+    <rect x="744" y="220" width="316" height="63" rx="12"/>
+    <rect x="744" y="328" width="316" height="63" rx="12"/>
+  </g>
+
+  <text class="small" x="34" y="184" text-anchor="middle">1</text>
+  <text class="small" x="34" y="259" text-anchor="middle">2</text>
+  <text class="small" x="34" y="366" text-anchor="middle">32</text>
+  <text class="small" x="34" y="309" text-anchor="middle">⋮</text>
+  <g class="cell" text-anchor="middle">
+    <text x="108" y="184">x₁,₀</text><text x="182" y="184">x₁,₁</text><text x="256" y="184">⋯</text><text x="330" y="184">x₁,₉₉</text>
+    <text x="108" y="259">x₂,₀</text><text x="182" y="259">x₂,₁</text><text x="256" y="259">⋯</text><text x="330" y="259">x₂,₉₉</text>
+    <text x="108" y="366">x₃₂,₀</text><text x="182" y="366">x₃₂,₁</text><text x="256" y="366">⋯</text><text x="330" y="366">x₃₂,₉₉</text>
+    <text x="791" y="184">y₁,₀</text><text x="865" y="184">y₁,₁</text><text x="939" y="184">⋯</text><text x="1013" y="184">y₁,₉₉</text>
+    <text x="791" y="259">y₂,₀</text><text x="865" y="259">y₂,₁</text><text x="939" y="259">⋯</text><text x="1013" y="259">y₂,₉₉</text>
+    <text x="791" y="366">y₃₂,₀</text><text x="865" y="366">y₃₂,₁</text><text x="939" y="366">⋯</text><text x="1013" y="366">y₃₂,₉₉</text>
+  </g>
+
+  <g fill="#fff3e9" stroke="#efcbac" stroke-width="2">
+    <rect x="455" y="145" width="232" height="63" rx="12"/>
+    <rect x="455" y="220" width="232" height="63" rx="12"/>
+    <rect x="455" y="328" width="232" height="63" rx="12"/>
+  </g>
+  <g class="formula" text-anchor="middle">
+    <text x="571" y="184">μ₁, s₁²</text>
+    <text x="571" y="259">μ₂, s₂²</text>
+    <text x="571" y="366">μ₃₂, s₃₂²</text>
+  </g>
+  <text class="small" x="571" y="310" text-anchor="middle">⋮</text>
+
+  <g class="line">
+    <path d="M387 176 H442"/><path d="M387 251 H442"/><path d="M387 359 H442"/>
+    <path d="M698 176 H731"/><path d="M698 251 H731"/><path d="M698 359 H731"/>
+  </g>
+  <g fill="#6b7e8e">
+    <path d="M449 176 l-9 -5 v10 z"/><path d="M449 251 l-9 -5 v10 z"/><path d="M449 359 l-9 -5 v10 z"/>
+    <path d="M738 176 l-9 -5 v10 z"/><path d="M738 251 l-9 -5 v10 z"/><path d="M738 359 l-9 -5 v10 z"/>
+  </g>
+
+  <text class="small" x="550" y="442" text-anchor="middle">Training = inference: each row uses its own current statistics.</text>
+  <text class="small" x="550" y="472" text-anchor="middle">No running mean, running variance, or momentum.</text>
+</svg>

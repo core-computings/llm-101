@@ -5,6 +5,8 @@ sidebar_position: 1
 
 # Chapter 1: Batch Normalization
 
+As earlier layers change during training, the scale and location of their outputs can change too. This gives later layers a moving range of input values to learn from, which can make optimization harder. Batch normalization centers and scales intermediate activations within each mini-batch, helping keep those values in a more consistent range. In a trainable implementation, scale and shift parameters then let the model choose a useful range instead of forcing every output to stay standardized. This was the motivation behind the original [Batch Normalization paper](https://arxiv.org/abs/1502.03167).
+
 Batch normalization works **feature by feature across the examples in a batch**. Here `x` has shape `[32, 100]`, meaning 32 examples with 100 features each. The calls `x.mean(0, keepdim=True)` and `x.var(0, keepdim=True)` reduce the 32 rows and return statistics of shape `[1, 100]`. Each of the 100 feature columns has its own mean and variance, shared by all 32 examples in that column.
 
 ![Batch normalization computes statistics down each feature column, then normalizes and applies an affine transform](./assets/chapter-1/batch-normalization.svg)
