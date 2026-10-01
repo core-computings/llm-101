@@ -5,7 +5,15 @@ sidebar_position: 1
 
 # Chapter 1: Batch Normalization
 
-As earlier layers change during training, the scale and location of their outputs can change too. This gives later layers a moving range of input values to learn from, which can make optimization harder. Batch normalization centers and scales intermediate activations within each mini-batch, helping keep those values in a more consistent range. In a trainable implementation, scale and shift parameters then let the model choose a useful range instead of forcing every output to stay standardized. This was the motivation behind the original [Batch Normalization paper](https://arxiv.org/abs/1502.03167).
+Why normalize activations inside a network? As earlier layers' weights change, the values passed to later layers can grow, shrink, or shift. For example, a feature that is typically near 2 at one point in training might later be near 20. Large changes in numerical scale can make the next layer's computation and gradients harder to optimize. BatchNorm uses the current mini-batch to center and scale **each feature**, giving subsequent layers a more controlled input scale. This often makes training easier, allows larger learning rates, and reduces sensitivity to initialization. A standard BatchNorm layer then learns `gamma` and `beta` so the network can choose the feature's useful scale and offset rather than being forced to output mean zero and variance one. In the minimal code below, `gamma` and `beta` are fixed, so their effect is shown but not learned.
+
+For a toy example, look at **one feature across three examples** in three different mini-batches. Its mean and spread increase from A to C. Using the sample standard deviation, as the code below does, each batch normalizes to the same simple scale:
+
+![Three mini-batches with increasing feature values, each normalized to the same scale](./assets/chapter-1/batch-normalization-toy-example.svg)
+
+This shows what BatchNorm controls: the **mean and scale of a feature entering the next layer**, not every detail of its distribution. The diagram uses `gamma = 2` and `beta = 3` to show the affine step. The minimal implementation below actually keeps them at 1 and 0. The example also ignores the small `eps` term, so real normalized values would be very close to these numbers rather than exactly equal.
+
+The original [Batch Normalization paper](https://arxiv.org/abs/1502.03167) motivated this using *internal covariate shift*, the idea that each layer must adapt to changing input distributions. That is a useful intuition, but it is not a complete explanation of why BatchNorm helps. [Later work on BatchNorm optimization](https://arxiv.org/abs/1805.11604) found smoother optimization behavior and more predictable gradients even when reducing distribution shift did not explain the improvement. The practical point is to make training easier, not to claim that every layer's input distribution becomes fixed.
 
 Batch normalization works **feature by feature across the examples in a batch**. Here `x` has shape `[32, 100]`, meaning 32 examples with 100 features each. The calls `x.mean(0, keepdim=True)` and `x.var(0, keepdim=True)` reduce the 32 rows and return statistics of shape `[1, 100]`. Each of the 100 feature columns has its own mean and variance, shared by all 32 examples in that column.
 

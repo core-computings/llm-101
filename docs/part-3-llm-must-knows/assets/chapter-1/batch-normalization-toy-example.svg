@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 535" role="img" aria-labelledby="title description">
+  <title id="title">One feature normalized across three mini-batches</title>
+  <desc id="description">Mini-batch A has values 0, 2, 4 with mean 2 and sample standard deviation 2. Mini-batch B has values 10, 20, 30 with mean 20 and standard deviation 10. Mini-batch C has values 100, 200, 300 with mean 200 and standard deviation 100. All normalize to negative one, zero, one and, when gamma is 2 and beta is 3, produce 1, 3, 5.</desc>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #243447; }
+    .batch { font-size: 23px; font-weight: 700; }
+    .label { font-size: 17px; fill: #526477; }
+    .value { font-size: 25px; font-weight: 700; }
+    .stat { font-size: 20px; font-weight: 600; }
+    .note { font-size: 17px; fill: #526477; }
+    .arrow { stroke: #687a8b; stroke-width: 2.2; stroke-linecap: round; }
+  </style>
+  <rect x="5" y="5" width="1130" height="525" rx="22" fill="#fcfdf9" stroke="#dce7d2" stroke-width="2"/>
+
+  <g>
+    <rect x="24" y="29" width="340" height="456" rx="20" fill="#f6faff" stroke="#c5d9ef" stroke-width="2"/>
+    <rect x="400" y="29" width="340" height="456" rx="20" fill="#f8fcf4" stroke="#cce2be" stroke-width="2"/>
+    <rect x="776" y="29" width="340" height="456" rx="20" fill="#fffaf4" stroke="#efd4b8" stroke-width="2"/>
+  </g>
+
+  <g text-anchor="middle" class="batch">
+    <text x="194" y="69">Mini-batch A</text>
+    <text x="570" y="69">Mini-batch B</text>
+    <text x="946" y="69">Mini-batch C</text>
+  </g>
+
+  <g fill="#ffffff" stroke-width="1.6">
+    <rect x="44" y="91" width="300" height="72" rx="12" stroke="#b9d0ec"/>
+    <rect x="420" y="91" width="300" height="72" rx="12" stroke="#c2dcaf"/>
+    <rect x="796" y="91" width="300" height="72" rx="12" stroke="#e9cbaa"/>
+    <rect x="44" y="192" width="300" height="67" rx="12" stroke="#b9d0ec"/>
+    <rect x="420" y="192" width="300" height="67" rx="12" stroke="#c2dcaf"/>
+    <rect x="796" y="192" width="300" height="67" rx="12" stroke="#e9cbaa"/>
+    <rect x="44" y="288" width="300" height="72" rx="12" stroke="#b9d0ec"/>
+    <rect x="420" y="288" width="300" height="72" rx="12" stroke="#c2dcaf"/>
+    <rect x="796" y="288" width="300" height="72" rx="12" stroke="#e9cbaa"/>
+    <rect x="44" y="389" width="300" height="72" rx="12" stroke="#b9d0ec"/>
+    <rect x="420" y="389" width="300" height="72" rx="12" stroke="#c2dcaf"/>
+    <rect x="796" y="389" width="300" height="72" rx="12" stroke="#e9cbaa"/>
+  </g>
+
+  <g text-anchor="middle">
+    <text class="label" x="194" y="116">Feature values</text>
+    <text class="label" x="570" y="116">Feature values</text>
+    <text class="label" x="946" y="116">Feature values</text>
+    <text class="value" x="194" y="147">[0, 2, 4]</text>
+    <text class="value" x="570" y="147">[10, 20, 30]</text>
+    <text class="value" x="946" y="147">[100, 200, 300]</text>
+
+    <text class="label" x="194" y="217">Mean / sample std</text>
+    <text class="label" x="570" y="217">Mean / sample std</text>
+    <text class="label" x="946" y="217">Mean / sample std</text>
+    <text class="stat" x="194" y="244">2 / 2</text>
+    <text class="stat" x="570" y="244">20 / 10</text>
+    <text class="stat" x="946" y="244">200 / 100</text>
+
+    <text class="label" x="194" y="313">Normalized</text>
+    <text class="label" x="570" y="313">Normalized</text>
+    <text class="label" x="946" y="313">Normalized</text>
+    <text class="value" x="194" y="344">[−1, 0, 1]</text>
+    <text class="value" x="570" y="344">[−1, 0, 1]</text>
+    <text class="value" x="946" y="344">[−1, 0, 1]</text>
+
+    <text class="label" x="194" y="414">Affine output · γ=2, β=3</text>
+    <text class="label" x="570" y="414">Affine output · γ=2, β=3</text>
+    <text class="label" x="946" y="414">Affine output · γ=2, β=3</text>
+    <text class="value" x="194" y="445">[1, 3, 5]</text>
+    <text class="value" x="570" y="445">[1, 3, 5]</text>
+    <text class="value" x="946" y="445">[1, 3, 5]</text>
+  </g>
+
+  <g class="arrow">
+    <path d="M194 169 V182"/><path d="M570 169 V182"/><path d="M946 169 V182"/>
+    <path d="M194 265 V278"/><path d="M570 265 V278"/><path d="M946 265 V278"/>
+    <path d="M194 366 V379"/><path d="M570 366 V379"/><path d="M946 366 V379"/>
+  </g>
+  <g fill="#687a8b">
+    <path d="M194 187 l-5 -8 h10 z"/><path d="M570 187 l-5 -8 h10 z"/><path d="M946 187 l-5 -8 h10 z"/>
+    <path d="M194 283 l-5 -8 h10 z"/><path d="M570 283 l-5 -8 h10 z"/><path d="M946 283 l-5 -8 h10 z"/>
+    <path d="M194 384 l-5 -8 h10 z"/><path d="M570 384 l-5 -8 h10 z"/><path d="M946 384 l-5 -8 h10 z"/>
+  </g>
+
+  <text class="note" x="570" y="513" text-anchor="middle">One feature across three examples per batch · ε omitted for clarity</text>
+</svg>
