@@ -9,12 +9,25 @@ sidebar_position: 14
 
 The target batch contains `524,288` tokens, but processing all of them in one forward and backward pass would require much more GPU memory for activations. Instead, each **micro-batch** has `B × T = 16 × 1024 = 16,384` tokens. We process `524,288 / 16,384 = 32` micro-batches before making one optimizer update. This keeps the activation memory closer to that of a single micro-batch while preserving the gradient of the larger batch. It does not eliminate the extra computation or the memory needed for parameters, gradients, and optimizer state.
 
-In `GPT.forward`, `F.cross_entropy` uses its default mean reduction to return the average cross-entropy over the micro-batch's `B × T` target positions. The model does not explicitly sum losses and divide by `B × T`. That is what the reduction means mathematically in this example. If we simply add the 32 returned losses, we get the sum of 32 micro-batch means, not the mean loss of the full batch. Since every micro-batch has the same number of tokens, we divide that sum by 32. Let $L_m$ be the mean loss of micro-batch $m$, and let $\theta$ denote the model parameters:
+If we passed all `524,288` tokens through the model at once, `F.cross_entropy` with its default mean reduction would return the **mean loss across all tokens**. In this loop, it instead returns a separate mean loss for each `16,384`-token micro-batch. Let $\ell_{m,j}$ be the loss for token $j$ in micro-batch $m$. Each micro-batch mean is
 
 $$
-L_{\mathrm{effective}} = \frac{1}{32}\sum_{m=1}^{32} L_m,
-\qquad
-\nabla_{\theta}L_{\mathrm{effective}} = \sum_{m=1}^{32}\nabla_{\theta}\left(\frac{L_m}{32}\right).
+L_m = \frac{1}{B T}\sum_{j=1}^{B T}\ell_{m,j}.
+$$
+
+Because all micro-batches have the same size, the mean loss we would obtain from the full batch is the **mean of those 32 means**, not their sum:
+
+$$
+L_{\mathrm{full}}
+= \frac{1}{32 B T}\sum_{m=1}^{32}\sum_{j=1}^{B T}\ell_{m,j}
+= \frac{1}{32}\sum_{m=1}^{32}L_m.
+$$
+
+Adding the micro-batch losses without dividing by 32 would make the result 32 times larger than the full-batch mean loss. Let $\theta$ denote the model parameters. The same averaging factor must apply when accumulating gradients:
+
+$$
+\nabla_{\theta}L_{\mathrm{full}}
+= \sum_{m=1}^{32}\nabla_{\theta}\left(\frac{L_m}{32}\right).
 $$
 
 The code applies this division to each micro-batch loss **before** `backward()`. PyTorch adds each `backward()` result to the existing `.grad` tensors, so the 32 scaled gradients sum to the gradient of the full-batch mean loss. We do **not** clear gradients inside the micro-step loop: after all 32 backward passes, we clip the accumulated gradient, run `optimizer.step()` once, and then call `optimizer.zero_grad()` for the next effective batch. Without dividing each loss by 32, both the accumulated loss and its gradient would be 32 times larger than the intended mean-batch values.
