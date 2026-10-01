@@ -10,6 +10,7 @@ module.exports = {
         'part-1-transformer/chapter-4-self-attention',
         'part-1-transformer/chapter-5-multi-head-attention',
         'part-1-transformer/chapter-6-transformer-block',
+        'part-1-transformer/chapter-7-token-generation',
       ],
     },
     {

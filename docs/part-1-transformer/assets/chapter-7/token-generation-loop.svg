@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 840" role="img" aria-labelledby="title desc">
+  <title id="title">Autoregressive next-token generation</title>
+  <desc id="desc">A one-dimensional token sequence is cropped to the most recent context window, passed through the language model, and only the final position logits are converted to probabilities and sampled. The sampled token is appended and the process repeats.</desc>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #26374b; }
+    .label { font-size: 20px; font-weight: 700; }
+    .small { font-size: 16px; fill: #526477; }
+    .token { font-size: 18px; font-weight: 700; }
+    .shape { font-size: 15px; fill: #526477; }
+    .arrow { stroke: #64778a; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64778a"/>
+    </marker>
+  </defs>
+  <rect x="5" y="5" width="1230" height="830" rx="22" fill="#fcfdf9" stroke="#dce7d2" stroke-width="2"/>
+
+  <g>
+    <rect x="35" y="60" width="270" height="310" rx="18" fill="#eef5fb" stroke="#b8d5ef" stroke-width="2"/>
+    <text class="label" x="170" y="108" text-anchor="middle">Running sequence</text>
+    <text class="small" x="170" y="140" text-anchor="middle">idx · [T]</text>
+    <g class="token" text-anchor="middle">
+      <rect x="83" y="180" width="38" height="46" rx="8" fill="#d9eafb" stroke="#9ec7ea"/>
+      <text x="102" y="210">…</text>
+      <rect x="130" y="180" width="42" height="46" rx="8" fill="#d9eafb" stroke="#9ec7ea"/>
+      <text x="151" y="210">t₄</text>
+      <rect x="181" y="180" width="42" height="46" rx="8" fill="#d9eafb" stroke="#9ec7ea"/>
+      <text x="202" y="210">t₅</text>
+      <rect x="232" y="180" width="28" height="46" rx="8" fill="#d9eafb" stroke="#9ec7ea"/>
+      <text x="246" y="210">t₆</text>
+    </g>
+    <text class="small" x="170" y="300" text-anchor="middle">may be longer than</text>
+    <text class="small" x="170" y="326" text-anchor="middle">the context window</text>
+  </g>
+
+  <path class="arrow" d="M310 203 H330" marker-end="url(#arrowhead)"/>
+
+  <g>
+    <rect x="335" y="60" width="270" height="310" rx="18" fill="#f1f8eb" stroke="#bddab0" stroke-width="2"/>
+    <text class="label" x="470" y="108" text-anchor="middle">Keep recent context</text>
+    <text class="small" x="470" y="140" text-anchor="middle">idx[:, −block_size:]</text>
+    <g class="token" text-anchor="middle">
+      <rect x="408" y="180" width="42" height="46" rx="8" fill="#ddf0d4" stroke="#abd099"/>
+      <text x="429" y="210">t₄</text>
+      <rect x="459" y="180" width="42" height="46" rx="8" fill="#ddf0d4" stroke="#abd099"/>
+      <text x="480" y="210">t₅</text>
+      <rect x="510" y="180" width="42" height="46" rx="8" fill="#ddf0d4" stroke="#abd099"/>
+      <text x="531" y="210">t₆</text>
+    </g>
+    <text class="small" x="470" y="300" text-anchor="middle">idx_cond</text>
+    <text class="shape" x="470" y="326" text-anchor="middle">[T′], T′ ≤ block_size</text>
+  </g>
+
+  <path class="arrow" d="M610 203 H630" marker-end="url(#arrowhead)"/>
+
+  <g>
+    <rect x="635" y="60" width="270" height="310" rx="18" fill="#fff4e9" stroke="#edcaac" stroke-width="2"/>
+    <text class="label" x="770" y="108" text-anchor="middle">Language model</text>
+    <text class="small" x="770" y="140" text-anchor="middle">embeddings + blocks</text>
+    <rect x="705" y="180" width="130" height="60" rx="10" fill="#fffaf6" stroke="#e6be9d"/>
+    <text class="small" x="770" y="216" text-anchor="middle">forward(idx_cond)</text>
+    <text class="shape" x="770" y="300" text-anchor="middle">logits</text>
+    <text class="shape" x="770" y="326" text-anchor="middle">[T′, vocab_size]</text>
+  </g>
+
+  <path class="arrow" d="M770 381 V405" marker-end="url(#arrowhead)"/>
+
+  <g>
+    <rect x="512" y="425" width="352" height="220" rx="18" fill="#f4f0fa" stroke="#cfbfe3" stroke-width="2"/>
+    <text class="label" x="688" y="469" text-anchor="middle">Final position only</text>
+    <text class="small" x="688" y="500" text-anchor="middle">logits[−1, :]</text>
+    <g transform="translate(548,524)">
+      <rect x="0" y="0" width="76" height="15" rx="5" fill="#ded6ec"/>
+      <rect x="0" y="25" width="76" height="15" rx="5" fill="#ded6ec"/>
+      <rect x="0" y="50" width="76" height="15" rx="5" fill="#c3abd9"/>
+      <path d="M92 57 H116" class="arrow" marker-end="url(#arrowhead)"/>
+      <text class="small" x="208" y="35" text-anchor="middle">last row uses the full context</text>
+      <text class="small" x="208" y="62" text-anchor="middle">P(next token | t₄, t₅, t₆)</text>
+    </g>
+    <text class="shape" x="688" y="620" text-anchor="middle">one distribution over the vocabulary</text>
+  </g>
+
+  <path class="arrow" d="M875 535 H900" marker-end="url(#arrowhead)"/>
+
+  <g>
+    <rect x="912" y="425" width="190" height="220" rx="18" fill="#eef5fb" stroke="#b8d5ef" stroke-width="2"/>
+    <text class="label" x="1007" y="469" text-anchor="middle">Sample</text>
+    <text class="small" x="1007" y="501" text-anchor="middle">Softmax → multinomial</text>
+    <g transform="translate(952,530)">
+      <rect x="0" y="38" width="20" height="18" rx="4" fill="#d5e8fa"/>
+      <rect x="27" y="24" width="20" height="32" rx="4" fill="#b9d9f3"/>
+      <rect x="54" y="4" width="20" height="52" rx="4" fill="#76addd"/>
+      <rect x="81" y="31" width="20" height="25" rx="4" fill="#c9e1f6"/>
+    </g>
+    <text class="token" x="1007" y="619" text-anchor="middle">t₇</text>
+  </g>
+
+  <g>
+    <path class="arrow" d="M1007 657 V728 H751" marker-end="url(#arrowhead)"/>
+    <rect x="530" y="684" width="210" height="92" rx="15" fill="#eaf6df" stroke="#b8d9a6" stroke-width="2"/>
+    <text class="label" x="635" y="722" text-anchor="middle">Append t₇</text>
+    <text class="small" x="635" y="750" text-anchor="middle">idx = cat(idx, idx_next)</text>
+  </g>
+  <path class="arrow" d="M518 730 H229 Q156 730 156 654 V382" marker-end="url(#arrowhead)"/>
+  <text class="small" x="286" y="704" text-anchor="middle">repeat for max_new_tokens</text>
+
+  <text class="small" x="620" y="810" text-anchor="middle">The sampled token becomes part of the context for the next prediction.</text>
+</svg>

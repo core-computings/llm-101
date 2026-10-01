@@ -47,6 +47,7 @@ html[data-theme='light'] { --ifm-background-surface-color: #f7faef; }
 .theme-doc-markdown img[alt^='Learning rate warmup and cosine decay schedule'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
 .theme-doc-markdown img[alt^='Batch normalization computes statistics'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
 .theme-doc-markdown img[alt^='Three mini-batches with increasing feature values'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
+.theme-doc-markdown img[alt^='Autoregressive token generation loop'] { display: block; width: 100%; height: auto; margin: 1.75rem auto; }
 .page-view-sidebar-wrapper { display: none; }
 .page-view-counter { border-top: 1px solid #dfe8d6; background: #fff; color: #536176; padding: .65rem 1.4rem; text-align: left; font-size: .78rem; }
 .page-view-counter strong { color: #26332d; font-variant-numeric: tabular-nums; }
