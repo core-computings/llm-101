@@ -1,7 +1,8 @@
 ---
 title: Chapter 1 · Building the Dataset
-part: Part 2 · Transformer
+part: Part 1 · Transformer
 sidebar_position: 1
+slug: /
 ---
 
 # Chapter 1: Building the Dataset

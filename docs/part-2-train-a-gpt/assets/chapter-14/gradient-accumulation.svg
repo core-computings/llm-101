@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="640" viewBox="0 0 1120 640" role="img" aria-labelledby="title desc">
+  <title id="title">Gradient accumulation across 32 micro-batches</title>
+  <desc id="desc">Each micro-batch of 16,384 tokens produces a gradient scaled by 1/32. Gradients accumulate over 32 micro-batches, then one gradient clipping and AdamW optimizer step updates the model.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L6 3.5 L1 6" fill="none" stroke="#5b6c78" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <style>
+    .text { font: 600 21px Inter, Arial, sans-serif; fill: #243444; }
+    .small { font: 500 17px Inter, Arial, sans-serif; fill: #536575; }
+    .head { font: 650 19px Inter, Arial, sans-serif; fill: #415363; }
+    .line { fill: none; stroke: #5b6c78; stroke-width: 2.2; stroke-linecap: round; marker-end: url(#arrow); }
+    .carry { fill: none; stroke: #a46c43; stroke-width: 2.2; stroke-linecap: round; marker-end: url(#arrow); }
+  </style>
+  <rect width="1120" height="640" rx="20" fill="#ffffff"/>
+  <rect x="15" y="15" width="1090" height="610" rx="16" fill="#fcfdf9" stroke="#e2e9dc" stroke-width="2"/>
+
+  <rect x="46" y="40" width="452" height="48" rx="12" fill="#edf5e8" stroke="#c7dec0"/>
+  <text class="small" x="272" y="70" text-anchor="middle">1 micro-batch = 16 × 1024 = 16,384 tokens</text>
+  <rect x="622" y="40" width="452" height="48" rx="12" fill="#eaf2fb" stroke="#bfd6ec"/>
+  <text class="small" x="848" y="70" text-anchor="middle">32 micro-batches = 524,288 tokens</text>
+
+  <text class="head" x="54" y="130">Input</text>
+  <text class="head" x="390" y="130">Backward on scaled loss</text>
+  <text class="head" x="749" y="130">Accumulated gradient</text>
+
+  <rect x="46" y="151" width="256" height="76" rx="13" fill="#edf5e8" stroke="#bad4ae" stroke-width="2"/>
+  <text class="text" x="174" y="183" text-anchor="middle">Micro-batch 1</text>
+  <text class="small" x="174" y="209" text-anchor="middle">16,384 tokens</text>
+  <path class="line" d="M312 189 H372"/>
+  <rect x="387" y="151" width="254" height="76" rx="13" fill="#eaf2fb" stroke="#b8d2ed" stroke-width="2"/>
+  <text class="text" x="514" y="195" text-anchor="middle">backward(L₁ / 32)</text>
+  <path class="line" d="M651 189 H729"/>
+  <rect x="744" y="151" width="330" height="76" rx="13" fill="#fff1e5" stroke="#eac9ab" stroke-width="2"/>
+  <text class="text" x="909" y="195" text-anchor="middle">g₁ / 32</text>
+
+  <path class="carry" d="M909 237 V260"/>
+  <rect x="46" y="272" width="256" height="76" rx="13" fill="#edf5e8" stroke="#bad4ae" stroke-width="2"/>
+  <text class="text" x="174" y="304" text-anchor="middle">Micro-batch 2</text>
+  <text class="small" x="174" y="330" text-anchor="middle">16,384 tokens</text>
+  <path class="line" d="M312 310 H372"/>
+  <rect x="387" y="272" width="254" height="76" rx="13" fill="#eaf2fb" stroke="#b8d2ed" stroke-width="2"/>
+  <text class="text" x="514" y="316" text-anchor="middle">backward(L₂ / 32)</text>
+  <path class="line" d="M651 310 H729"/>
+  <rect x="744" y="272" width="330" height="76" rx="13" fill="#fff1e5" stroke="#eac9ab" stroke-width="2"/>
+  <text class="text" x="909" y="316" text-anchor="middle">(g₁ + g₂) / 32</text>
+
+  <text class="text" x="174" y="396" text-anchor="middle">⋮</text>
+  <text class="text" x="514" y="396" text-anchor="middle">⋮</text>
+  <text class="text" x="909" y="396" text-anchor="middle">⋮</text>
+
+  <rect x="46" y="432" width="256" height="76" rx="13" fill="#edf5e8" stroke="#bad4ae" stroke-width="2"/>
+  <text class="text" x="174" y="464" text-anchor="middle">Micro-batch 32</text>
+  <text class="small" x="174" y="490" text-anchor="middle">16,384 tokens</text>
+  <path class="line" d="M312 470 H372"/>
+  <rect x="387" y="432" width="254" height="76" rx="13" fill="#eaf2fb" stroke="#b8d2ed" stroke-width="2"/>
+  <text class="text" x="514" y="476" text-anchor="middle">backward(L₃₂ / 32)</text>
+  <path class="line" d="M651 470 H729"/>
+  <rect x="744" y="432" width="330" height="76" rx="13" fill="#fff1e5" stroke="#eac9ab" stroke-width="2"/>
+  <text class="text" x="909" y="476" text-anchor="middle">(g₁ + ⋯ + g₃₂) / 32</text>
+
+  <path class="carry" d="M909 518 V540"/>
+  <rect x="604" y="552" width="470" height="52" rx="13" fill="#f1f6eb" stroke="#bad4ae" stroke-width="2"/>
+  <text class="text" x="839" y="585" text-anchor="middle">clip → AdamW step → zero gradients</text>
+</svg>

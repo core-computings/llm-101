@@ -4,10 +4,10 @@ Each chapter is one Markdown file under `docs/`. Add new files to the appropriat
 
 ```text
 docs/
-  part-1-tokenization/
-    chapter-1-llm-fundamentals.md
-  part-2-transformer/
-    chapter-1.md
+  part-1-transformer/
+    chapter-1-building-the-dataset.md
+  part-2-train-a-gpt/
+    chapter-1-reproducing-gpt-2.md
 ```
 
 Use the front matter at the top for the title and chapter order. The body supports normal Markdown, code fences, tables, blockquotes, and LaTeX math.
