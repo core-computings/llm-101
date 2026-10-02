@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="980" viewBox="0 0 1000 980" role="img" aria-labelledby="title desc">
+  <title id="title">Multi-head attention with four heads</title>
+  <desc id="desc">An input tensor with 64 embedding channels fans out to four parallel attention heads. Each head produces 16 channels. The outputs are concatenated to restore 64 channels, then an output projection mixes information across heads.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbfdf8"/><stop offset="1" stop-color="#f3faeb"/></linearGradient>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L0,7 L7,3.5 z" fill="#577248"/></marker>
+    <style>
+      .text { font-family: Inter, Arial, sans-serif; fill: #253027; }
+      .label { font-size: 22px; font-weight: 700; }
+      .detail { font-size: 17px; fill: #60705f; }
+      .shape { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 17px; font-weight: 700; fill: #31412e; }
+      .arrow { fill: none; stroke: #577248; stroke-width: 2.25; marker-end: url(#arrow); }
+      .connector { fill: none; stroke: #577248; stroke-width: 2.25; }
+    </style>
+  </defs>
+  <rect width="1000" height="980" rx="24" fill="url(#background)"/>
+
+  <rect x="340" y="54" width="320" height="134" rx="18" fill="#e7f1dc" stroke="#9dbb88" stroke-width="2.5"/>
+  <text x="500" y="101" class="text label" text-anchor="middle">Input X</text>
+  <text x="500" y="132" class="text detail" text-anchor="middle">token embeddings</text>
+  <text x="500" y="165" class="shape" text-anchor="middle">(B, T, 64)</text>
+
+  <path d="M500 188 V224 H155 V273" class="arrow"/>
+  <path d="M500 188 V224 H385 V273" class="arrow"/>
+  <path d="M500 188 V224 H615 V273" class="arrow"/>
+  <path d="M500 188 V224 H845 V273" class="arrow"/>
+
+  <g>
+    <rect x="50" y="275" width="210" height="162" rx="17" fill="#e8f2fb" stroke="#9bbbd4" stroke-width="2.25"/>
+    <text x="155" y="322" class="text label" text-anchor="middle">Head 1</text><text x="155" y="353" class="text detail" text-anchor="middle">Q₁, K₁, V₁</text><text x="155" y="379" class="text detail" text-anchor="middle">attention view</text><text x="155" y="414" class="shape" text-anchor="middle">(B, T, 16)</text>
+    <rect x="280" y="275" width="210" height="162" rx="17" fill="#eaf5f0" stroke="#9cc5ae" stroke-width="2.25"/>
+    <text x="385" y="322" class="text label" text-anchor="middle">Head 2</text><text x="385" y="353" class="text detail" text-anchor="middle">Q₂, K₂, V₂</text><text x="385" y="379" class="text detail" text-anchor="middle">attention view</text><text x="385" y="414" class="shape" text-anchor="middle">(B, T, 16)</text>
+    <rect x="510" y="275" width="210" height="162" rx="17" fill="#fff0dc" stroke="#dda65c" stroke-width="2.25"/>
+    <text x="615" y="322" class="text label" text-anchor="middle">Head 3</text><text x="615" y="353" class="text detail" text-anchor="middle">Q₃, K₃, V₃</text><text x="615" y="379" class="text detail" text-anchor="middle">attention view</text><text x="615" y="414" class="shape" text-anchor="middle">(B, T, 16)</text>
+    <rect x="740" y="275" width="210" height="162" rx="17" fill="#f3ebf8" stroke="#bca0ca" stroke-width="2.25"/>
+    <text x="845" y="322" class="text label" text-anchor="middle">Head 4</text><text x="845" y="353" class="text detail" text-anchor="middle">Q₄, K₄, V₄</text><text x="845" y="379" class="text detail" text-anchor="middle">attention view</text><text x="845" y="414" class="shape" text-anchor="middle">(B, T, 16)</text>
+  </g>
+
+  <path d="M155 437 V504 H500" class="connector"/>
+  <path d="M385 437 V504 H500" class="connector"/>
+  <path d="M615 437 V504 H500" class="connector"/>
+  <path d="M845 437 V504 H500" class="connector"/>
+  <path d="M500 504 V562" class="arrow"/>
+
+  <rect x="330" y="564" width="340" height="168" rx="18" fill="#ffffff" stroke="#9dbb88" stroke-width="2.5"/>
+  <text x="500" y="610" class="text label" text-anchor="middle">Concatenate</text><text x="500" y="640" class="text detail" text-anchor="middle">join the four channel groups</text>
+  <rect x="414" y="662" width="40" height="38" rx="5" fill="#d9eaf8"/><rect x="456" y="662" width="40" height="38" rx="5" fill="#d8efe3"/><rect x="498" y="662" width="40" height="38" rx="5" fill="#fee3bd"/><rect x="540" y="662" width="40" height="38" rx="5" fill="#eadcf1"/>
+  <text x="500" y="720" class="shape" text-anchor="middle">(B, T, 64)</text>
+
+  <path d="M500 732 V783" class="arrow"/>
+  <rect x="340" y="785" width="320" height="134" rx="18" fill="#ffffff" stroke="#587248" stroke-width="2.5"/>
+  <text x="500" y="830" class="text label" text-anchor="middle">Output projection</text><text x="500" y="861" class="text detail" text-anchor="middle">self.proj mixes information across heads</text><text x="500" y="894" class="shape" text-anchor="middle">(B, T, 64)</text>
+</svg>

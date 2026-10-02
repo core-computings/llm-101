@@ -1,5 +1,9 @@
 @import 'katex/dist/katex.min.css';
 
+html:root {
+  --doc-sidebar-width: 360px;
+}
+
 :root {
   --ifm-color-primary: #6f9638;
   --ifm-color-primary-dark: #5f832e;
