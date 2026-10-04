@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="2280" viewBox="0 0 1280 2280" role="img" aria-labelledby="title desc">
+  <title id="title">KV cache with hello i am</title>
+  <desc id="desc">A spacious three-stage diagram. The text hello i am is tokenized by GPT-2. Prefill processes all three token embeddings and stores a key and value feature vector for every token at every Transformer layer. A subsequent decode step reads those cached matrices with a fresh query and appends a new key and value row.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#516559"/></marker>
+    <marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#557f40"/></marker>
+    <marker id="small-green" markerWidth="5" markerHeight="5" refX="4.5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#557f40"/></marker>
+    <marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4e789f"/></marker>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #203128; }
+      .section { font-size: 22px; font-weight: 720; }
+      .label { font-size: 18px; font-weight: 680; }
+      .small { font-size: 16px; fill: #586c5d; }
+      .tiny { font-size: 14px; fill: #63766a; }
+      .math { font-family: Georgia, serif; font-size: 21px; font-weight: 650; }
+      .arrow { fill: none; stroke: #516559; stroke-width: 2.25; marker-end: url(#arrow); }
+      .green { fill: none; stroke: #557f40; stroke-width: 2.35; marker-end: url(#green); }
+      .green-line { fill: none; stroke: #557f40; stroke-width: 2.35; }
+      .green-small { fill: none; stroke: #557f40; stroke-width: 2.1; marker-end: url(#small-green); }
+      .blue { fill: none; stroke: #4e789f; stroke-width: 2.35; marker-end: url(#blue); }
+      .line { fill: none; stroke: #78916e; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect x="12" y="12" width="1256" height="2256" rx="24" fill="#fcfdfb" stroke="#dbe7d5" stroke-width="2"/>
+
+  <!-- tokenize -->
+  <rect x="44" y="44" width="1192" height="225" rx="20" fill="#f6f9fb" stroke="#d4e0e8" stroke-width="1.7"/>
+  <text x="76" y="88" class="section">1. Tokenize the prompt</text>
+  <rect x="82" y="126" width="224" height="88" rx="15" fill="#fff" stroke="#c8d7e2" stroke-width="1.6"/>
+  <text x="194" y="161" class="label" text-anchor="middle">hello i am</text><text x="194" y="191" class="small" text-anchor="middle">input text</text>
+  <path d="M306 170 H390" class="arrow"/>
+  <rect x="392" y="126" width="166" height="88" rx="15" fill="#e9f2fa" stroke="#aac4d8" stroke-width="1.6"/>
+  <text x="475" y="158" class="label" text-anchor="middle">hello</text><text x="475" y="190" class="math" text-anchor="middle">31373</text>
+  <rect x="580" y="126" width="166" height="88" rx="15" fill="#e9f2fa" stroke="#aac4d8" stroke-width="1.6"/>
+  <text x="663" y="158" class="label" text-anchor="middle"> i</text><text x="663" y="190" class="math" text-anchor="middle">1312</text>
+  <rect x="768" y="126" width="166" height="88" rx="15" fill="#e9f2fa" stroke="#aac4d8" stroke-width="1.6"/>
+  <text x="851" y="158" class="label" text-anchor="middle"> am</text><text x="851" y="190" class="math" text-anchor="middle">716</text>
+  <text x="988" y="161" class="small">GPT-2 BPE token IDs</text>
+
+  <!-- prefill -->
+  <rect x="44" y="302" width="1192" height="710" rx="20" fill="#f5faef" stroke="#c9dfba" stroke-width="1.7"/>
+  <text x="76" y="347" class="section">2. Prefill, build the initial K/V cache for the whole prompt</text>
+  <text x="76" y="375" class="small">All prompt tokens are processed together. Each token becomes one feature-vector row in every layer’s K and V cache.</text>
+
+  <text x="110" y="428" class="label">input embedding matrix X</text><text x="110" y="453" class="small">shape (3, C)</text>
+  <g stroke="#afc5d7" stroke-width="1.2">
+    <rect x="110" y="473" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="169" y="473" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="228" y="473" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="287" y="473" width="57" height="35" rx="5" fill="#e9f2fa"/>
+    <rect x="110" y="510" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="169" y="510" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="228" y="510" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="287" y="510" width="57" height="35" rx="5" fill="#e9f2fa"/>
+    <rect x="110" y="547" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="169" y="547" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="228" y="547" width="57" height="35" rx="5" fill="#e9f2fa"/><rect x="287" y="547" width="57" height="35" rx="5" fill="#e9f2fa"/>
+  </g>
+  <text x="94" y="497" class="tiny" text-anchor="end">hello</text><text x="94" y="534" class="tiny" text-anchor="end"> i</text><text x="94" y="571" class="tiny" text-anchor="end"> am</text>
+  <text x="138" y="497" class="tiny" text-anchor="middle">x₁₁</text><text x="197" y="497" class="tiny" text-anchor="middle">x₁₂</text><text x="256" y="497" class="tiny" text-anchor="middle">…</text><text x="315" y="497" class="tiny" text-anchor="middle">x₁C</text>
+  <text x="138" y="534" class="tiny" text-anchor="middle">x₂₁</text><text x="197" y="534" class="tiny" text-anchor="middle">x₂₂</text><text x="256" y="534" class="tiny" text-anchor="middle">…</text><text x="315" y="534" class="tiny" text-anchor="middle">x₂C</text>
+  <text x="138" y="571" class="tiny" text-anchor="middle">x₃₁</text><text x="197" y="571" class="tiny" text-anchor="middle">x₃₂</text><text x="256" y="571" class="tiny" text-anchor="middle">…</text><text x="315" y="571" class="tiny" text-anchor="middle">x₃C</text>
+
+  <path d="M350 528 H488" class="arrow"/>
+  <rect x="490" y="431" width="270" height="193" rx="18" fill="#fff" stroke="#b8d2a9" stroke-width="1.7"/>
+  <text x="625" y="471" class="label" text-anchor="middle">Transformer stack</text><text x="625" y="499" class="small" text-anchor="middle">processes all 3 rows together</text>
+  <rect x="548" y="525" width="154" height="29" rx="7" fill="#eaf5e1" stroke="#c1d8b2"/><text x="625" y="546" class="tiny" text-anchor="middle">Layer 1</text>
+  <rect x="548" y="560" width="154" height="29" rx="7" fill="#eaf5e1" stroke="#c1d8b2"/><text x="625" y="581" class="tiny" text-anchor="middle">Layer 2</text>
+  <text x="625" y="611" class="label" text-anchor="middle">⋮</text>
+
+  <path d="M625 624 V703" class="arrow"/>
+  <text x="643" y="681" class="tiny">at every layer ℓ</text>
+  <path d="M625 705 H425 V750" class="green"/><path d="M625 705 H825 V750" class="green"/>
+
+  <rect x="160" y="752" width="432" height="196" rx="18" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.7"/>
+  <text x="190" y="790" class="label">K cache at layer ℓ</text><text x="190" y="816" class="small">shape (3, dₕ)</text>
+  <g stroke="#b8d3a8" stroke-width="1.2">
+    <rect x="270" y="838" width="48" height="29" fill="#e0f0d4"/><rect x="320" y="838" width="48" height="29" fill="#e0f0d4"/><rect x="370" y="838" width="48" height="29" fill="#e0f0d4"/><rect x="420" y="838" width="48" height="29" fill="#e0f0d4"/>
+    <rect x="270" y="869" width="48" height="29" fill="#e0f0d4"/><rect x="320" y="869" width="48" height="29" fill="#e0f0d4"/><rect x="370" y="869" width="48" height="29" fill="#e0f0d4"/><rect x="420" y="869" width="48" height="29" fill="#e0f0d4"/>
+    <rect x="270" y="900" width="48" height="29" fill="#e0f0d4"/><rect x="320" y="900" width="48" height="29" fill="#e0f0d4"/><rect x="370" y="900" width="48" height="29" fill="#e0f0d4"/><rect x="420" y="900" width="48" height="29" fill="#e0f0d4"/>
+  </g>
+  <text x="252" y="858" class="tiny" text-anchor="end">k₁,: </text><text x="252" y="889" class="tiny" text-anchor="end">k₂,: </text><text x="252" y="920" class="tiny" text-anchor="end">k₃,: </text>
+  <text x="376" y="978" class="tiny" text-anchor="middle">one K feature vector per token</text>
+
+  <rect x="690" y="752" width="432" height="196" rx="18" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.7"/>
+  <text x="720" y="790" class="label">V cache at layer ℓ</text><text x="720" y="816" class="small">shape (3, dₕ)</text>
+  <g stroke="#b8d3a8" stroke-width="1.2">
+    <rect x="800" y="838" width="48" height="29" fill="#e0f0d4"/><rect x="850" y="838" width="48" height="29" fill="#e0f0d4"/><rect x="900" y="838" width="48" height="29" fill="#e0f0d4"/><rect x="950" y="838" width="48" height="29" fill="#e0f0d4"/>
+    <rect x="800" y="869" width="48" height="29" fill="#e0f0d4"/><rect x="850" y="869" width="48" height="29" fill="#e0f0d4"/><rect x="900" y="869" width="48" height="29" fill="#e0f0d4"/><rect x="950" y="869" width="48" height="29" fill="#e0f0d4"/>
+    <rect x="800" y="900" width="48" height="29" fill="#e0f0d4"/><rect x="850" y="900" width="48" height="29" fill="#e0f0d4"/><rect x="900" y="900" width="48" height="29" fill="#e0f0d4"/><rect x="950" y="900" width="48" height="29" fill="#e0f0d4"/>
+  </g>
+  <text x="782" y="858" class="tiny" text-anchor="end">v₁,: </text><text x="782" y="889" class="tiny" text-anchor="end">v₂,: </text><text x="782" y="920" class="tiny" text-anchor="end">v₃,: </text>
+  <text x="906" y="978" class="tiny" text-anchor="middle">one V feature vector per token</text>
+
+  <!-- decode -->
+  <rect x="44" y="1046" width="1192" height="1170" rx="20" fill="#fffaf2" stroke="#ecd7ae" stroke-width="1.7"/>
+  <text x="76" y="1092" class="section">3. Decode, read the K/V cache and append one new row</text>
+  <text x="76" y="1120" class="small">The final prefill position predicts a next token. Assume sampling selects “ a”, GPT-2 token ID 257.</text>
+
+  <rect x="100" y="1160" width="205" height="91" rx="15" fill="#fff0d9" stroke="#e8bd7c" stroke-width="1.6"/>
+  <text x="203" y="1197" class="label" text-anchor="middle">sampled token</text><text x="203" y="1229" class="math" text-anchor="middle"> a  ·  257</text>
+  <path d="M305 1206 H405" class="arrow"/>
+  <rect x="407" y="1145" width="208" height="120" rx="15" fill="#fff" stroke="#d8cda9" stroke-width="1.6"/>
+  <text x="511" y="1178" class="label" text-anchor="middle">new embedding row x₄</text>
+  <g stroke="#afc5d7" stroke-width="1.1">
+    <rect x="426" y="1192" width="37" height="29" rx="4" fill="#e9f2fa"/><rect x="465" y="1192" width="37" height="29" rx="4" fill="#e9f2fa"/><rect x="504" y="1192" width="37" height="29" rx="4" fill="#e9f2fa"/><rect x="543" y="1192" width="37" height="29" rx="4" fill="#e9f2fa"/>
+  </g>
+  <text x="445" y="1212" class="tiny" text-anchor="middle">x₄₁</text><text x="484" y="1212" class="tiny" text-anchor="middle">x₄₂</text><text x="523" y="1212" class="tiny" text-anchor="middle">…</text><text x="562" y="1212" class="tiny" text-anchor="middle">x₄C</text>
+  <text x="511" y="1248" class="small" text-anchor="middle">shape (B, 1, C)</text>
+  <path d="M511 1265 V1318" class="arrow"/>
+  <rect x="390" y="1320" width="242" height="98" rx="16" fill="#fff" stroke="#d8cda9" stroke-width="1.6"/>
+  <text x="511" y="1358" class="label" text-anchor="middle">project at layer ℓ</text><text x="511" y="1388" class="small" text-anchor="middle">make fresh q₄, k₄, v₄</text>
+
+  <path d="M511 1418 V1452 H255 V1494" class="blue"/>
+  <path d="M511 1418 V1452 H535 V1494" class="green"/>
+  <path d="M511 1418 V1452 H815 V1494" class="green"/>
+  <rect x="150" y="1496" width="210" height="103" rx="16" fill="#e9f2fa" stroke="#aac4d8" stroke-width="1.6"/>
+  <text x="255" y="1554" class="label" text-anchor="middle">fresh query q₄</text>
+  <rect x="430" y="1496" width="210" height="103" rx="16" fill="#e5f2da" stroke="#b8d3a8" stroke-width="1.6"/>
+  <text x="535" y="1554" class="label" text-anchor="middle">new key k₄</text>
+  <rect x="710" y="1496" width="210" height="103" rx="16" fill="#e5f2da" stroke="#b8d3a8" stroke-width="1.6"/>
+  <text x="815" y="1554" class="label" text-anchor="middle">new value v₄</text>
+
+  <rect x="88" y="1660" width="268" height="168" rx="17" fill="#f2f5f8" stroke="#cbd7df" stroke-width="1.6"/>
+  <text x="222" y="1697" class="label" text-anchor="middle">old queries are not cached</text>
+  <text x="222" y="1730" class="math" text-anchor="middle">q₁   q₂   q₃</text>
+  <path d="M132 1746 L312 1794 M312 1746 L132 1794" stroke="#9aaab3" stroke-width="2.2"/>
+  <text x="222" y="1855" class="small" text-anchor="middle">history queries are not used at all</text>
+  <text x="222" y="1878" class="small" text-anchor="middle">since they are not aggregating all</text>
+  <text x="222" y="1901" class="small" text-anchor="middle">history information</text>
+
+  <path d="M255 1599 V1642 H466 V1678" class="blue"/>
+  <rect x="410" y="1680" width="548" height="370" rx="19" fill="#fff" stroke="#c6d3bd" stroke-width="1.7"/>
+  <text x="684" y="1720" class="label" text-anchor="middle">Only fresh q₄ reads the cached history</text>
+  <rect x="450" y="1745" width="468" height="45" rx="10" fill="#e9f2fa" stroke="#aac4d8" stroke-width="1.3"/>
+  <text x="684" y="1774" class="math" text-anchor="middle">x₄ (B, 1, C) → q₄ (B, 1, dₕ)</text>
+  <rect x="450" y="1810" width="468" height="52" rx="11" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.3"/>
+  <text x="684" y="1843" class="math" text-anchor="middle">K cache (B, 3, dₕ) = [k₁  k₂  k₃]</text>
+  <path d="M684 1862 V1888" class="arrow"/>
+  <text x="684" y="1917" class="math" text-anchor="middle">scores = q₄ K cacheᵀ</text>
+  <text x="684" y="1944" class="small" text-anchor="middle">one score for each earlier token</text>
+  <path d="M684 1954 V1978" class="arrow"/>
+  <text x="684" y="2008" class="math" text-anchor="middle">weights = softmax(scores)</text>
+  <text x="684" y="2035" class="small" text-anchor="middle">then use those weights on V, not K</text>
+
+  <rect x="1000" y="1660" width="188" height="168" rx="17" fill="#e9f5df" stroke="#b8d3a8" stroke-width="1.6"/>
+  <text x="1094" y="1697" class="label" text-anchor="middle">append for later</text>
+  <text x="1094" y="1733" class="math" text-anchor="middle">k₄</text>
+  <text x="1094" y="1765" class="math" text-anchor="middle">v₄</text>
+  <text x="1094" y="1804" class="small" text-anchor="middle">extended K and V cache</text>
+  <path d="M535 1599 V1640 H1094" class="green-line"/>
+  <path d="M815 1599 V1640 H1094" class="green-line"/>
+  <path d="M1094 1640 V1658" class="green-small"/>
+
+  <path d="M684 2050 V2080" class="arrow"/>
+  <rect x="410" y="2082" width="548" height="74" rx="16" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.6"/>
+  <text x="684" y="2114" class="math" text-anchor="middle">output = Σᵢ weightsᵢ · vᵢ</text>
+  <text x="684" y="2143" class="small" text-anchor="middle">weighted sum of the cached value feature vectors</text>
+</svg>

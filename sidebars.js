@@ -41,6 +41,7 @@ module.exports = {
       items: [
         'part-3-llm-must-knows/chapter-1-batch-normalization',
         'part-3-llm-must-knows/chapter-2-layer-normalization',
+        'part-3-llm-must-knows/chapter-3-kv-cache',
       ],
     },
   ],
