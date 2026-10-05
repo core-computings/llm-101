@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="2000" viewBox="0 0 1400 2000" role="img" aria-labelledby="title desc">
+  <title id="title">A 32 by 32 tiled GEMM computed by four workgroups</title>
+  <desc id="desc">Matrices A and B are 32 by 32, using 16 by 16 tiles. Four workgroups compute the four output tiles. Workgroup zero has 256 threads and computes the top-left output tile by accumulating A00 times B00 and A01 times B10 across two K tiles.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#557248"/></marker>
+    <marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#4e789f"/></marker>
+    <marker id="orange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#c78331"/></marker>
+    <style>
+      text { font-family: Inter, Arial, sans-serif; fill: #243028; }
+      .label { font-size: 20px; font-weight: 700; }
+      .small { font-size: 16px; fill: #607060; }
+      .tiny { font-size: 14px; fill: #607060; }
+      .math { font-family: Georgia, serif; font-size: 21px; font-weight: 650; }
+      .arrow { fill: none; stroke: #557248; stroke-width: 2.25; marker-end: url(#arrow); }
+      .blue { fill: none; stroke: #4e789f; stroke-width: 2.35; marker-end: url(#blue); }
+      .orange { fill: none; stroke: #c78331; stroke-width: 2.35; marker-end: url(#orange); }
+    </style>
+  </defs>
+  <rect width="1400" height="2000" rx="24" fill="#fbfdf8"/>
+
+  <!-- matrix and workgroup map -->
+  <rect x="48" y="46" width="1304" height="354" rx="20" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.7"/>
+  <text x="78" y="86" class="label">32 × 32 GEMM with 16 × 16 tiles</text>
+  <text x="78" y="113" class="small">C = A × B. The output contains four 16 × 16 tiles, so the dispatch uses a 2 × 2 workgroup grid.</text>
+
+  <text x="102" y="164" class="label">A</text><text x="102" y="189" class="small">32 × 32</text>
+  <rect x="102" y="212" width="180" height="180" rx="10" fill="#fff" stroke="#8fb3d2" stroke-width="2"/>
+  <rect x="103" y="213" width="89" height="89" fill="#d8eaf8" stroke="#347eb6" stroke-width="4"/><rect x="192" y="213" width="89" height="89" fill="#eaf3fb"/><rect x="103" y="302" width="89" height="89" fill="#eaf3fb"/><rect x="192" y="302" width="89" height="89" fill="#eaf3fb"/>
+  <path d="M192 212 V392 M102 302 H282" stroke="#8fb3d2" stroke-width="2"/>
+  <text x="147" y="262" class="math" text-anchor="middle">A₀₀</text><text x="237" y="262" class="math" text-anchor="middle">A₀₁</text><text x="147" y="351" class="math" text-anchor="middle">A₁₀</text><text x="237" y="351" class="math" text-anchor="middle">A₁₁</text>
+
+  <text x="366" y="164" class="label">B</text><text x="366" y="189" class="small">32 × 32</text>
+  <rect x="366" y="212" width="180" height="180" rx="10" fill="#fff" stroke="#d99c48" stroke-width="2"/>
+  <rect x="367" y="213" width="89" height="89" fill="#fee3bd" stroke="#bd731b" stroke-width="4"/><rect x="456" y="213" width="89" height="89" fill="#fff4e3"/><rect x="367" y="302" width="89" height="89" fill="#fff4e3"/><rect x="456" y="302" width="89" height="89" fill="#fff4e3"/>
+  <path d="M456 212 V392 M366 302 H546" stroke="#d99c48" stroke-width="2"/>
+  <text x="411" y="262" class="math" text-anchor="middle">B₀₀</text><text x="501" y="262" class="math" text-anchor="middle">B₀₁</text><text x="411" y="351" class="math" text-anchor="middle">B₁₀</text><text x="501" y="351" class="math" text-anchor="middle">B₁₁</text>
+
+  <path d="M572 300 H660" class="arrow"/>
+  <text x="702" y="164" class="label">C = A × B</text><text x="702" y="189" class="small">32 × 32 output</text>
+  <rect x="702" y="212" width="180" height="180" rx="10" fill="#fff" stroke="#9dbb88" stroke-width="2"/>
+  <rect x="703" y="213" width="89" height="89" fill="#cfe8bc" stroke="#557f40" stroke-width="2.5"/><rect x="792" y="213" width="89" height="89" fill="#f3faeb"/><rect x="703" y="302" width="89" height="89" fill="#f3faeb"/><rect x="792" y="302" width="89" height="89" fill="#f3faeb"/>
+  <path d="M792 212 V392 M702 302 H882" stroke="#9dbb88" stroke-width="2"/>
+  <text x="747" y="262" class="math" text-anchor="middle">C₀₀</text><text x="837" y="262" class="math" text-anchor="middle">C₀₁</text><text x="747" y="351" class="math" text-anchor="middle">C₁₀</text><text x="837" y="351" class="math" text-anchor="middle">C₁₁</text>
+
+  <path d="M902 300 H968" class="arrow"/>
+  <rect x="970" y="151" width="322" height="222" rx="18" fill="#f5faef" stroke="#b8d3a8" stroke-width="1.7"/>
+  <text x="1131" y="190" class="label" text-anchor="middle">2 × 2 workgroup grid</text>
+  <rect x="1030" y="218" width="88" height="56" rx="7" fill="#cfe8bc" stroke="#557f40" stroke-width="2"/><rect x="1118" y="218" width="88" height="56" rx="7" fill="#eaf5e1"/><rect x="1030" y="274" width="88" height="56" rx="7" fill="#eaf5e1"/><rect x="1118" y="274" width="88" height="56" rx="7" fill="#eaf5e1"/>
+  <text x="1074" y="252" class="label" text-anchor="middle">WG 0</text><text x="1162" y="252" class="label" text-anchor="middle">WG 1</text><text x="1074" y="308" class="label" text-anchor="middle">WG 2</text><text x="1162" y="308" class="label" text-anchor="middle">WG 3</text>
+  <text x="1131" y="355" class="tiny" text-anchor="middle">each workgroup writes its matching C tile</text>
+
+  <!-- workgroup 0 expanded -->
+  <rect x="48" y="438" width="1304" height="1514" rx="20" fill="#f5faef" stroke="#c9dfba" stroke-width="1.7"/>
+  <text x="78" y="480" class="label">Workgroup 0 computes C₀₀, the upper-left 16 × 16 output tile</text>
+  <text x="78" y="507" class="small">Its 16 × 16 local threads execute the same load, synchronize, and accumulate loop for every K tile.</text>
+
+  <rect x="78" y="550" width="284" height="173" rx="17" fill="#fff" stroke="#b8d3a8" stroke-width="1.7"/>
+  <text x="220" y="588" class="label" text-anchor="middle">16 × 16 local threads</text>
+  <g stroke="#8fad7d" stroke-width="1"><path d="M132 620V689 M163 620V689 M194 620V689 M225 620V689 M256 620V689 M287 620V689 M318 620V689 M101 634H339 M101 648H339 M101 662H339 M101 676H339"/></g>
+  <text x="220" y="711" class="tiny" text-anchor="middle">thread (local row, local column)</text>
+
+  <path d="M362 636 H422 V607 H480" class="blue"/>
+  <path d="M422 636 V765 H480" class="orange"/>
+  <rect x="482" y="542" width="318" height="130" rx="15" fill="#e7f1fb" stroke="#8fb3d2" stroke-width="1.7"/>
+  <text x="641" y="575" class="label" text-anchor="middle">load from A</text><text x="641" y="598" class="tiny" text-anchor="middle">select A₀₀, a 16 × 16 tile</text>
+  <g stroke="#8fb3d2" stroke-width="1"><rect x="594" y="613" width="94" height="42" fill="#eaf3fb"/><path d="M641 613V655 M594 634H688"/><rect x="594" y="613" width="47" height="21" fill="#d6e8f8" stroke="#347eb6" stroke-width="3"/></g>
+  <rect x="482" y="700" width="318" height="130" rx="15" fill="#fff0dc" stroke="#d99c48" stroke-width="1.7"/>
+  <text x="641" y="733" class="label" text-anchor="middle">load from B</text><text x="641" y="756" class="tiny" text-anchor="middle">select B₀₀, a 16 × 16 tile</text>
+  <g stroke="#d99c48" stroke-width="1"><rect x="594" y="771" width="94" height="42" fill="#fff4e3"/><path d="M641 771V813 M594 792H688"/><rect x="594" y="771" width="47" height="21" fill="#fee3bd" stroke="#bd731b" stroke-width="3"/></g>
+
+  <path d="M800 607 H858" class="blue"/><path d="M800 765 H858" class="orange"/>
+  <rect x="860" y="542" width="206" height="130" rx="15" fill="#dcecf9" stroke="#8fb3d2" stroke-width="1.7"/>
+  <text x="963" y="575" class="label" text-anchor="middle">shared tile_a</text><text x="963" y="598" class="tiny" text-anchor="middle">16 × 16 values</text>
+  <g stroke="#8fb3d2" stroke-width="1"><rect x="916" y="613" width="94" height="42" fill="#c8e0f3"/><path d="M939 613V655 M963 613V655 M986 613V655 M916 623H1010 M916 634H1010 M916 645H1010"/></g>
+  <rect x="860" y="700" width="206" height="130" rx="15" fill="#fee5c0" stroke="#d99c48" stroke-width="1.7"/>
+  <text x="963" y="733" class="label" text-anchor="middle">shared tile_b</text><text x="963" y="756" class="tiny" text-anchor="middle">16 × 16 values</text>
+  <g stroke="#d99c48" stroke-width="1"><rect x="916" y="771" width="94" height="42" fill="#fbd39e"/><path d="M939 771V813 M963 771V813 M986 771V813 M916 781H1010 M916 792H1010 M916 803H1010"/></g>
+  <text x="1124" y="628" class="small">all 256 threads load in parallel</text><text x="1124" y="654" class="small">then synchronize</text>
+
+  <path d="M963 830 V900" class="arrow"/>
+  <rect x="190" y="902" width="1020" height="380" rx="19" fill="#fff" stroke="#c6d3bd" stroke-width="1.7"/>
+  <text x="700" y="942" class="label" text-anchor="middle">One example thread reads one row and one column</text>
+  <text x="372" y="976" class="small" text-anchor="middle">shared tile_a</text>
+  <rect x="324" y="990" width="96" height="96" rx="7" fill="#eef5fb" stroke="#8fb3d2" stroke-width="1.5"/>
+  <g stroke="#8fb3d2" stroke-width="1"><path d="M348 990V1086 M372 990V1086 M396 990V1086 M324 1014H420 M324 1038H420 M324 1062H420"/></g>
+  <rect x="325" y="1014" width="94" height="24" fill="#86b9df" opacity="0.8"/>
+  <text x="372" y="1110" class="tiny" text-anchor="middle">highlighted row r</text>
+
+  <text x="372" y="1135" class="small" text-anchor="middle">shared tile_b</text>
+  <rect x="324" y="1149" width="96" height="96" rx="7" fill="#fff3e1" stroke="#d99c48" stroke-width="1.5"/>
+  <g stroke="#d99c48" stroke-width="1"><path d="M348 1149V1245 M372 1149V1245 M396 1149V1245 M324 1173H420 M324 1197H420 M324 1221H420"/></g>
+  <rect x="372" y="1150" width="24" height="94" fill="#e7a84e" opacity="0.8"/>
+  <text x="372" y="1267" class="tiny" text-anchor="middle">highlighted column c</text>
+
+  <path d="M420 1026 H690 V1060 H786" class="blue"/>
+  <path d="M420 1197 H690 V1090 H786" class="orange"/>
+  <rect x="800" y="1026" width="330" height="136" rx="15" fill="#eaf5e1" stroke="#9dbb88" stroke-width="1.7"/>
+  <text x="965" y="1063" class="label" text-anchor="middle">thread (r, c)</text>
+  <text x="965" y="1099" class="math" text-anchor="middle">partial = dot(row, column)</text>
+  <text x="965" y="1130" class="math" text-anchor="middle">accumulator += partial</text>
+  <path d="M700 1282 V1300" class="arrow"/>
+  <rect x="288" y="1302" width="824" height="350" rx="18" fill="#fff" stroke="#c6d3bd" stroke-width="1.7"/>
+  <text x="700" y="1342" class="label" text-anchor="middle">Next K tile</text>
+  <text x="458" y="1379" class="label" text-anchor="middle">A</text>
+  <rect x="380" y="1396" width="156" height="124" rx="9" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.5"/>
+  <path d="M458 1396V1520 M380 1458H536" stroke="#8fb3d2" stroke-width="1.3"/>
+  <rect x="459" y="1397" width="76" height="60" fill="#d6e8f8" stroke="#347eb6" stroke-width="3"/>
+  <text x="419" y="1435" class="small" text-anchor="middle">A₀₀</text><text x="497" y="1435" class="small" text-anchor="middle">A₀₁</text><text x="419" y="1496" class="small" text-anchor="middle">A₁₀</text><text x="497" y="1496" class="small" text-anchor="middle">A₁₁</text>
+  <text x="458" y="1550" class="small" text-anchor="middle">A₀₁ → shared tile_a</text>
+
+  <text x="942" y="1379" class="label" text-anchor="middle">B</text>
+  <rect x="864" y="1396" width="156" height="124" rx="9" fill="#fff4e3" stroke="#d99c48" stroke-width="1.5"/>
+  <path d="M942 1396V1520 M864 1458H1020" stroke="#d99c48" stroke-width="1.3"/>
+  <rect x="865" y="1459" width="76" height="60" fill="#fee3bd" stroke="#bd731b" stroke-width="3"/>
+  <text x="903" y="1435" class="small" text-anchor="middle">B₀₀</text><text x="981" y="1435" class="small" text-anchor="middle">B₀₁</text><text x="903" y="1496" class="small" text-anchor="middle">B₁₀</text><text x="981" y="1496" class="small" text-anchor="middle">B₁₁</text>
+  <text x="942" y="1550" class="small" text-anchor="middle">B₁₀ → shared tile_b</text>
+
+  <path d="M458 1562 V1584 H564" class="blue"/>
+  <path d="M942 1562 V1584 H836" class="orange"/>
+  <rect x="564" y="1554" width="272" height="61" rx="14" fill="#eaf5e1" stroke="#9dbb88" stroke-width="1.7"/>
+  <text x="700" y="1592" class="math" text-anchor="middle">accumulator += A₀₁ × B₁₀</text>
+
+  <path d="M700 1652 V1690" class="arrow"/>
+  <rect x="288" y="1692" width="824" height="190" rx="20" fill="#eaf5e1" stroke="#9dbb88" stroke-width="2"/>
+  <text x="700" y="1730" class="label" text-anchor="middle">After all K tiles, write C₀₀</text>
+  <text x="436" y="1759" class="small" text-anchor="middle">output C</text>
+  <rect x="388" y="1772" width="96" height="76" rx="7" fill="#f7fcf2" stroke="#9dbb88" stroke-width="1.3"/>
+  <path d="M436 1772V1848 M388 1810H484" stroke="#9dbb88" stroke-width="1"/>
+  <rect x="389" y="1773" width="46" height="36" fill="#cfe8bc" stroke="#557f40" stroke-width="3"/>
+  <text x="412" y="1796" class="tiny" text-anchor="middle">C₀₀</text><text x="460" y="1796" class="tiny" text-anchor="middle">C₀₁</text><text x="412" y="1834" class="tiny" text-anchor="middle">C₁₀</text><text x="460" y="1834" class="tiny" text-anchor="middle">C₁₁</text>
+  <text x="770" y="1792" class="small" text-anchor="middle">Each thread writes one element in C₀₀.</text>
+  <text x="436" y="1870" class="tiny" text-anchor="middle">C₀₀ is complete</text>
+</svg>

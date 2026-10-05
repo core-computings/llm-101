@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="650" viewBox="0 0 1400 650" role="img" aria-labelledby="title desc">
+  <title id="title">Naive GEMM, one GPU thread per output element</title>
+  <desc id="desc">A highlighted input row and weight row are multiplied element by element, summed with a bias, and written into one highlighted output cell. One GPU thread performs this process for one batch and output coordinate.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#557248"/></marker>
+    <style>
+      text { font-family: Inter, Arial, sans-serif; fill: #243028; }
+      .label { font-size: 20px; font-weight: 700; }
+      .small { font-size: 16px; fill: #607060; }
+      .tiny { font-size: 14px; fill: #607060; }
+      .math { font-family: Georgia, serif; font-size: 22px; font-weight: 650; }
+      .arrow { fill: none; stroke: #557248; stroke-width: 2.2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1400" height="650" rx="24" fill="#fbfdf8"/>
+
+  <text x="72" y="72" class="label">Input X</text><text x="72" y="99" class="small">shape (B, K)</text>
+  <g stroke="#9fbdd7" stroke-width="1.5">
+    <rect x="72" y="128" width="72" height="48" fill="#edf4fb"/><rect x="144" y="128" width="72" height="48" fill="#edf4fb"/><rect x="216" y="128" width="72" height="48" fill="#edf4fb"/><rect x="288" y="128" width="72" height="48" fill="#edf4fb"/>
+    <rect x="72" y="176" width="72" height="48" fill="#dcecf9"/><rect x="144" y="176" width="72" height="48" fill="#dcecf9"/><rect x="216" y="176" width="72" height="48" fill="#dcecf9"/><rect x="288" y="176" width="72" height="48" fill="#dcecf9"/>
+    <rect x="72" y="224" width="72" height="48" fill="#edf4fb"/><rect x="144" y="224" width="72" height="48" fill="#edf4fb"/><rect x="216" y="224" width="72" height="48" fill="#edf4fb"/><rect x="288" y="224" width="72" height="48" fill="#edf4fb"/>
+  </g>
+  <text x="52" y="207" class="tiny">b = 1</text>
+  <text x="108" y="207" class="math" text-anchor="middle">x₁₀</text><text x="180" y="207" class="math" text-anchor="middle">x₁₁</text><text x="252" y="207" class="math" text-anchor="middle">x₁₂</text><text x="324" y="207" class="math" text-anchor="middle">x₁₃</text>
+
+  <text x="72" y="339" class="label">Transposed weights Wᵀ</text><text x="72" y="366" class="small">shape (K, O)</text>
+  <g stroke="#e0ad65" stroke-width="1.5">
+    <rect x="72" y="395" width="72" height="48" fill="#fff4e3"/><rect x="144" y="395" width="72" height="48" fill="#fff4e3"/><rect x="216" y="395" width="72" height="48" fill="#fee4bd"/>
+    <rect x="72" y="443" width="72" height="48" fill="#fff4e3"/><rect x="144" y="443" width="72" height="48" fill="#fff4e3"/><rect x="216" y="443" width="72" height="48" fill="#fee4bd"/>
+    <rect x="72" y="491" width="72" height="48" fill="#fff4e3"/><rect x="144" y="491" width="72" height="48" fill="#fff4e3"/><rect x="216" y="491" width="72" height="48" fill="#fee4bd"/>
+    <rect x="72" y="539" width="72" height="48" fill="#fff4e3"/><rect x="144" y="539" width="72" height="48" fill="#fff4e3"/><rect x="216" y="539" width="72" height="48" fill="#fee4bd"/>
+  </g>
+  <text x="252" y="387" class="tiny" text-anchor="middle">o = 2</text>
+  <text x="252" y="427" class="math" text-anchor="middle">w₂₀</text><text x="252" y="475" class="math" text-anchor="middle">w₂₁</text><text x="252" y="523" class="math" text-anchor="middle">w₂₂</text><text x="252" y="571" class="math" text-anchor="middle">w₂₃</text>
+
+  <path d="M360 200 H445 V332 H518" class="arrow"/>
+  <path d="M288 491 H445 V392 H518" class="arrow"/>
+  <rect x="520" y="257" width="360" height="220" rx="20" fill="#fff" stroke="#b9cda9" stroke-width="2"/>
+  <text x="700" y="300" class="label" text-anchor="middle">one GPU thread</text>
+  <text x="700" y="334" class="small" text-anchor="middle">input row 1 × Wᵀ column 2</text>
+  <text x="700" y="382" class="math" text-anchor="middle">sum = bias₂</text>
+  <text x="700" y="419" class="math" text-anchor="middle">+ x₁₀w₂₀ + x₁₁w₂₁</text>
+  <text x="700" y="453" class="math" text-anchor="middle">+ x₁₂w₂₂ + x₁₃w₂₃</text>
+  <text x="700" y="509" class="tiny" text-anchor="middle">loop over k = 0 … K − 1</text>
+
+  <path d="M880 367 H972" class="arrow"/>
+  <text x="1020" y="184" class="label">Output Y</text><text x="1020" y="211" class="small">shape (B, O)</text>
+  <g stroke="#9dbb88" stroke-width="1.5">
+    <rect x="1020" y="240" width="80" height="54" fill="#f3faeb"/><rect x="1100" y="240" width="80" height="54" fill="#f3faeb"/><rect x="1180" y="240" width="80" height="54" fill="#f3faeb"/><rect x="1260" y="240" width="80" height="54" fill="#f3faeb"/>
+    <rect x="1020" y="294" width="80" height="54" fill="#f3faeb"/><rect x="1100" y="294" width="80" height="54" fill="#f3faeb"/><rect x="1180" y="294" width="80" height="54" fill="#cfe8bc" stroke="#557f40" stroke-width="3"/><rect x="1260" y="294" width="80" height="54" fill="#f3faeb"/>
+  </g>
+  <text x="1220" y="327" class="math" text-anchor="middle">y₁₂</text>
+  <text x="1180" y="382" class="small" text-anchor="middle">write one output element</text>
+
+</svg>
