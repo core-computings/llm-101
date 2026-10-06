@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1220" role="img" aria-labelledby="title desc">
+  <title id="title">Why the exponential in softmax overflows in float32</title>
+  <desc id="desc">A linear-scale plot of exp(x) from 80 to 90 crosses the largest finite float32 value at approximately 88.72. Direct exponentiation of logits 1000, 1001, and 1002 produces infinities and invalid probabilities. Subtracting their maximum yields minus 2, minus 1, and 0, whose exponentials normalize to finite probabilities.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/>
+    </marker>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+      .section { font-size: 22px; font-weight: 700; }
+      .label { font-size: 18px; font-weight: 680; }
+      .small { font-size: 16px; fill: #586c5d; }
+      .math { font-family: Georgia, "Times New Roman", serif; font-size: 22px; font-weight: 650; }
+      .panel { fill: #ffffff; stroke: #dbe3df; stroke-width: 1.5; }
+      .blue { fill: #eaf3fb; stroke: #8fb3d2; stroke-width: 2; }
+      .green { fill: #edf7e6; stroke: #557f40; stroke-width: 2.5; }
+      .inactive { fill: #f2f5f8; stroke: #cbd7df; stroke-width: 2; }
+      .arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; marker-end: url(#arrow); }
+      .axis { fill: none; stroke: #516559; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="1218" rx="24" fill="#fbfdf8" stroke="#dbe3df" stroke-width="1.5"/>
+
+  <!-- Exponential growth and the float32 limit -->
+  <rect x="200" y="180" width="880" height="206.71" fill="#f2f5f8"/>
+  <text x="234" y="217" class="label">Beyond the largest finite float32 value</text>
+  <text x="234" y="248" class="small">exp(89) ≈ 4.49 × 10³⁸ → inf in float32</text>
+  <text x="80" y="166" class="math">exp(x)</text>
+
+  <path d="M200 180 V460 H1080" class="axis"/>
+  <path d="M192 244.62 H200 M192 460 H200" class="axis"/>
+  <text x="178" y="250" class="small" text-anchor="end">10³⁹</text>
+  <text x="178" y="466" class="small" text-anchor="end">0</text>
+  <path d="M200 386.71 H1080" fill="none" stroke="#63766a" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="178" y="392.71" class="small" text-anchor="end">3.40 × 10³⁸</text>
+  <text x="224" y="368.71" class="small">float32 maximum</text>
+  <path d="M967.61 394.71 V460" fill="none" stroke="#63766a" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <path d="M200.00,459.99 L207.68,459.99 L215.35,459.99 L223.03,459.98 L230.70,459.98 L238.38,459.98 L246.06,459.98 L253.73,459.98 L261.41,459.98 L269.08,459.97 L276.76,459.97 L284.44,459.97 L292.11,459.97 L299.79,459.96 L307.47,459.96 L315.14,459.96 L322.82,459.95 L330.49,459.95 L338.17,459.94 L345.85,459.94 L353.52,459.93 L361.20,459.93 L368.87,459.92 L376.55,459.91 L384.23,459.90 L391.90,459.89 L399.58,459.88 L407.25,459.87 L414.93,459.86 L422.61,459.85 L430.28,459.84 L437.96,459.82 L445.64,459.81 L453.31,459.79 L460.99,459.77 L468.66,459.75 L476.34,459.72 L484.02,459.70 L491.69,459.67 L499.37,459.64 L507.04,459.61 L514.72,459.57 L522.40,459.53 L530.07,459.49 L537.75,459.45 L545.42,459.40 L553.10,459.34 L560.78,459.28 L568.45,459.21 L576.13,459.14 L583.80,459.06 L591.48,458.98 L599.16,458.89 L606.83,458.79 L614.51,458.67 L622.19,458.55 L629.86,458.42 L637.54,458.28 L645.21,458.12 L652.89,457.95 L660.57,457.76 L668.24,457.56 L675.92,457.34 L683.59,457.09 L691.27,456.83 L698.95,456.54 L706.62,456.22 L714.30,455.88 L721.97,455.50 L729.65,455.09 L737.33,454.65 L745.00,454.16 L752.68,453.63 L760.36,453.05 L768.03,452.41 L775.71,451.72 L783.38,450.97 L791.06,450.14 L798.74,449.24 L806.41,448.26 L814.09,447.19 L821.76,446.03 L829.44,444.75 L837.12,443.36 L844.79,441.85 L852.47,440.19 L860.14,438.39 L867.82,436.42 L875.50,434.27 L883.17,431.92 L890.85,429.36 L898.52,426.57 L906.20,423.53 L913.88,420.20 L921.55,416.57 L929.23,412.62 L936.91,408.30 L944.58,403.58 L952.26,398.44 L959.93,392.83 L967.61,386.71" fill="none" stroke="#4e789f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M967.61,386.71 L971.36,383.52 L975.10,380.19 L978.85,376.72 L982.60,373.10 L986.34,369.32 L990.09,365.38 L993.83,361.26 L997.58,356.97 L1001.33,352.49 L1005.07,347.81 L1008.82,342.93 L1012.57,337.84 L1016.31,332.53 L1020.06,326.99 L1023.80,321.20 L1027.55,315.16 L1031.30,308.87 L1035.04,302.29 L1038.79,295.43 L1042.54,288.28 L1046.28,280.81 L1050.03,273.01 L1053.78,264.88 L1057.52,256.40 L1061.27,247.54 L1065.01,238.30 L1068.76,228.66 L1072.51,218.60 L1076.25,208.10 L1080.00,197.14" fill="none" stroke="#63766a" stroke-width="3" stroke-dasharray="6 5"/>
+  <circle cx="967.61" cy="386.71" r="6" fill="#ffffff" stroke="#4e789f" stroke-width="3"/>
+  <text x="1015" y="313" class="math">eˣ</text>
+
+  <path d="M200 460 V468 M376 460 V468 M552 460 V468 M728 460 V468 M904 460 V468 M1080 460 V468" class="axis"/>
+  <text x="200" y="492" class="small" text-anchor="middle">80</text>
+  <text x="376" y="492" class="small" text-anchor="middle">82</text>
+  <text x="552" y="492" class="small" text-anchor="middle">84</text>
+  <text x="728" y="492" class="small" text-anchor="middle">86</text>
+  <text x="904" y="492" class="small" text-anchor="middle">88</text>
+  <text x="1080" y="492" class="small" text-anchor="middle">90</text>
+  <text x="1098" y="464" class="math">x</text>
+  <text x="80" y="550" class="label">Overflow begins around x = ln(float32 max) ≈ 88.72</text>
+
+  <!-- Direct exponentiation -->
+  <rect x="48" y="628" width="1104" height="252" rx="20" class="panel"/>
+  <text x="80" y="670" class="section">Direct exp(x), then divide by the sum</text>
+  <rect x="80" y="704" width="256" height="128" rx="14" class="blue"/>
+  <text x="104" y="738" class="label">Logits x · shape [3]</text>
+  <text x="208" y="788" class="math" text-anchor="middle">[1000, 1001, 1002]</text>
+  <path d="M348 768 H378" class="arrow"/>
+  <rect x="390" y="704" width="310" height="128" rx="14" class="inactive"/>
+  <text x="414" y="738" class="label">exp(x) in float32</text>
+  <text x="545" y="778" class="math" text-anchor="middle">[inf, inf, inf]</text>
+  <text x="545" y="812" class="small" text-anchor="middle">sum = inf</text>
+  <path d="M712 768 H746" class="arrow"/>
+  <rect x="758" y="704" width="362" height="128" rx="14" class="inactive"/>
+  <text x="782" y="738" class="label">Invalid probabilities</text>
+  <text x="939" y="778" class="math" text-anchor="middle">[NaN, NaN, NaN]</text>
+  <text x="939" y="812" class="small" text-anchor="middle">inf / inf is undefined</text>
+
+  <!-- Shifted exponentiation -->
+  <rect x="48" y="912" width="1104" height="260" rx="20" class="panel"/>
+  <text x="80" y="954" class="section">Subtract max(x) = 1002, before exp</text>
+  <rect x="80" y="988" width="256" height="128" rx="14" class="blue"/>
+  <text x="104" y="1022" class="label">Shifted logits x − m</text>
+  <text x="208" y="1072" class="math" text-anchor="middle">[−2, −1, 0]</text>
+  <path d="M348 1052 H378" class="arrow"/>
+  <rect x="390" y="988" width="310" height="128" rx="14" class="green"/>
+  <text x="414" y="1022" class="label">exp(x − m) ≤ 1</text>
+  <text x="545" y="1062" class="math" text-anchor="middle">[0.1353, 0.3679, 1]</text>
+  <text x="545" y="1096" class="small" text-anchor="middle">sum ≈ 1.5032</text>
+  <path d="M712 1052 H746" class="arrow"/>
+  <rect x="758" y="988" width="362" height="128" rx="14" class="green"/>
+  <text x="782" y="1022" class="label">Finite probabilities · shape [3]</text>
+  <text x="939" y="1062" class="math" text-anchor="middle">[0.0900, 0.2447, 0.6652]</text>
+  <text x="939" y="1096" class="small" text-anchor="middle">same mathematical softmax</text>
+  <text x="80" y="1149" class="small">The probabilities are bounded. The intermediate exponentials can overflow.</text>
+</svg>

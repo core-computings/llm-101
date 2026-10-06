@@ -43,6 +43,7 @@ module.exports = {
         'part-3-llm-must-knows/chapter-2-layer-normalization',
         'part-3-llm-must-knows/chapter-3-kv-cache',
         'part-3-llm-must-knows/chapter-4-gemm',
+        'part-3-llm-must-knows/chapter-5-online-softmax',
       ],
     },
   ],
