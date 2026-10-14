@@ -39,6 +39,12 @@ const config = {
         },
         blog: false,
         pages: false,
+        sitemap: {
+          filename: 'sitemap.xml',
+          lastmod: 'date',
+          changefreq: null,
+          priority: null,
+        },
         theme: { customCss: require.resolve('./src/css/custom.css') },
       },
     ],

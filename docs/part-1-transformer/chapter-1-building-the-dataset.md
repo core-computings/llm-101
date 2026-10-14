@@ -1,5 +1,6 @@
 ---
 title: Chapter 1 · Building the Dataset
+description: "Learn LLMs with visual explanations and Python examples, from Transformers and GPT2 training to quantization. Start by preparing a text dataset."
 part: Part 1 · Transformer
 sidebar_position: 1
 slug: /

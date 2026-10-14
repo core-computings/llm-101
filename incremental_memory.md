@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-10-13 — Search discovery and crawler configuration
+
+- **Scope:** Sitemap configuration, deployment history, homepage metadata, and robots.txt for LLM 101.
+- **Feedback:** Prepare the site for Google Search Console with a sitemap and crawler files.
+- **Change made:** Configured the existing automatic sitemap explicitly with Git-based modification dates, enabled full-history checkout, added a homepage description and submission instructions, excluded the two title-only chapters from indexing until they have content, and added a project robots.txt copy plus the effective host-root policy in the root site's repository.
+- **Rule for future work:** Keep sitemaps generated from actual routes. On a GitHub Pages project site, robots.txt must be published at the host root to control crawling. Verify public URLs and distinguish crawlability from Google's decision to index or rank a page.
+
 ## 2026-10-13 — Part 2 title
 
 - **Scope:** Part 2 display title in `sidebars.js` and `README.md`.
