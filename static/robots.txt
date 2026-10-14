@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://llm-101.core-computings-llm101.workers.dev/sitemap.xml
+Sitemap: https://llm-101.pages.dev/sitemap.xml

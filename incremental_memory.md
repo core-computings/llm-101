@@ -9,7 +9,9 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Scope:** Site URL, base path, crawler policy, README, page-view counter origin, and deployment workflow.
 - **Feedback:** Use the existing default Cloudflare address and stop maintaining the GitHub Pages address; commit and push the migration.
 - **Change made:** Set the canonical origin to `https://llm-101.core-computings-llm101.workers.dev` with root base path, updated site links and robots.txt, aligned the counter origin, and removed the GitHub Pages deployment workflow.
-- **Rule for future work:** Use the confirmed production hostname rather than guessing a Pages project name. This deployment uses Workers (`workers.dev`), and its static assets are served from `/`. Keep canonical URLs, sitemap, crawler policy, and counter CORS origin aligned. Updating the counter source still requires a separate Worker deployment.
+- **Rule for future work:** Use the confirmed production hostname rather than guessing a Pages project name. The site is served from `/`; the confirmed host determines the deployment platform. Keep canonical URLs, sitemap, crawler policy, and counter CORS origin aligned. Updating the counter source still requires a separate Worker deployment.
+
+- **Follow-up feedback (2026-10-14):** Switch website hosting from Workers to Cloudflare Pages at `https://llm-101.pages.dev`. Updated the canonical origin, links, crawler policy, counter CORS origin, and Pages build instructions. The optional counter remains a separate Worker; the root base path stays unchanged. Use the Pages address for future website deployments.
 
 ## 2026-10-13 — Search discovery and crawler configuration
 

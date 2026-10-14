@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "compatibility_date": "2026-09-29",
   "vars": {
-    "SITE_ORIGIN": "https://llm-101.core-computings-llm101.workers.dev"
+    "SITE_ORIGIN": "https://llm-101.pages.dev"
   },
   "durable_objects": {
     "bindings": [

@@ -5,7 +5,7 @@ const config = {
   title: 'LLM 101',
   tagline: 'A visual, practical guide to large language models.',
   favicon: 'img/favicon.svg',
-  url: 'https://llm-101.core-computings-llm101.workers.dev',
+  url: 'https://llm-101.pages.dev',
   baseUrl: '/',
   organizationName: 'core-computings',
   projectName: 'llm-101',
