@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-10-14 — Cloudflare as the sole production host
+
+- **Scope:** Site URL, base path, crawler policy, README, page-view counter origin, and deployment workflow.
+- **Feedback:** Use the existing default Cloudflare address and stop maintaining the GitHub Pages address; commit and push the migration.
+- **Change made:** Set the canonical origin to `https://llm-101.core-computings-llm101.workers.dev` with root base path, updated site links and robots.txt, aligned the counter origin, and removed the GitHub Pages deployment workflow.
+- **Rule for future work:** Use the confirmed production hostname rather than guessing a Pages project name. This deployment uses Workers (`workers.dev`), and its static assets are served from `/`. Keep canonical URLs, sitemap, crawler policy, and counter CORS origin aligned. Updating the counter source still requires a separate Worker deployment.
+
 ## 2026-10-13 — Search discovery and crawler configuration
 
 - **Scope:** Sitemap configuration, deployment history, homepage metadata, and robots.txt for LLM 101.

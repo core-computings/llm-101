@@ -1,6 +1,4 @@
-# The effective crawler policy is at https://core-computings.github.io/robots.txt.
-# This project-path copy documents the LLM 101 policy.
 User-agent: *
-Allow: /llm-101/
+Allow: /
 
-Sitemap: https://core-computings.github.io/llm-101/sitemap.xml
+Sitemap: https://llm-101.core-computings-llm101.workers.dev/sitemap.xml
