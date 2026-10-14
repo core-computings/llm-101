@@ -15,7 +15,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Part 2 — Train a GPT',
+      label: 'Part 2 — GPT2',
       items: [
         'part-2-train-a-gpt/chapter-1-reproducing-gpt-2',
         'part-2-train-a-gpt/chapter-2-implementing-the-gpt-2-model',
@@ -44,6 +44,13 @@ module.exports = {
         'part-3-llm-must-knows/chapter-3-kv-cache',
         'part-3-llm-must-knows/chapter-4-gemm',
         'part-3-llm-must-knows/chapter-5-online-softmax',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Part 4 — Quantization',
+      items: [
+        'part-4-quantization/chapter-1-post-training-quantization',
       ],
     },
   ],

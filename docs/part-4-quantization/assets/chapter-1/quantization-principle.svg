@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Quantization maps a floating-point number line to INT8 ticks</title>
+  <desc id="desc">A longer floating-point line maps mixed magnitudes to a shorter INT8 line. With scale 2 and zero-point 0, -120 maps to -60, -24 to -12, -3.6 to -2, both 0.3 and 0.7 to 0, 4.2 to 2, and 120 to 60. Positions are schematic rather than proportional to magnitude. Breaks in the INT8 line indicate omitted integer ticks.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L0,8 L8,4 z" fill="#516559"/>
+    </marker>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+      .label { font-size: 26px; font-weight: 680; }
+      .small { font-size: 22px; fill: #586c5d; }
+      .number { font-size: 26px; text-anchor: middle; }
+      .blue { fill: #cde2f3; stroke: #4e789f; stroke-width: 3; }
+      .green { fill: #d8edc8; stroke: #557f40; stroke-width: 3; }
+      .axis { fill: none; stroke-width: 2.2; stroke-linecap: round; }
+      .connector { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+      .arrow { marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="518" rx="24" fill="#fcfdf9" stroke="#dbe3df" stroke-width="1.5"/>
+
+  <!-- Mixed input magnitudes, with schematic spacing for legibility -->
+  <text x="56" y="70" class="label">Floating-point</text>
+  <path d="M120 160 H1120" class="axis" stroke="#4e789f"/>
+  <circle cx="160" cy="160" r="8" class="blue"/>
+  <text x="160" y="124" class="number">−120</text>
+  <circle cx="300" cy="160" r="8" class="blue"/>
+  <text x="300" y="124" class="number">−24</text>
+  <circle cx="440" cy="160" r="8" class="blue"/>
+  <text x="440" y="124" class="number">−3.6</text>
+  <circle cx="560" cy="160" r="8" class="blue"/>
+  <text x="560" y="124" class="number">0.3</text>
+  <circle cx="680" cy="160" r="8" class="blue"/>
+  <text x="680" y="124" class="number">0.7</text>
+  <circle cx="820" cy="160" r="8" class="blue"/>
+  <text x="820" y="124" class="number">4.2</text>
+  <circle cx="1080" cy="160" r="8" class="blue"/>
+  <text x="1080" y="124" class="number">120</text>
+
+  <!-- Divide by 2 and round, merging the two fractional inputs -->
+  <path d="M160 184 L400 356" class="connector arrow"/>
+  <path d="M300 184 L500 356" class="connector arrow"/>
+  <path d="M440 184 L600 356" class="connector arrow"/>
+  <path d="M560 184 L700 296 M680 184 L700 296" class="connector"/>
+  <path d="M700 296 V356" class="connector arrow"/>
+  <path d="M820 184 L800 356" class="connector arrow"/>
+  <path d="M1080 184 L900 356" class="connector arrow"/>
+
+  <!-- Short INT8 axis, breaks omit larger runs of integer ticks -->
+  <text x="264" y="388" class="label">INT8</text>
+  <path d="M360 380 H438 M462 380 H538 M562 380 H838 M862 380 H940" class="axis" stroke="#557f40"/>
+  <path d="M442 388 L450 372 M452 388 L460 372 M542 388 L550 372 M552 388 L560 372 M842 388 L850 372 M852 388 L860 372" class="axis" stroke="#557f40"/>
+  <path d="M400 370 V390 M500 370 V390 M600 370 V390 M650 374 V386 M700 370 V390 M750 374 V386 M800 370 V390 M900 370 V390" class="axis" stroke="#557f40"/>
+  <circle cx="400" cy="380" r="8" class="green"/>
+  <text x="400" y="426" class="number">−60</text>
+  <circle cx="500" cy="380" r="8" class="green"/>
+  <text x="500" y="426" class="number">−12</text>
+  <circle cx="600" cy="380" r="8" class="green"/>
+  <text x="600" y="426" class="number">−2</text>
+  <circle cx="700" cy="380" r="8" class="green"/>
+  <text x="700" y="426" class="number">0</text>
+  <circle cx="800" cy="380" r="8" class="green"/>
+  <text x="800" y="426" class="number">2</text>
+  <circle cx="900" cy="380" r="8" class="green"/>
+  <text x="900" y="426" class="number">60</text>
+  <text x="56" y="474" class="small">Example: scale 2, zero-point 0 · schematic spacing</text>
+</svg>

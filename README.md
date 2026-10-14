@@ -11,8 +11,9 @@ Read the tutorial online:
 The tutorial follows the path from a first language model to training a GPT:
 
 - **Part 1 — Transformer:** how a model builds context, predicts the next token, and uses attention and Transformer blocks.
-- **Part 2 — Train a GPT:** how to implement GPT-2, load its checkpoint, and train it efficiently.
+- **Part 2 — GPT2:** how to implement GPT-2, load its checkpoint, and train it efficiently.
 - **Part 3 — LLM Must-Knows:** essential concepts for understanding large language models, starting with Batch Normalization.
+- **Part 4 — Quantization:** lower-precision representations for inference, starting with Post-training Quantization.
 
 The explanations are supported by small Python examples, real intermediate outputs, formulas, and visual diagrams. The goal is to make each step understandable before moving to the next one.
 
