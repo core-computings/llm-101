@@ -24,6 +24,14 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Built-in indexing revision (2026-10-31):** The user liked the dispatch grid and requested that GLSL built-in variables be explained directly on it. Preserved the global and local grids and selected invocation, labeled all six workgroup/invocation built-ins with their example values, highlighted the 19 preceding local cells, and added the coordinate conversion and computed global index.
 - **Rule for this figure:** Tie API names to the actual dimensions, highlighted group, and selected invocation. Preserve the established example when extending a successful diagram. Distinguish size values from indices and the shader-computed global linear index from GLSL built-ins; show how row width determines flattening.
 
+- **Occupancy hierarchy revision (2026-10-31):** The user mistook the eight workgroup cards for eight warps and requested an explicit omission cue. Added nested `Warp 0 … Warp 7` cells inside every resident WG card in `occupancy.svg`, identified the omitted Warps 1–6, and displayed `8 WGs × 8 warps = 64` and `4 WGs × 8 warps = 32`.
+- **Rule for this figure:** Show the WG-to-warp hierarchy visually when explaining occupancy. Attach ellipses to a labeled, bounded range and keep the number of resident workgroups accurate; do not imply extra resident groups beyond the eight in the full-occupancy example.
+
+- **Section removal (2026-10-31):** At the user’s request, removed the entire “7. What this means for LLM kernels” section from `docs/part-5-gpu-computing/chapter-1-gpu-architecture.md`. Keep this chapter ending with the occupancy explanation; do not restore the removed application discussion unless requested. This is a scoped editorial preference, not a technical correction.
+
+- **Four-WG explanation revision (2026-10-31):** The user found “Why would only four workgroups fit?” insufficiently simple. Rewrote the subsection around the shared-memory budget: four WGs use 64 KiB, while a fifth would require 80 KiB. Then derived the register limit, connected four WGs to 32 warps and 50% occupancy, and explained that a finished WG releases resources for a later WG.
+- **Rule for this explanation:** State total capacity and per-WG demand before deriving a limit. Explain why the next WG cannot fit with concrete arithmetic, and distinguish simultaneous residency from the total work dispatched. Identify changed kernel resource requirements rather than implying that waiting warps cause the limit.
+
 ## 2026-10-14 — Cloudflare as the sole production host
 
 - **Scope:** Site URL, base path, crawler policy, README, page-view counter origin, and deployment workflow.

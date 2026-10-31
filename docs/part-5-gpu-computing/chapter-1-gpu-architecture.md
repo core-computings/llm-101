@@ -199,28 +199,28 @@ The first snapshot has more resident warps but the same number ready to issue. N
 
 ### Why would only four workgroups fit?
 
-Now give each 256-thread workgroup 64 registers per thread and 16 KiB of shared memory. The storage allocations fill up before the warp capacity does:
+**Each WG needs registers and shared memory as well as room for its warps. All of these must fit on the same SM.**
+
+Consider a kernel with **256 threads per WG**, **64 registers per thread**, and **16 KiB of shared memory per WG**. Assume the SM has **65,536 registers**, **64 KiB of shared memory**, and room for **64 warps**. These are illustrative capacities.
+
+Start with shared memory:
+
+- One WG takes **16 KiB**.
+- Four WGs take **4 × 16 = 64 KiB**, using the entire SM shared-memory budget.
+- A fifth WG would raise the total to **80 KiB**, exceeding the available **64 KiB**. **It cannot join the four already resident on this SM.**
+
+Registers reach the same limit: each WG needs **256 × 64 = 16,384 registers**, so **65,536 ÷ 16,384 = 4 WGs** fit. The earlier register example used 32 registers per thread; this kernel needs twice as many.
 
 ![Four workgroups fill an illustrative SM's 65,536 registers and 64 KiB of shared memory. Each group uses 16,384 registers, 16 KiB shared memory and eight warps, leaving half the 64-warp capacity unused.](./assets/chapter-1/occupancy-resource-budget.svg)
 
-For example, 4,096 live `float` elements in a GLSL `shared` array require 16 KiB. The register count is twice the earlier 32-register example. Threads and warps each allow eight groups, registers and shared memory each allow four, and the hardware workgroup-count limit is sixteen:
+Those four WGs contain **4 × 8 = 32 warps**. The SM still has room for more warps, but their required storage is already allocated:
 
 $$
-N_{\mathrm{resident\ groups}} = \min(8, 8, 4, 4, 16) = 4.
+\mathrm{Occupancy} = \frac{32}{64} \times 100\% = 50\%.
 $$
 
-$$
-\mathrm{Occupancy} = \frac{4 \times 8}{64} \times 100\% = 50\%.
-$$
+**Four is the number of WGs that can reside on this SM at once.** When a resident WG finishes and releases its resources, another WG can take its place. Waiting for data does not release a WG's allocation.
 
-This is a simplified resource bound assuming enough work is available, with no stricter allocation or partition constraints. Hardware allocation granularity, barriers, and other architectural limits can further reduce residency. The SM-wide shared-memory budget in this table is distinct from Vulkan's **per-workgroup** shared-memory limit.
+This example assumes other hardware limits do not reduce residency further. The 64 KiB budget belongs to the whole SM; each WG gets its own 16 KiB allocation.
 
 Low occupancy can also come from too little work. A dispatch with only four workgroups cannot keep a large GPU full, but it does not imply exactly 50% occupancy: the groups may be spread over different SMs. During execution, groups also finish at different times. **Theoretical occupancy** is a resource-based ceiling; **achieved occupancy** measures residency over execution and can be lower.
-
-## 7. What this means for LLM kernels
-
-In [tiled GEMM](../part-3-llm-must-knows/chapter-4-gemm.md), a workgroup loads tiles into shared memory and reuses them, while each thread keeps partial sums in registers. Increasing the tile size can reduce repeated global-memory loads, but larger shared tiles or more per-thread accumulators can reduce the number of groups that fit on an SM.
-
-The goal is useful throughput. More occupancy provides more opportunities to hide latency, but a kernel with lower occupancy can still be faster if it reuses data better or performs fewer memory accesses. Artificially restricting registers can introduce spills; shrinking shared tiles can increase global-memory traffic.
-
-Measure kernel time alongside occupancy, scheduler activity, and memory throughput. **Occupancy describes resident execution state; bandwidth efficiency describes how effectively memory traffic serves useful work.** Both help explain performance, but neither alone determines it.

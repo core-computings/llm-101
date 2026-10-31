@@ -1,71 +1,152 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 970" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1210" role="img" aria-labelledby="title desc">
   <title id="title">Full residency with waiting warps versus half residency</title>
-  <desc id="desc">Both SM snapshots have a maximum of 64 resident warps. Each resident workgroup contains eight warps. In the first snapshot, four groups wait for data and four are ready, giving 64 resident warps and 100 percent occupancy. In the second snapshot, four groups are ready and the remaining 32 warp slots are unused, giving 50 percent occupancy. Both snapshots have 32 ready warps.</desc>
+  <desc id="desc">Both SM snapshots have a maximum of 64 resident warps. Each resident workgroup contains eight warps, shown as Warp 0, an ellipsis for Warps 1–6, and Warp 7. In the first snapshot, four groups wait for data and four are ready, giving 64 resident warps and 100 percent occupancy. In the second snapshot, four groups are ready and the remaining 32 warp slots are unused, giving 50 percent occupancy. Both snapshots have 32 ready warps.</desc>
   <defs>
     <style>
       text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
       .section { font-size: 22px; font-weight: 700; }
       .label { font-size: 20px; font-weight: 680; }
       .small { font-size: 18px; fill: #586c5d; }
+      .warp { font-size: 16px; fill: #586c5d; }
       .math { font-family: Georgia, "Times New Roman", serif; font-size: 22px; font-weight: 650; }
       .ready { fill: #fff; stroke: #8fa499; stroke-width: 1.8; }
       .waiting { fill: #fff4e3; stroke: #d99c48; stroke-width: 1.8; }
       .empty { fill: #f2f5f8; stroke: #cbd7df; stroke-width: 1.8; stroke-dasharray: 7 5; }
     </style>
   </defs>
-  <rect width="1200" height="970" rx="24" fill="#fbfdf8"/>
-  <text x="48" y="72" class="small">Illustrative SM capacity: 64 resident warps · Each workgroup: 256 threads = 8 warps</text>
 
-  <!-- All warp capacity occupied, half of the resident warps waiting -->
-  <rect x="48" y="104" width="1104" height="376" rx="20" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
-  <text x="80" y="147" class="section">8 resident workgroups</text>
-  <text x="1120" y="147" class="math" text-anchor="end">64 / 64 = 100% occupancy</text>
-  <g class="waiting">
-    <rect x="80" y="180" width="242" height="96" rx="14"/>
-    <rect x="346" y="180" width="242" height="96" rx="14"/>
-    <rect x="612" y="180" width="242" height="96" rx="14"/>
-    <rect x="878" y="180" width="242" height="96" rx="14"/>
-  </g>
-  <text x="201" y="216" class="label" text-anchor="middle">WG 0 · 8 warps</text><text x="201" y="250" class="small" text-anchor="middle">Waiting for data</text>
-  <text x="467" y="216" class="label" text-anchor="middle">WG 1 · 8 warps</text><text x="467" y="250" class="small" text-anchor="middle">Waiting for data</text>
-  <text x="733" y="216" class="label" text-anchor="middle">WG 2 · 8 warps</text><text x="733" y="250" class="small" text-anchor="middle">Waiting for data</text>
-  <text x="999" y="216" class="label" text-anchor="middle">WG 3 · 8 warps</text><text x="999" y="250" class="small" text-anchor="middle">Waiting for data</text>
-  <g class="ready">
-    <rect x="80" y="300" width="242" height="96" rx="14"/>
-    <rect x="346" y="300" width="242" height="96" rx="14"/>
-    <rect x="612" y="300" width="242" height="96" rx="14"/>
-    <rect x="878" y="300" width="242" height="96" rx="14"/>
-  </g>
-  <text x="201" y="336" class="label" text-anchor="middle">WG 4 · 8 warps</text><text x="201" y="370" class="small" text-anchor="middle">Ready</text>
-  <text x="467" y="336" class="label" text-anchor="middle">WG 5 · 8 warps</text><text x="467" y="370" class="small" text-anchor="middle">Ready</text>
-  <text x="733" y="336" class="label" text-anchor="middle">WG 6 · 8 warps</text><text x="733" y="370" class="small" text-anchor="middle">Ready</text>
-  <text x="999" y="336" class="label" text-anchor="middle">WG 7 · 8 warps</text><text x="999" y="370" class="small" text-anchor="middle">Ready</text>
-  <text x="80" y="443" class="label">64 resident = 32 waiting + 32 ready</text>
-
-  <!-- Half of the warp capacity occupied, half unused -->
-  <rect x="48" y="520" width="1104" height="376" rx="20" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
-  <text x="80" y="563" class="section">4 resident workgroups</text>
-  <text x="1120" y="563" class="math" text-anchor="end">32 / 64 = 50% occupancy</text>
-  <g class="ready">
-    <rect x="80" y="596" width="242" height="96" rx="14"/>
-    <rect x="346" y="596" width="242" height="96" rx="14"/>
-    <rect x="612" y="596" width="242" height="96" rx="14"/>
-    <rect x="878" y="596" width="242" height="96" rx="14"/>
-  </g>
-  <text x="201" y="632" class="label" text-anchor="middle">WG 0 · 8 warps</text><text x="201" y="666" class="small" text-anchor="middle">Ready</text>
-  <text x="467" y="632" class="label" text-anchor="middle">WG 1 · 8 warps</text><text x="467" y="666" class="small" text-anchor="middle">Ready</text>
-  <text x="733" y="632" class="label" text-anchor="middle">WG 2 · 8 warps</text><text x="733" y="666" class="small" text-anchor="middle">Ready</text>
-  <text x="999" y="632" class="label" text-anchor="middle">WG 3 · 8 warps</text><text x="999" y="666" class="small" text-anchor="middle">Ready</text>
-  <g class="empty">
-    <rect x="80" y="716" width="242" height="96" rx="14"/>
-    <rect x="346" y="716" width="242" height="96" rx="14"/>
-    <rect x="612" y="716" width="242" height="96" rx="14"/>
-    <rect x="878" y="716" width="242" height="96" rx="14"/>
-  </g>
-  <text x="201" y="752" class="label" text-anchor="middle">8 unused slots</text><text x="201" y="786" class="small" text-anchor="middle">No resident warps</text>
-  <text x="467" y="752" class="label" text-anchor="middle">8 unused slots</text><text x="467" y="786" class="small" text-anchor="middle">No resident warps</text>
-  <text x="733" y="752" class="label" text-anchor="middle">8 unused slots</text><text x="733" y="786" class="small" text-anchor="middle">No resident warps</text>
-  <text x="999" y="752" class="label" text-anchor="middle">8 unused slots</text><text x="999" y="786" class="small" text-anchor="middle">No resident warps</text>
-  <text x="80" y="859" class="label">32 resident = 32 ready</text>
-  <text x="48" y="932" class="small">Same ready-warp count, different residency. Ready does not mean issued in this cycle.</text>
+  <rect width="1200" height="1210" rx="24" fill="#fbfdf8"/>
+  <text x="48" y="64" class="small">Illustrative SM capacity: 64 resident warps · Each WG: 256 threads = 8 warps</text>
+  <text x="48" y="96" class="small">Inside each WG: Warp 0 … Warp 7 = 8 warps. The dots stand for Warps 1–6.</text>
+  <!-- Full residency -->
+  <rect x="48" y="128" width="1104" height="484" rx="20" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+  <text x="80" y="170" class="section" text-anchor="start">8 resident workgroups</text>
+  <text x="1120" y="170" class="math" text-anchor="end">64 / 64 = 100% occupancy</text>
+  <!-- Workgroup 0: eight warps, with the middle six omitted -->
+  <rect x="80" y="200" width="242" height="156" rx="14" class="waiting"/>
+  <text x="201" y="232" class="label" text-anchor="middle">WG 0 · 8 warps</text>
+  <rect x="92" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="134" y="280" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="226" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="268" y="280" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="201" y="280" class="label" text-anchor="middle">…</text>
+  <text x="201" y="332" class="small" text-anchor="middle">Waiting for data</text>
+  <!-- Workgroup 1: eight warps, with the middle six omitted -->
+  <rect x="346" y="200" width="242" height="156" rx="14" class="waiting"/>
+  <text x="467" y="232" class="label" text-anchor="middle">WG 1 · 8 warps</text>
+  <rect x="358" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="400" y="280" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="492" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="534" y="280" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="467" y="280" class="label" text-anchor="middle">…</text>
+  <text x="467" y="332" class="small" text-anchor="middle">Waiting for data</text>
+  <!-- Workgroup 2: eight warps, with the middle six omitted -->
+  <rect x="612" y="200" width="242" height="156" rx="14" class="waiting"/>
+  <text x="733" y="232" class="label" text-anchor="middle">WG 2 · 8 warps</text>
+  <rect x="624" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="666" y="280" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="758" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="800" y="280" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="733" y="280" class="label" text-anchor="middle">…</text>
+  <text x="733" y="332" class="small" text-anchor="middle">Waiting for data</text>
+  <!-- Workgroup 3: eight warps, with the middle six omitted -->
+  <rect x="878" y="200" width="242" height="156" rx="14" class="waiting"/>
+  <text x="999" y="232" class="label" text-anchor="middle">WG 3 · 8 warps</text>
+  <rect x="890" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="932" y="280" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="1024" y="252" width="84" height="44" rx="8" class="waiting"/>
+  <text x="1066" y="280" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="999" y="280" class="label" text-anchor="middle">…</text>
+  <text x="999" y="332" class="small" text-anchor="middle">Waiting for data</text>
+  <!-- Workgroup 4: eight warps, with the middle six omitted -->
+  <rect x="80" y="380" width="242" height="156" rx="14" class="ready"/>
+  <text x="201" y="412" class="label" text-anchor="middle">WG 4 · 8 warps</text>
+  <rect x="92" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="134" y="460" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="226" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="268" y="460" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="201" y="460" class="label" text-anchor="middle">…</text>
+  <text x="201" y="512" class="small" text-anchor="middle">Ready</text>
+  <!-- Workgroup 5: eight warps, with the middle six omitted -->
+  <rect x="346" y="380" width="242" height="156" rx="14" class="ready"/>
+  <text x="467" y="412" class="label" text-anchor="middle">WG 5 · 8 warps</text>
+  <rect x="358" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="400" y="460" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="492" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="534" y="460" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="467" y="460" class="label" text-anchor="middle">…</text>
+  <text x="467" y="512" class="small" text-anchor="middle">Ready</text>
+  <!-- Workgroup 6: eight warps, with the middle six omitted -->
+  <rect x="612" y="380" width="242" height="156" rx="14" class="ready"/>
+  <text x="733" y="412" class="label" text-anchor="middle">WG 6 · 8 warps</text>
+  <rect x="624" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="666" y="460" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="758" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="800" y="460" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="733" y="460" class="label" text-anchor="middle">…</text>
+  <text x="733" y="512" class="small" text-anchor="middle">Ready</text>
+  <!-- Workgroup 7: eight warps, with the middle six omitted -->
+  <rect x="878" y="380" width="242" height="156" rx="14" class="ready"/>
+  <text x="999" y="412" class="label" text-anchor="middle">WG 7 · 8 warps</text>
+  <rect x="890" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="932" y="460" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="1024" y="432" width="84" height="44" rx="8" class="ready"/>
+  <text x="1066" y="460" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="999" y="460" class="label" text-anchor="middle">…</text>
+  <text x="999" y="512" class="small" text-anchor="middle">Ready</text>
+  <text x="80" y="580" class="label" text-anchor="start">8 WGs × 8 warps = 64 resident warps = 32 waiting + 32 ready</text>
+  <!-- Half residency -->
+  <rect x="48" y="652" width="1104" height="484" rx="20" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+  <text x="80" y="694" class="section" text-anchor="start">4 resident workgroups</text>
+  <text x="1120" y="694" class="math" text-anchor="end">32 / 64 = 50% occupancy</text>
+  <!-- Workgroup 0: eight warps, with the middle six omitted -->
+  <rect x="80" y="724" width="242" height="156" rx="14" class="ready"/>
+  <text x="201" y="756" class="label" text-anchor="middle">WG 0 · 8 warps</text>
+  <rect x="92" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="134" y="804" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="226" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="268" y="804" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="201" y="804" class="label" text-anchor="middle">…</text>
+  <text x="201" y="856" class="small" text-anchor="middle">Ready</text>
+  <!-- Workgroup 1: eight warps, with the middle six omitted -->
+  <rect x="346" y="724" width="242" height="156" rx="14" class="ready"/>
+  <text x="467" y="756" class="label" text-anchor="middle">WG 1 · 8 warps</text>
+  <rect x="358" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="400" y="804" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="492" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="534" y="804" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="467" y="804" class="label" text-anchor="middle">…</text>
+  <text x="467" y="856" class="small" text-anchor="middle">Ready</text>
+  <!-- Workgroup 2: eight warps, with the middle six omitted -->
+  <rect x="612" y="724" width="242" height="156" rx="14" class="ready"/>
+  <text x="733" y="756" class="label" text-anchor="middle">WG 2 · 8 warps</text>
+  <rect x="624" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="666" y="804" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="758" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="800" y="804" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="733" y="804" class="label" text-anchor="middle">…</text>
+  <text x="733" y="856" class="small" text-anchor="middle">Ready</text>
+  <!-- Workgroup 3: eight warps, with the middle six omitted -->
+  <rect x="878" y="724" width="242" height="156" rx="14" class="ready"/>
+  <text x="999" y="756" class="label" text-anchor="middle">WG 3 · 8 warps</text>
+  <rect x="890" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="932" y="804" class="warp" text-anchor="middle">Warp 0</text>
+  <rect x="1024" y="776" width="84" height="44" rx="8" class="ready"/>
+  <text x="1066" y="804" class="warp" text-anchor="middle">Warp 7</text>
+  <text x="999" y="804" class="label" text-anchor="middle">…</text>
+  <text x="999" y="856" class="small" text-anchor="middle">Ready</text>
+  <rect x="80" y="904" width="242" height="116" rx="14" class="empty"/>
+  <text x="201" y="948" class="label" text-anchor="middle">8 unused warp slots</text>
+  <text x="201" y="986" class="small" text-anchor="middle">No resident warps</text>
+  <rect x="346" y="904" width="242" height="116" rx="14" class="empty"/>
+  <text x="467" y="948" class="label" text-anchor="middle">8 unused warp slots</text>
+  <text x="467" y="986" class="small" text-anchor="middle">No resident warps</text>
+  <rect x="612" y="904" width="242" height="116" rx="14" class="empty"/>
+  <text x="733" y="948" class="label" text-anchor="middle">8 unused warp slots</text>
+  <text x="733" y="986" class="small" text-anchor="middle">No resident warps</text>
+  <rect x="878" y="904" width="242" height="116" rx="14" class="empty"/>
+  <text x="999" y="948" class="label" text-anchor="middle">8 unused warp slots</text>
+  <text x="999" y="986" class="small" text-anchor="middle">No resident warps</text>
+  <text x="80" y="1104" class="label" text-anchor="start">4 WGs × 8 warps = 32 resident warps = 32 ready</text>
+  <text x="48" y="1178" class="small" text-anchor="start">Same ready-warp count, different residency. Ready does not mean issued in this cycle.</text>
 </svg>
