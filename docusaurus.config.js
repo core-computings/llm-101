@@ -1,5 +1,17 @@
 const cloudflareAnalyticsToken = process.env.CLOUDFLARE_ANALYTICS_TOKEN;
-const pageViewCounterUrl = process.env.PAGE_VIEW_COUNTER_URL;
+const counterAddress = process.env.PAGE_VIEW_COUNTER_URL?.trim();
+let pageViewCounterUrl;
+if (counterAddress) {
+  const url = new URL(
+    /^[a-z][a-z\d+.-]*:/i.test(counterAddress)
+      ? counterAddress
+      : `https://${counterAddress.replace(/^\/\//, '')}`,
+  );
+  if (!['https:', 'http:'].includes(url.protocol)) {
+    throw new Error('PAGE_VIEW_COUNTER_URL must use HTTP or HTTPS.');
+  }
+  pageViewCounterUrl = url.href.replace(/\/$/, '');
+}
 
 const config = {
   title: 'LLM 101',

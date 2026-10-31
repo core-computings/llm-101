@@ -33,6 +33,9 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 
 - **Follow-up feedback (2026-10-14):** Switch website hosting from Workers to Cloudflare Pages at `https://llm-101.pages.dev`. Updated the canonical origin, links, crawler policy, counter CORS origin, and Pages build instructions. The optional counter remains a separate Worker; the root base path stays unchanged. Use the Pages address for future website deployments.
 
+- **Counter repair (2026-10-31):** The user reported the missing production count and requested an end-to-end repair. The deployed Pages counter URL lacked `https://`, and the deployed counter Worker still allowed the former GitHub Pages origin. Added build-time URL normalization and protocol validation in `docusaurus.config.js`, documented the exact URL and separate deployment steps in `README.md`, corrected the Pages production variable, and redeployed the existing Worker with the Pages origin.
+- **Verification rule:** After changing hosts, verify the deployed frontend URL and the live counter's CORS response using the actual production Origin, then verify the visible count in a desktop browser. Repository configuration alone does not establish that a separately deployed Worker is updated. Preserve the existing Worker and Durable Object identity to retain stored counts.
+
 ## 2026-10-13 — Search discovery and crawler configuration
 
 - **Scope:** Sitemap configuration, deployment history, homepage metadata, and robots.txt for LLM 101.
