@@ -5,6 +5,8 @@ sidebar_position: 10
 
 # Chapter 10: Compilation
 
+## 1. Compile and measure the model
+
 The earlier experiment used `B=4` and `T=128`, or 512 token predictions per step. Here we increase that to `B=16` and `T=1024`: 16,384 predictions per step, 32× more work for each optimizer update. A larger batch and context window give the GPU enough parallel work to use its Tensor Cores more efficiently, though the longer context also makes attention substantially more memory- and compute-intensive.
 
 The line `model = torch.compile(model)` asks PyTorch to capture compilable regions of the model and generate optimized code for later calls. In this experiment it is layered on top of TF32 and bfloat16 autocast: those choose numerical formats, while compilation reduces framework overhead and can combine compatible operations. The first compiled step includes the one-time compilation cost and should not be used as a throughput measurement. See the [PyTorch `torch.compile` tutorial](https://docs.pytorch.org/tutorials/intermediate/torch_compile_full_example.html) for the general behavior.
@@ -93,7 +95,7 @@ step 90, loss: 5.996917724609375, epoch time: 92.02ms, token_per_second: 178041.
 
 After warm-up, the eager version runs at about 116K tokens/s, while the compiled version reaches roughly 180K tokens/s: about a 1.55× speedup for the same training setup. The 26-second first step is expected compilation overhead; the following steps are the relevant steady-state comparison. The two loss curves remain close, which is the required check that the optimization improves speed without materially changing training behavior.
 
-### Why compilation can improve GPU throughput
+### 1.1 Why compilation can improve GPU throughput {#why-compilation-can-improve-gpu-throughput}
 
 ![GPU HBM memory traffic before and after compilation](./assets/chapter-10/compiled-memory-traffic.svg)
 

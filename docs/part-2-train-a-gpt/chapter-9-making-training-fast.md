@@ -13,17 +13,17 @@ The A100 exposes different numerical formats for different parts of training. Th
 
 *Source: [NVIDIA A100 specifications](https://www.nvidia.com/en-us/data-center/a100/).*
 
-### FP32
+### 1.1 FP32 {#fp32}
 
 FP32 (`torch.float32`) is the standard single-precision floating-point format. It has the widest precision of the three formats discussed here, so it is the dependable choice for quantities that are sensitive to small numerical changes—for example, an optimizer's state, reductions, and loss calculations. The trade-off is cost: FP32 values occupy 4 bytes each, and ordinary FP32 matrix multiplication does not use the A100 Tensor Cores as efficiently as the lower-precision modes. The A100 specification lists 19.5 TFLOPS for FP32.
 
-### TF32
+### 1.2 TF32 {#tf32}
 
 TF32 is an A100 Tensor Core math mode for matrix multiplications; it is not normally a tensor-storage dtype that you select for model parameters. It preserves FP32's 8-bit exponent range but uses a 10-bit mantissa for the Tensor Core multiply, with FP32 accumulation. This gives it much of FP32's range while making large matrix multiplies substantially faster. On the A100, Tensor Float 32 is rated at 156 TFLOPS (or 312 TFLOPS with structured sparsity), compared with 19.5 TFLOPS for ordinary FP32.
 
 For a first FP32 training implementation, TF32 is a useful speedup because it can accelerate the large linear layers without rewriting the model into a lower-precision format. It does introduce slightly different numerical results from full FP32, so exact reproducibility and numerically delicate workloads may require disabling it.
 
-### bfloat16
+### 1.3 bfloat16 {#bfloat16}
 
 bfloat16 (`torch.bfloat16`) keeps FP32's 8-bit exponent, so it covers a similarly large range of magnitudes, but it has a much shorter 7-bit fraction. It needs only 2 bytes per value, reducing activation and memory bandwidth costs. A100 Tensor Cores deliver 312 TFLOPS for BF16 (or 624 TFLOPS with structured sparsity), which makes it the primary format for high-throughput mixed-precision training.
 
@@ -248,14 +248,14 @@ This bfloat16 run reaches about 17–18K tokens/s and follows a similar loss tre
 
 `torch.autocast` does **not** convert every operation in its block to a low-precision type. It applies a per-operation policy. The following CUDA lists are the relevant categories from the [PyTorch AMP CUDA op reference](https://docs.pytorch.org/docs/2.14/amp.html#cuda-ops-that-can-autocast-to-float16). The reference labels the low-precision list as `float16`; when this chapter uses `dtype=torch.bfloat16`, the same policy selects bfloat16 for eligible operations.
 
-### Operations eligible for low precision
+### 5.1 Operations eligible for low precision {#operations-eligible-for-low-precision}
 
 These are primarily the high-throughput matrix and convolution operations: `__matmul__`, `addbmm`, `addmm`, `addmv`, `addr`, `baddbmm`, `bmm`, `chain_matmul`, `multi_dot`, `conv1d`, `conv2d`, `conv3d`, `conv_transpose1d`, `conv_transpose2d`, `conv_transpose3d`, `GRUCell`, `linear`, `LSTMCell`, `matmul`, `mm`, `mv`, `prelu`, and `RNNCell`.
 
-### Operations that autocast to FP32
+### 5.2 Operations that autocast to FP32 {#operations-that-autocast-to-fp32}
 
 These operations are kept in FP32 because they are more sensitive to numerical range or precision: `__pow__`, `__rdiv__`, `__rpow__`, `__rtruediv__`, `acos`, `asin`, `binary_cross_entropy_with_logits`, `cosh`, `cosine_embedding_loss`, `cdist`, `cosine_similarity`, `cross_entropy`, `cumprod`, `cumsum`, `dist`, `erfinv`, `exp`, `expm1`, `group_norm`, `hinge_embedding_loss`, `kl_div`, `l1_loss`, `layer_norm`, `log`, `log_softmax`, `log10`, `log1p`, `log2`, `margin_ranking_loss`, `mse_loss`, `multilabel_margin_loss`, `multi_margin_loss`, `nll_loss`, `norm`, `normalize`, `pdist`, `poisson_nll_loss`, `pow`, `prod`, `reciprocal`, `rsqrt`, `sinh`, `smooth_l1_loss`, `soft_margin_loss`, `softmax`, `softmin`, `softplus`, `sum`, `renorm`, `tan`, and `triplet_margin_loss`.
 
-### Operations that promote to the widest input type
+### 5.3 Operations that promote to the widest input type {#operations-that-promote-to-the-widest-input-type}
 
 For `addcdiv`, `addcmul`, `atan2`, `bilinear`, `cross`, `dot`, `grid_sample`, `index_put`, `scatter_add`, and `tensordot`, all inputs are promoted to match the widest input type. For example, if any input is FP32, the operation runs in FP32. Operations outside these eligibility lists keep the dtype determined by their inputs. This is why autocast is genuinely mixed precision: it accelerates the expensive matrix multiplications while preserving FP32 where stability matters.

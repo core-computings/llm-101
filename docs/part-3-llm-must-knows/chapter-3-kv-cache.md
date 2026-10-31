@@ -52,7 +52,7 @@ Inference has two distinct phases. The example below follows the prompt `hello i
 
 ![A concrete KV cache example. The prompt hello i am is tokenized, prefill writes a key and value feature-vector row for every token at every layer, then decoding uses a new query to read the cached K and V rows before appending a new key and value row.](./assets/chapter-3/kv-cache-incremental-decoding.svg)
 
-### Prefill: process the prompt
+### 2.1 Prefill: process the prompt {#prefill-process-the-prompt}
 
 In the figure, GPT-2 BPE maps `hello i am` to three token IDs. Their embeddings form a prompt matrix with three token rows. During **prefill**, the model runs all of those rows through every Transformer layer in parallel. At each layer $ell$, it writes one key feature vector and one value feature vector for every prompt token, producing K and V cache tensors with shape $(B, 3, d_h)$ for this example.
 
@@ -60,7 +60,7 @@ The causal mask still prevents a token from seeing later tokens, but the impleme
 
 The attention work of a full prompt grows roughly quadratically with prompt length because every query position compares with many key positions. This phase often has high arithmetic intensity and uses the GPU efficiently, especially when several requests are batched together.
 
-### Decode: generate one token at a time
+### 2.2 Decode: generate one token at a time {#decode-generate-one-token-at-a-time}
 
 During **decode**, the model receives only the newest token. In the figure, the sampled token ` a` becomes one embedding row with shape $(B, 1, C)$. At layer $ell$, the query projection therefore produces only $q_4$ with shape $(B, 1, d_h)$, rather than queries for all earlier tokens.
 

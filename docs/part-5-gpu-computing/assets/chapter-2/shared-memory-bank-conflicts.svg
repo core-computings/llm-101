@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Shared-memory bank conflicts: parallel reads versus serialized reads</title>
+  <desc id="desc">In an illustrative NVIDIA-style model with 32 banks and 32-bit floats, bank equals element index modulo 32 for an array starting at bank zero. Four active threads of one warp perform one shared-memory read instruction. Consecutive elements 0, 1, 2, 3 reach four different banks and are served together. Elements 0, 32, 64, 96 reach four separately outlined words inside one Bank 0 container and require four service rounds. Other threads are inactive. Round order is illustrative.</desc>
+  <defs><style>
+    text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+    .section { font-size: 24px; font-weight: 700; }
+    .label { font-size: 21px; font-weight: 680; }
+    .panel { fill: #f6f9fb; stroke: #d1dfeb; stroke-width: 1.8; }
+    .thread { fill: #eaf3fb; stroke: #8fb3d2; stroke-width: 1.8; }
+    .bank { fill: #fff4e3; stroke: #d99c48; stroke-width: 1.8; }
+    .served { fill: #edf7e6; stroke: #9dbb88; stroke-width: 1.8; }
+    .arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; }
+  </style></defs>
+  <rect width="1200" height="760" rx="24" fill="#fbfdf8"/>
+
+  <!-- Different banks serve in parallel -->
+  <rect x="48" y="48" width="536" height="664" rx="14" class="panel"/>
+  <text x="72" y="92" class="section" text-anchor="start">No bank conflict</text>
+  <text x="72" y="128" class="label" text-anchor="start">Read a[thread_id]</text>
+  <rect x="72" y="212" width="180" height="60" rx="14" class="thread"/>
+  <text x="162" y="249" class="label" text-anchor="middle">Thread 0</text>
+  <path d="M272 242 H317" class="arrow"/>
+  <path d="M317 238 L317 246 L324 242 Z" fill="#516559"/>
+  <rect x="344" y="202" width="216" height="80" rx="14" class="bank"/>
+  <text x="452" y="232" class="label" text-anchor="middle">Bank 0</text>
+  <text x="452" y="260" class="label" text-anchor="middle">a[0]</text>
+  <rect x="72" y="306" width="180" height="60" rx="14" class="thread"/>
+  <text x="162" y="343" class="label" text-anchor="middle">Thread 1</text>
+  <path d="M272 336 H317" class="arrow"/>
+  <path d="M317 332 L317 340 L324 336 Z" fill="#516559"/>
+  <rect x="344" y="296" width="216" height="80" rx="14" class="bank"/>
+  <text x="452" y="326" class="label" text-anchor="middle">Bank 1</text>
+  <text x="452" y="354" class="label" text-anchor="middle">a[1]</text>
+  <rect x="72" y="400" width="180" height="60" rx="14" class="thread"/>
+  <text x="162" y="437" class="label" text-anchor="middle">Thread 2</text>
+  <path d="M272 430 H317" class="arrow"/>
+  <path d="M317 426 L317 434 L324 430 Z" fill="#516559"/>
+  <rect x="344" y="390" width="216" height="80" rx="14" class="bank"/>
+  <text x="452" y="420" class="label" text-anchor="middle">Bank 2</text>
+  <text x="452" y="448" class="label" text-anchor="middle">a[2]</text>
+  <rect x="72" y="494" width="180" height="60" rx="14" class="thread"/>
+  <text x="162" y="531" class="label" text-anchor="middle">Thread 3</text>
+  <path d="M272 524 H317" class="arrow"/>
+  <path d="M317 520 L317 528 L324 524 Z" fill="#516559"/>
+  <rect x="344" y="484" width="216" height="80" rx="14" class="bank"/>
+  <text x="452" y="514" class="label" text-anchor="middle">Bank 3</text>
+  <text x="452" y="542" class="label" text-anchor="middle">a[3]</text>
+  <text x="72" y="608" class="label" text-anchor="start">One service round</text>
+  <rect x="72" y="632" width="488" height="54" rx="14" class="served"/>
+  <text x="316" y="666" class="label" text-anchor="middle">[0], [1], [2], [3] together</text>
+  <!-- Different words in one bank -->
+  <rect x="616" y="48" width="536" height="664" rx="14" class="panel"/>
+  <text x="640" y="92" class="section" text-anchor="start">Bank conflict</text>
+  <text x="640" y="128" class="label" text-anchor="start">Read a[thread_id × 32]</text>
+  <rect x="912" y="156" width="216" height="418" rx="14" class="bank"/>
+  <text x="1020" y="188" class="label" text-anchor="middle">Bank 0</text>
+  <rect x="640" y="212" width="180" height="60" rx="14" class="thread"/>
+  <text x="730" y="249" class="label" text-anchor="middle">Thread 0</text>
+  <path d="M840 242 H885" class="arrow"/>
+  <path d="M885 238 L885 246 L892 242 Z" fill="#516559"/>
+  <rect x="936" y="212" width="168" height="60" rx="10" fill="#ffffff" stroke="#d99c48" stroke-width="1.5"/>
+  <text x="1020" y="249" class="label" text-anchor="middle">a[0]</text>
+  <rect x="640" y="306" width="180" height="60" rx="14" class="thread"/>
+  <text x="730" y="343" class="label" text-anchor="middle">Thread 1</text>
+  <path d="M840 336 H885" class="arrow"/>
+  <path d="M885 332 L885 340 L892 336 Z" fill="#516559"/>
+  <rect x="936" y="306" width="168" height="60" rx="10" fill="#ffffff" stroke="#d99c48" stroke-width="1.5"/>
+  <text x="1020" y="343" class="label" text-anchor="middle">a[32]</text>
+  <rect x="640" y="400" width="180" height="60" rx="14" class="thread"/>
+  <text x="730" y="437" class="label" text-anchor="middle">Thread 2</text>
+  <path d="M840 430 H885" class="arrow"/>
+  <path d="M885 426 L885 434 L892 430 Z" fill="#516559"/>
+  <rect x="936" y="400" width="168" height="60" rx="10" fill="#ffffff" stroke="#d99c48" stroke-width="1.5"/>
+  <text x="1020" y="437" class="label" text-anchor="middle">a[64]</text>
+  <rect x="640" y="494" width="180" height="60" rx="14" class="thread"/>
+  <text x="730" y="531" class="label" text-anchor="middle">Thread 3</text>
+  <path d="M840 524 H885" class="arrow"/>
+  <path d="M885 520 L885 528 L892 524 Z" fill="#516559"/>
+  <rect x="936" y="494" width="168" height="60" rx="10" fill="#ffffff" stroke="#d99c48" stroke-width="1.5"/>
+  <text x="1020" y="531" class="label" text-anchor="middle">a[96]</text>
+  <text x="640" y="608" class="label" text-anchor="start">Four service rounds →</text>
+  <rect x="640" y="632" width="112" height="54" rx="14" class="served"/>
+  <text x="696" y="666" class="label" text-anchor="middle">1: [0]</text>
+  <rect x="764" y="632" width="112" height="54" rx="14" class="served"/>
+  <text x="820" y="666" class="label" text-anchor="middle">2: [32]</text>
+  <rect x="888" y="632" width="112" height="54" rx="14" class="served"/>
+  <text x="944" y="666" class="label" text-anchor="middle">3: [64]</text>
+  <rect x="1012" y="632" width="112" height="54" rx="14" class="served"/>
+  <text x="1068" y="666" class="label" text-anchor="middle">4: [96]</text>
+</svg>

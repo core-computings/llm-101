@@ -25,7 +25,7 @@ For the **NVIDIA-style model used below**, a workgroup's threads execute on one 
 
 Each arrow assigns whole workgroups. The placement shown is one example; Vulkan does not promise this distribution.
 
-### What is a warp?
+### 1.1 What is a warp?
 
 A **warp is a group of 32 threads** in the NVIDIA execution model. A 256-thread workgroup therefore contains eight warps. Each thread occupies one **lane** in its warp and keeps its own register values. A scheduler issues a common instruction to participating threads of a warp. This is **SIMT: Single Instruction, Multiple Threads**. See NVIDIA's [SIMT execution model](https://docs.nvidia.com/cuda/archive/13.2.0/cuda-programming-guide/03-advanced/advanced-kernel-programming.html#simt-execution-model).
 
@@ -112,7 +112,7 @@ The figure shows two resident workgroups of 256 threads each. Each workgroup has
 
 The drawing is conceptual. Real SMs divide schedulers, register storage, and execution pipelines into architecture-specific subpartitions. Shared memory is explicitly managed by the shader; it is not simply an automatic cache for global memory.
 
-### Registers belong to individual threads
+### 3.1 Registers belong to individual threads
 
 The next two diagrams use a smaller **128-thread workgroup with four warps** to make storage ownership easy to see. Registers hold private per-thread values, including between threads in the same warp.
 
@@ -128,7 +128,7 @@ $$
 
 Four such workgroups need 32,768 registers. On an illustrative SM with 65,536 registers, that is half the register capacity. Actual allocation can be rounded to hardware-specific granularity. Source-variable count does not determine register count: the compiler can eliminate values, reuse storage, or spill values into memory.
 
-### Shared memory connects warps within a workgroup
+### 3.2 Shared memory connects warps within a workgroup
 
 **Shared memory is allocated per workgroup and shared by the threads in all of its warps.** In this 128-thread example, all four warps can access one shared allocation.
 
@@ -151,13 +151,17 @@ Multiple workgroups can make progress concurrently on one SM, but this does not 
 | Issued | A scheduler selected an instruction from the warp for execution. |
 | Stalled | The warp cannot currently issue, for example because it is waiting for a memory result or barrier. It remains resident. |
 
-![Two resident warps share one illustrated scheduler. Warp A issues a load and waits for its result, while Warp B supplies compute instructions. Warp A resumes issuing compute instructions when its data is ready.](./assets/chapter-1/warp-latency-hiding.svg)
+### 4.1 The latency gap: do useful work while a load is pending
 
-Warp A cannot issue its dependent computation until its load returns. Warp B supplies eligible instructions during the wait: this is **latency hiding**. A keeps its allocated state throughout. The timeline illustrates issue choices, not instruction durations or measured memory latency.
+A load that must reach device memory can take hundreds of clock cycles. If the next instruction needs that value, the warp must wait. For example, after loading `x`, the calculation `y = x * 2` cannot proceed until `x` arrives. Actual latency depends on the GPU, cache hits, and memory traffic.
 
-Scheduling is hardware-dependent; there is no guaranteed round-robin sequence over workgroups. Nor does Vulkan guarantee that distinct workgroups run together or in a chosen order. A workgroup that spins waiting for another workgroup can prevent that other group from ever being scheduled. Use an appropriate synchronization design, such as separate dispatches with the required API memory dependency, for global phases.
+The scheduler can issue instructions from **other resident warps that are ready** during this wait:
 
-Within a subgroup, divergent control flow can also reduce useful execution. If lanes take different branches, paths may execute with different lane masks. Avoid assuming that sharing a subgroup replaces explicit synchronization where data exchange requires it.
+![Two aligned timelines show Warp A loading x and receiving it at the same time. With no other ready work, the scheduler is idle during the wait. With ready resident Warps B and C, it issues their computation instead, then returns to A when x is available.](./assets/chapter-1/warp-latency-hiding.svg)
+
+**Latency hiding keeps useful work going while memory is being fetched.** The lower timeline gets more work done in the same interval, while A's own wait stays the same. B and C must have eligible instructions that do not depend on A's pending load. If every resident warp is waiting, the gap remains.
+
+
 
 ## 5. Workgroup limits are not SM capacity
 
@@ -197,7 +201,7 @@ Assume an SM supports **64 resident warps**, and every workgroup contains **256 
 
 The first snapshot has more resident warps but the same number ready to issue. Neither ready count tells us how many instructions the SM can issue in a cycle. Even if all 64 resident warps stall, occupancy can remain 100% while no warp can issue.
 
-### Why would only four workgroups fit?
+### 6.1 Why would only four workgroups fit?
 
 **Each WG needs registers and shared memory as well as room for its warps. All of these must fit on the same SM.**
 

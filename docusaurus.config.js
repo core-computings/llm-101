@@ -68,7 +68,7 @@ const config = {
       logo: { alt: 'LLM 101', src: 'img/logo.svg' },
       items: [{ href: 'https://github.com/core-computings/llm-101', label: 'GitHub ↗', position: 'right' }],
     },
-    prism: { additionalLanguages: ['python', 'bash', 'json'] },
+    prism: { additionalLanguages: ['python', 'bash', 'json', 'glsl'] },
     colorMode: { defaultMode: 'light', disableSwitch: false, respectPrefersColorScheme: false },
   },
 };

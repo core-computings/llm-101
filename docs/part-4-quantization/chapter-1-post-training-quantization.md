@@ -21,7 +21,7 @@ This implementation uses **one scale for the whole tensor** and zero-point $z=0$
 
 The data spans **−0.8 to 1.6**, so the largest absolute value is **1.6**. **Symmetric** quantization uses **−1.6 to 1.6**, centered on zero. The dashed part extends the range beyond the observed data. Both sides use the same scale, and zero maps to zero.
 
-### From weights to integers
+### 1.1 From weights to integers {#from-weights-to-integers}
 
 For a nonempty tensor of finite weights $X$, compute the scale $s$:
 
@@ -48,7 +48,7 @@ $$
 
 The range $[-127,127]$ is symmetric around zero, leaving INT8's $-128$ unused.
 
-### Reconstruction error
+### 1.2 Reconstruction error {#reconstruction-error}
 
 Adjacent reconstruction levels are $s$ apart. Within range, rounding introduces at most half a step of error in exact arithmetic:
 
@@ -59,7 +59,7 @@ $$
 
 The code below uses $s=1/127$ because the largest absolute weight is $1$.
 
-### NumPy implementation
+### 1.3 NumPy implementation {#numpy-implementation}
 
 ```python
 import numpy as np

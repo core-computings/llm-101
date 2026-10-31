@@ -1,71 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 880" role="img" aria-labelledby="title desc">
-<title id="title">Latency hiding with two resident warps</title><desc id="desc">Two resident warps share one illustrated scheduler. Warp A issues a load, then waits for its result. Warp B supplies three compute instructions during the wait. When the data is ready, Warp A issues compute instructions. Time intervals are schematic, not measured cycles.</desc>
-<defs>
-<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
-<style>
-text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
-.section { font-size: 24px; font-weight: 700; }
-.label { font-size: 21px; font-weight: 680; }
-.small { font-size: 19px; fill: #586c5d; }
-.math { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 650; }
-.arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
-</style></defs>
-<rect width="1200" height="880" rx="24" fill="#fbfdf8"/>
-<text x="48" y="75" class="section" text-anchor="start">Two resident warps, one illustrated scheduler</text>
-<path d="M242 117 H1120" class="arrow"/>
-<text x="48" y="123" class="label" text-anchor="start">Time →</text>
-<text x="306" y="164" class="small" text-anchor="middle">t0</text>
-<text x="454" y="164" class="small" text-anchor="middle">t1</text>
-<text x="602" y="164" class="small" text-anchor="middle">t2</text>
-<text x="750" y="164" class="small" text-anchor="middle">t3</text>
-<text x="898" y="164" class="small" text-anchor="middle">t4</text>
-<text x="1046" y="164" class="small" text-anchor="middle">t5</text>
-<text x="48" y="240" class="label" text-anchor="start">Warp A</text>
-<text x="48" y="273" class="small" text-anchor="start">Workgroup 0</text>
-<text x="48" y="405" class="label" text-anchor="start">Warp B</text>
-<text x="48" y="438" class="small" text-anchor="start">Workgroup 1</text>
-<rect x="240" y="200" width="132" height="110" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
-<text x="306" y="244" class="label" text-anchor="middle">Load</text>
-<text x="306" y="278" class="small" text-anchor="middle">issued</text>
-<rect x="240" y="365" width="132" height="110" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
-<text x="306" y="427" class="label" text-anchor="middle">Ready</text>
-<rect x="388" y="365" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="454" y="409" class="label" text-anchor="middle">Compute</text>
-<text x="454" y="443" class="small" text-anchor="middle">issued</text>
-<rect x="536" y="365" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="602" y="409" class="label" text-anchor="middle">Compute</text>
-<text x="602" y="443" class="small" text-anchor="middle">issued</text>
-<rect x="684" y="365" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="750" y="409" class="label" text-anchor="middle">Compute</text>
-<text x="750" y="443" class="small" text-anchor="middle">issued</text>
-<rect x="832" y="200" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="898" y="244" class="label" text-anchor="middle">Compute</text>
-<text x="898" y="278" class="small" text-anchor="middle">issued</text>
-<rect x="832" y="365" width="132" height="110" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
-<text x="898" y="427" class="label" text-anchor="middle">Ready</text>
-<rect x="980" y="200" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="1046" y="244" class="label" text-anchor="middle">Compute</text>
-<text x="1046" y="278" class="small" text-anchor="middle">issued</text>
-<rect x="980" y="365" width="132" height="110" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
-<text x="1046" y="427" class="label" text-anchor="middle">Ready</text>
-<rect x="388" y="200" width="428" height="110" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8" stroke-dasharray="7 5"/>
-<text x="602" y="244" class="label" text-anchor="middle">Waiting for load result</text>
-<text x="602" y="278" class="small" text-anchor="middle">Still resident</text>
-<!-- Actual issue choices for this conceptual scheduler -->
-<rect x="48" y="534" width="1104" height="198" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
-<text x="80" y="578" class="section" text-anchor="start">Scheduler issue trace</text>
-<rect x="240" y="610" width="132" height="76" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
-<text x="306" y="656" class="label" text-anchor="middle">A: load</text>
-<rect x="388" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="454" y="656" class="label" text-anchor="middle">B: math</text>
-<rect x="536" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="602" y="656" class="label" text-anchor="middle">B: math</text>
-<rect x="684" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="750" y="656" class="label" text-anchor="middle">B: math</text>
-<rect x="832" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="898" y="656" class="label" text-anchor="middle">A: math</text>
-<rect x="980" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
-<text x="1046" y="656" class="label" text-anchor="middle">A: math</text>
-<text x="48" y="783" class="label" text-anchor="start">B supplies work while A waits. Both warps keep their allocated state.</text>
-<text x="48" y="815" class="small" text-anchor="start">Schematic issue opportunities, not measured cycles or a guaranteed scheduling order.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Hide memory latency by issuing work from other resident warps</title>
+  <desc id="desc">Two aligned timelines show the same load by Warp A and the same data return time. Without other ready work, the scheduler leaves three illustrated issue opportunities idle. With ready resident Warps B and C, it issues their computation during A's wait. A resumes when its data arrives. Slots are schematic issue opportunities, not measured clock cycles or instruction durations.</desc>
+  <defs>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+      .section { font-size: 24px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 680; }
+      .small { font-size: 18px; fill: #586c5d; }
+      .panel { fill: #f6f9fb; stroke: #d1dfeb; stroke-width: 1.8; }
+      .memory { fill: #fff4e3; stroke: #d99c48; stroke-width: 1.8; }
+      .issued { fill: #edf7e6; stroke: #9dbb88; stroke-width: 1.8; }
+      .idle { fill: #f2f5f8; stroke: #cbd7df; stroke-width: 1.8; stroke-dasharray: 6 5; }
+    </style>
+  </defs>
+  <rect width="1200" height="1080" rx="24" fill="#fbfdf8"/>
+
+  <text x="48" y="56" class="label" text-anchor="start">One illustrated scheduler · Warp A: load x → compute using x</text>
+  <text x="48" y="88" class="small" text-anchor="start">Time flows left to right. Both scenarios use the same load latency.</text>
+  <!-- No ready work to cover the wait -->
+  <rect x="48" y="120" width="1104" height="400" rx="12" class="panel"/>
+  <text x="80" y="162" class="section" text-anchor="start">No other warp has ready work</text>
+  <text x="80" y="266" class="label" text-anchor="start">Warp A</text>
+  <text x="80" y="296" class="small" text-anchor="start">Load result</text>
+  <rect x="240" y="226" width="132" height="100" rx="12" class="memory"/>
+  <text x="306" y="268" class="label" text-anchor="middle">Load x</text>
+  <text x="306" y="300" class="small" text-anchor="middle">issued</text>
+  <rect x="388" y="226" width="428" height="100" rx="12" class="memory"/>
+  <text x="602" y="268" class="label" text-anchor="middle">Waiting for x</text>
+  <text x="602" y="300" class="small" text-anchor="middle">Still resident</text>
+  <rect x="832" y="226" width="280" height="100" rx="12" class="issued"/>
+  <text x="972" y="268" class="label" text-anchor="middle">x is available</text>
+  <text x="972" y="300" class="small" text-anchor="middle">A can use x</text>
+  <text x="80" y="406" class="label" text-anchor="start">Scheduler</text>
+  <text x="80" y="436" class="small" text-anchor="start">Issues from:</text>
+  <rect x="240" y="370" width="132" height="88" rx="12" class="memory"/>
+  <text x="306" y="422" class="label" text-anchor="middle">A: load</text>
+  <rect x="388" y="370" width="132" height="88" rx="12" class="idle"/>
+  <text x="454" y="422" class="label" text-anchor="middle">Idle</text>
+  <rect x="536" y="370" width="132" height="88" rx="12" class="idle"/>
+  <text x="602" y="422" class="label" text-anchor="middle">Idle</text>
+  <rect x="684" y="370" width="132" height="88" rx="12" class="idle"/>
+  <text x="750" y="422" class="label" text-anchor="middle">Idle</text>
+  <rect x="832" y="370" width="132" height="88" rx="12" class="issued"/>
+  <text x="898" y="422" class="label" text-anchor="middle">A: math</text>
+  <rect x="980" y="370" width="132" height="88" rx="12" class="issued"/>
+  <text x="1046" y="422" class="label" text-anchor="middle">A: math</text>
+  <text x="80" y="496" class="small" text-anchor="start">A needs x. With no eligible instruction, this scheduler has nothing to issue.</text>
+  <!-- Other resident warps cover the wait -->
+  <rect x="48" y="556" width="1104" height="400" rx="12" class="panel"/>
+  <text x="80" y="598" class="section" text-anchor="start">Other resident warps supply ready work</text>
+  <text x="80" y="702" class="label" text-anchor="start">Warp A</text>
+  <text x="80" y="732" class="small" text-anchor="start">Load result</text>
+  <rect x="240" y="662" width="132" height="100" rx="12" class="memory"/>
+  <text x="306" y="704" class="label" text-anchor="middle">Load x</text>
+  <text x="306" y="736" class="small" text-anchor="middle">issued</text>
+  <rect x="388" y="662" width="428" height="100" rx="12" class="memory"/>
+  <text x="602" y="704" class="label" text-anchor="middle">Waiting for x</text>
+  <text x="602" y="736" class="small" text-anchor="middle">Still resident</text>
+  <rect x="832" y="662" width="280" height="100" rx="12" class="issued"/>
+  <text x="972" y="704" class="label" text-anchor="middle">x is available</text>
+  <text x="972" y="736" class="small" text-anchor="middle">A can use x</text>
+  <text x="80" y="842" class="label" text-anchor="start">Scheduler</text>
+  <text x="80" y="872" class="small" text-anchor="start">Issues from:</text>
+  <rect x="240" y="806" width="132" height="88" rx="12" class="memory"/>
+  <text x="306" y="858" class="label" text-anchor="middle">A: load</text>
+  <rect x="388" y="806" width="132" height="88" rx="12" class="issued"/>
+  <text x="454" y="858" class="label" text-anchor="middle">B: math</text>
+  <rect x="536" y="806" width="132" height="88" rx="12" class="issued"/>
+  <text x="602" y="858" class="label" text-anchor="middle">C: math</text>
+  <rect x="684" y="806" width="132" height="88" rx="12" class="issued"/>
+  <text x="750" y="858" class="label" text-anchor="middle">B: math</text>
+  <rect x="832" y="806" width="132" height="88" rx="12" class="issued"/>
+  <text x="898" y="858" class="label" text-anchor="middle">A: math</text>
+  <rect x="980" y="806" width="132" height="88" rx="12" class="issued"/>
+  <text x="1046" y="858" class="label" text-anchor="middle">A: math</text>
+  <text x="80" y="932" class="small" text-anchor="start">B and C fill the gap. A resumes at the same time.</text>
+  <text x="48" y="1004" class="section" text-anchor="start">Same memory wait, fewer idle issue opportunities.</text>
+  <text x="48" y="1040" class="small" text-anchor="start">Schematic slots, not clock cycles. A real SM has multiple schedulers and execution pipelines.</text>
 </svg>

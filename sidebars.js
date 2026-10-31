@@ -58,6 +58,7 @@ module.exports = {
       label: 'Part 5 — GPU Computing',
       items: [
         'part-5-gpu-computing/chapter-1-gpu-architecture',
+        'part-5-gpu-computing/chapter-2-memory-model',
       ],
     },
   ],

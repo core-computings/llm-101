@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 940" role="img" aria-labelledby="title desc">
+  <title id="title">GPU memory hierarchy across two streaming multiprocessors</title>
+  <desc id="desc">Global device memory, or VRAM, connects to an on-chip L2 cache shared across SMs. Two example SMs each contain an L1 cache, shared memory allocated separately to workgroups, and registers holding private per-thread values. Arrows indicate communication with the memory system. The vertically stacked resources inside each SM are not a mandatory sequence for every access.</desc>
+  <defs>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+      .section { font-size: 26px; font-weight: 700; }
+      .label { font-size: 24px; font-weight: 680; }
+      .small { font-size: 20px; fill: #586c5d; }
+      .panel { fill: #ffffff; stroke: #dbe3df; stroke-width: 1.8; }
+      .cache { fill: #eaf3fb; stroke: #8fb3d2; stroke-width: 1.8; }
+      .shared { fill: #fff4e3; stroke: #d99c48; stroke-width: 1.8; }
+      .registers { fill: #f6f9fb; stroke: #d1dfeb; stroke-width: 1.8; }
+      .arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; }
+    </style>
+  </defs>
+  <rect width="1200" height="940" rx="24" fill="#fbfdf8"/>
+
+  <!-- Device-wide memory and cache -->
+  <rect x="48" y="48" width="1104" height="96" rx="14" class="panel"/>
+  <text x="600" y="88" class="section" text-anchor="middle">GPU Global Memory (VRAM)</text>
+  <text x="600" y="122" class="small" text-anchor="middle">Device DRAM · Accessible across workgroups</text>
+  <path d="M588 164 V199" class="arrow"/>
+  <path d="M584 199 L592 199 L588 206 Z" fill="#516559"/>
+  <path d="M612 206 V171" class="arrow"/>
+  <path d="M608 171 L616 171 L612 164 Z" fill="#516559"/>
+  <rect x="48" y="226" width="1104" height="96" rx="14" class="cache"/>
+  <text x="600" y="266" class="section" text-anchor="middle">L2 Cache</text>
+  <text x="600" y="300" class="small" text-anchor="middle">On-chip · Shared across SMs</text>
+  <path d="M300 342 V393" class="arrow"/>
+  <path d="M296 393 L304 393 L300 400 Z" fill="#516559"/>
+  <path d="M324 400 V349" class="arrow"/>
+  <path d="M320 349 L328 349 L324 342 Z" fill="#516559"/>
+  <!-- SM 0: logical storage roles -->
+  <rect x="48" y="420" width="528" height="402" rx="14" class="panel"/>
+  <text x="312" y="464" class="section" text-anchor="middle">SM 0</text>
+  <rect x="72" y="488" width="480" height="84" rx="14" class="cache"/>
+  <text x="312" y="524" class="label" text-anchor="middle">L1 Cache</text>
+  <text x="312" y="554" class="small" text-anchor="middle">Local to this SM · Hardware-managed</text>
+  <rect x="72" y="592" width="480" height="94" rx="14" class="shared"/>
+  <text x="312" y="630" class="label" text-anchor="middle">Shared Memory</text>
+  <text x="312" y="662" class="small" text-anchor="middle">Separate allocation per workgroup</text>
+  <rect x="72" y="706" width="480" height="88" rx="14" class="registers"/>
+  <text x="312" y="744" class="label" text-anchor="middle">Registers</text>
+  <text x="312" y="776" class="small" text-anchor="middle">Private values per thread</text>
+  <path d="M876 342 V393" class="arrow"/>
+  <path d="M872 393 L880 393 L876 400 Z" fill="#516559"/>
+  <path d="M900 400 V349" class="arrow"/>
+  <path d="M896 349 L904 349 L900 342 Z" fill="#516559"/>
+  <!-- SM 1: logical storage roles -->
+  <rect x="624" y="420" width="528" height="402" rx="14" class="panel"/>
+  <text x="888" y="464" class="section" text-anchor="middle">SM 1</text>
+  <rect x="648" y="488" width="480" height="84" rx="14" class="cache"/>
+  <text x="888" y="524" class="label" text-anchor="middle">L1 Cache</text>
+  <text x="888" y="554" class="small" text-anchor="middle">Local to this SM · Hardware-managed</text>
+  <rect x="648" y="592" width="480" height="94" rx="14" class="shared"/>
+  <text x="888" y="630" class="label" text-anchor="middle">Shared Memory</text>
+  <text x="888" y="662" class="small" text-anchor="middle">Separate allocation per workgroup</text>
+  <rect x="648" y="706" width="480" height="88" rx="14" class="registers"/>
+  <text x="888" y="744" class="label" text-anchor="middle">Registers</text>
+  <text x="888" y="776" class="small" text-anchor="middle">Private values per thread</text>
+  <text x="48" y="862" class="small" text-anchor="start">Simplified NVIDIA-style GPU · Two SMs shown · Sizes and physical layout vary.</text>
+  <text x="48" y="894" class="small" text-anchor="start">L1 and shared memory may share physical storage while serving different roles.</text>
+</svg>
