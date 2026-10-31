@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1080" role="img" aria-labelledby="title desc">
+<title id="title">Why four workgroups fill memory resources but only half the warp capacity</title><desc id="desc">An illustrative SM has 65536 32-bit registers, 64 KiB shared memory, and room for 64 warps. Each 256-thread workgroup uses 16384 registers, 16 KiB shared memory, and eight warps. Four groups exhaust both memory budgets while using 32 of 64 warp slots. Thread and workgroup-count limits do not bind in this example.</desc>
+<defs>
+<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
+<style>
+text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+.section { font-size: 24px; font-weight: 700; }
+.label { font-size: 21px; font-weight: 680; }
+.small { font-size: 19px; fill: #586c5d; }
+.math { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 650; }
+.arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+</style></defs>
+<rect width="1200" height="1080" rx="24" fill="#fbfdf8"/>
+<text x="48" y="76" class="label" text-anchor="start">One workgroup: 256 threads · 64 registers per thread · 16 KiB shared</text>
+<!-- Register file allocation -->
+<rect x="48" y="116" width="1104" height="202" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="159" class="section" text-anchor="start">Register file</text>
+<text x="1120" y="159" class="small" text-anchor="end">65,536 × 32-bit registers</text>
+<rect x="80" y="188" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="204" y="226" class="label" text-anchor="middle">WG 0</text>
+<text x="204" y="261" class="small" text-anchor="middle">16,384 registers</text>
+<rect x="344" y="188" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="468" y="226" class="label" text-anchor="middle">WG 1</text>
+<text x="468" y="261" class="small" text-anchor="middle">16,384 registers</text>
+<rect x="608" y="188" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="732" y="226" class="label" text-anchor="middle">WG 2</text>
+<text x="732" y="261" class="small" text-anchor="middle">16,384 registers</text>
+<rect x="872" y="188" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="996" y="226" class="label" text-anchor="middle">WG 3</text>
+<text x="996" y="261" class="small" text-anchor="middle">16,384 registers</text>
+<!-- Shared memory allocation -->
+<rect x="48" y="354" width="1104" height="202" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="397" class="section" text-anchor="start">Shared memory</text>
+<text x="1120" y="397" class="small" text-anchor="end">64 KiB per SM</text>
+<rect x="80" y="426" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="204" y="464" class="label" text-anchor="middle">WG 0</text>
+<text x="204" y="499" class="small" text-anchor="middle">16 KiB</text>
+<rect x="344" y="426" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="468" y="464" class="label" text-anchor="middle">WG 1</text>
+<text x="468" y="499" class="small" text-anchor="middle">16 KiB</text>
+<rect x="608" y="426" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="732" y="464" class="label" text-anchor="middle">WG 2</text>
+<text x="732" y="499" class="small" text-anchor="middle">16 KiB</text>
+<rect x="872" y="426" width="248" height="100" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="996" y="464" class="label" text-anchor="middle">WG 3</text>
+<text x="996" y="499" class="small" text-anchor="middle">16 KiB</text>
+<!-- Unused warp capacity cannot compensate for exhausted storage -->
+<rect x="48" y="592" width="1104" height="222" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="635" class="section" text-anchor="start">Resident warp capacity</text>
+<text x="1120" y="635" class="small" text-anchor="end">64 warps per SM</text>
+<rect x="80" y="666" width="116" height="104" rx="14" fill="#fff" stroke="#8fa499" stroke-width="1.8"/>
+<text x="138" y="705" class="label" text-anchor="middle">WG 0</text>
+<text x="138" y="742" class="small" text-anchor="middle">8 warps</text>
+<rect x="212" y="666" width="116" height="104" rx="14" fill="#fff" stroke="#8fa499" stroke-width="1.8"/>
+<text x="270" y="705" class="label" text-anchor="middle">WG 1</text>
+<text x="270" y="742" class="small" text-anchor="middle">8 warps</text>
+<rect x="344" y="666" width="116" height="104" rx="14" fill="#fff" stroke="#8fa499" stroke-width="1.8"/>
+<text x="402" y="705" class="label" text-anchor="middle">WG 2</text>
+<text x="402" y="742" class="small" text-anchor="middle">8 warps</text>
+<rect x="476" y="666" width="116" height="104" rx="14" fill="#fff" stroke="#8fa499" stroke-width="1.8"/>
+<text x="534" y="705" class="label" text-anchor="middle">WG 3</text>
+<text x="534" y="742" class="small" text-anchor="middle">8 warps</text>
+<rect x="608" y="666" width="116" height="104" rx="14" fill="#f2f5f8" stroke="#cbd7df" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="666" y="705" class="label" text-anchor="middle">Unused</text>
+<text x="666" y="742" class="small" text-anchor="middle">8 slots</text>
+<rect x="740" y="666" width="116" height="104" rx="14" fill="#f2f5f8" stroke="#cbd7df" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="798" y="705" class="label" text-anchor="middle">Unused</text>
+<text x="798" y="742" class="small" text-anchor="middle">8 slots</text>
+<rect x="872" y="666" width="116" height="104" rx="14" fill="#f2f5f8" stroke="#cbd7df" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="930" y="705" class="label" text-anchor="middle">Unused</text>
+<text x="930" y="742" class="small" text-anchor="middle">8 slots</text>
+<rect x="1004" y="666" width="116" height="104" rx="14" fill="#f2f5f8" stroke="#cbd7df" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="1062" y="705" class="label" text-anchor="middle">Unused</text>
+<text x="1062" y="742" class="small" text-anchor="middle">8 slots</text>
+<path d="M600 830 V878" class="arrow"/>
+<rect x="200" y="894" width="800" height="90" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="600" y="933" class="label" text-anchor="middle">4 groups fit → 32 resident warps → 50% occupancy</text>
+<text x="600" y="965" class="small" text-anchor="middle">A fifth group needs registers and shared memory that are already allocated.</text>
+<text x="48" y="1030" class="small" text-anchor="start">Other assumed limits: 2,048 resident threads and 16 workgroups per SM.</text>
+</svg>

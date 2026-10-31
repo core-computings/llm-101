@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1520" role="img" aria-labelledby="title desc">
+<title id="title">A workgroup divided into warps, and one warp executing on per-thread data</title><desc id="desc">A 256-thread workgroup has eight NVIDIA warps of 32 threads. Warp zero is expanded to show all 32 lanes, each representing one thread. A final panel shows one common addition instruction applied to separate values in four illustrative lanes. The eight by four lane arrangement is for display, not physical placement or Vulkan local indexing.</desc>
+<defs>
+<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
+<style>
+text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+.section { font-size: 24px; font-weight: 700; }
+.label { font-size: 21px; font-weight: 680; }
+.small { font-size: 19px; fill: #586c5d; }
+.math { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 650; }
+.arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+</style></defs>
+<rect width="1200" height="1520" rx="24" fill="#fbfdf8"/>
+<!-- Workgroup partition: eight warps with 32 threads each -->
+<rect x="48" y="48" width="1104" height="336" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="94" class="section" text-anchor="start">One workgroup · 256 threads = 8 warps × 32 threads</text>
+<rect x="80" y="128" width="248" height="96" rx="14" fill="#eaf3fb" stroke="#4e789f" stroke-width="3"/>
+<text x="204" y="165" class="label" text-anchor="middle">Warp 0</text>
+<text x="204" y="199" class="small" text-anchor="middle">32 threads</text>
+<rect x="344" y="128" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="468" y="165" class="label" text-anchor="middle">Warp 1</text>
+<text x="468" y="199" class="small" text-anchor="middle">32 threads</text>
+<rect x="608" y="128" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="732" y="165" class="label" text-anchor="middle">Warp 2</text>
+<text x="732" y="199" class="small" text-anchor="middle">32 threads</text>
+<rect x="872" y="128" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="996" y="165" class="label" text-anchor="middle">Warp 3</text>
+<text x="996" y="199" class="small" text-anchor="middle">32 threads</text>
+<rect x="80" y="248" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="204" y="285" class="label" text-anchor="middle">Warp 4</text>
+<text x="204" y="319" class="small" text-anchor="middle">32 threads</text>
+<rect x="344" y="248" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="468" y="285" class="label" text-anchor="middle">Warp 5</text>
+<text x="468" y="319" class="small" text-anchor="middle">32 threads</text>
+<rect x="608" y="248" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="732" y="285" class="label" text-anchor="middle">Warp 6</text>
+<text x="732" y="319" class="small" text-anchor="middle">32 threads</text>
+<rect x="872" y="248" width="248" height="96" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="996" y="285" class="label" text-anchor="middle">Warp 7</text>
+<text x="996" y="319" class="small" text-anchor="middle">32 threads</text>
+<!-- Expand warp zero into its 32 constituent threads -->
+<rect x="48" y="424" width="1104" height="480" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="469" class="section" text-anchor="start">Warp 0 expanded</text>
+<text x="80" y="507" class="small" text-anchor="start">32 lanes · one thread per lane · each thread has its own register values</text>
+<rect x="80" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="138" y="576" class="label" text-anchor="middle">Lane 0</text>
+<rect x="212" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="270" y="576" class="label" text-anchor="middle">Lane 1</text>
+<rect x="344" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="402" y="576" class="label" text-anchor="middle">Lane 2</text>
+<rect x="476" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="534" y="576" class="label" text-anchor="middle">Lane 3</text>
+<rect x="608" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="666" y="576" class="label" text-anchor="middle">Lane 4</text>
+<rect x="740" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="798" y="576" class="label" text-anchor="middle">Lane 5</text>
+<rect x="872" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="930" y="576" class="label" text-anchor="middle">Lane 6</text>
+<rect x="1004" y="536" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="1062" y="576" class="label" text-anchor="middle">Lane 7</text>
+<rect x="80" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="138" y="662" class="label" text-anchor="middle">Lane 8</text>
+<rect x="212" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="270" y="662" class="label" text-anchor="middle">Lane 9</text>
+<rect x="344" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="402" y="662" class="label" text-anchor="middle">Lane 10</text>
+<rect x="476" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="534" y="662" class="label" text-anchor="middle">Lane 11</text>
+<rect x="608" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="666" y="662" class="label" text-anchor="middle">Lane 12</text>
+<rect x="740" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="798" y="662" class="label" text-anchor="middle">Lane 13</text>
+<rect x="872" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="930" y="662" class="label" text-anchor="middle">Lane 14</text>
+<rect x="1004" y="622" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="1062" y="662" class="label" text-anchor="middle">Lane 15</text>
+<rect x="80" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="138" y="748" class="label" text-anchor="middle">Lane 16</text>
+<rect x="212" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="270" y="748" class="label" text-anchor="middle">Lane 17</text>
+<rect x="344" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="402" y="748" class="label" text-anchor="middle">Lane 18</text>
+<rect x="476" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="534" y="748" class="label" text-anchor="middle">Lane 19</text>
+<rect x="608" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="666" y="748" class="label" text-anchor="middle">Lane 20</text>
+<rect x="740" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="798" y="748" class="label" text-anchor="middle">Lane 21</text>
+<rect x="872" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="930" y="748" class="label" text-anchor="middle">Lane 22</text>
+<rect x="1004" y="708" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="1062" y="748" class="label" text-anchor="middle">Lane 23</text>
+<rect x="80" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="138" y="834" class="label" text-anchor="middle">Lane 24</text>
+<rect x="212" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="270" y="834" class="label" text-anchor="middle">Lane 25</text>
+<rect x="344" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="402" y="834" class="label" text-anchor="middle">Lane 26</text>
+<rect x="476" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="534" y="834" class="label" text-anchor="middle">Lane 27</text>
+<rect x="608" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="666" y="834" class="label" text-anchor="middle">Lane 28</text>
+<rect x="740" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="798" y="834" class="label" text-anchor="middle">Lane 29</text>
+<rect x="872" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="930" y="834" class="label" text-anchor="middle">Lane 30</text>
+<rect x="1004" y="794" width="116" height="64" rx="10" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="1062" y="834" class="label" text-anchor="middle">Lane 31</text>
+<!-- One common operation on separate lane data -->
+<rect x="48" y="944" width="1104" height="528" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="989" class="section" text-anchor="start">Same instruction, separate data</text>
+<text x="80" y="1027" class="small" text-anchor="start">All 32 lanes active in this example · four lanes shown below</text>
+<text x="250" y="1086" class="label" text-anchor="middle">Lane 0</text>
+<rect x="180" y="1112" width="140" height="64" rx="14" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="250" y="1152" class="label" text-anchor="middle">x = 0</text>
+<path d="M250 1192 V1224" class="arrow"/>
+<text x="450" y="1086" class="label" text-anchor="middle">Lane 1</text>
+<rect x="380" y="1112" width="140" height="64" rx="14" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="450" y="1152" class="label" text-anchor="middle">x = 10</text>
+<path d="M450 1192 V1224" class="arrow"/>
+<text x="650" y="1086" class="label" text-anchor="middle">Lane 2</text>
+<rect x="580" y="1112" width="140" height="64" rx="14" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="650" y="1152" class="label" text-anchor="middle">x = 20</text>
+<path d="M650 1192 V1224" class="arrow"/>
+<text x="1030" y="1086" class="label" text-anchor="middle">Lane 31</text>
+<rect x="960" y="1112" width="140" height="64" rx="14" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="1030" y="1152" class="label" text-anchor="middle">x = 310</text>
+<path d="M1030 1192 V1224" class="arrow"/>
+<text x="850" y="1152" class="section" text-anchor="middle">…</text>
+<rect x="80" y="1240" width="1040" height="70" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="600" y="1285" class="math" text-anchor="middle">One common instruction:  y = x + 1</text>
+<path d="M250 1326 V1354" class="arrow"/>
+<rect x="180" y="1370" width="140" height="64" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="250" y="1410" class="label" text-anchor="middle">y = 1</text>
+<path d="M450 1326 V1354" class="arrow"/>
+<rect x="380" y="1370" width="140" height="64" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="450" y="1410" class="label" text-anchor="middle">y = 11</text>
+<path d="M650 1326 V1354" class="arrow"/>
+<rect x="580" y="1370" width="140" height="64" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="650" y="1410" class="label" text-anchor="middle">y = 21</text>
+<path d="M1030 1326 V1354" class="arrow"/>
+<rect x="960" y="1370" width="140" height="64" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="1030" y="1410" class="label" text-anchor="middle">y = 311</text>
+<text x="850" y="1410" class="section" text-anchor="middle">…</text>
+</svg>

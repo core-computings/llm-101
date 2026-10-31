@@ -53,5 +53,12 @@ module.exports = {
         'part-4-quantization/chapter-1-post-training-quantization',
       ],
     },
+    {
+      type: 'category',
+      label: 'Part 5 — GPU Computing',
+      items: [
+        'part-5-gpu-computing/chapter-1-gpu-architecture',
+      ],
+    },
   ],
 };

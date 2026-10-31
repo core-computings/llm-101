@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1090" role="img" aria-labelledby="title desc">
+  <title id="title">Resident workgroups and resources on an SM</title>
+  <desc id="desc">A conceptual NVIDIA-style SM contains two resident workgroups of eight warps each. Ready warps feed warp schedulers, which issue instructions to execution units. Separate storage panels show private thread register allocations and isolated shared-memory allocations for the two workgroups. Physical subpartitions are omitted.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
+    <style>
+      text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+      .section { font-size: 22px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 680; }
+      .small { font-size: 18px; fill: #586c5d; }
+      .arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+      .card { fill: #fff; stroke: #d1dfeb; stroke-width: 1.8; }
+      .memory { fill: #fff4e3; stroke: #d99c48; stroke-width: 1.8; }
+    </style>
+  </defs>
+  <rect width="1200" height="1090" rx="24" fill="#fbfdf8"/>
+  <rect x="48" y="48" width="1104" height="994" rx="22" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+  <text x="80" y="90" class="section">One SM</text>
+  <text x="1120" y="90" class="small" text-anchor="end">Conceptual NVIDIA-style model</text>
+
+  <!-- Resident execution state: logical groups, not physical cores -->
+  <rect x="80" y="124" width="480" height="240" rx="16" class="card"/>
+  <text x="104" y="162" class="label">Workgroup 0</text>
+  <text x="104" y="192" class="small">256 threads · 8 resident warps</text>
+  <rect x="104" y="216" width="432" height="48" rx="12" class="card"/>
+  <text x="320" y="247" class="label" text-anchor="middle">Warp 0 · 32 threads</text>
+  <text x="320" y="282" class="label" text-anchor="middle">⋮</text>
+  <rect x="104" y="300" width="432" height="48" rx="12" class="card"/>
+  <text x="320" y="330" class="small" text-anchor="middle">Warp 7 · 32 threads</text>
+
+  <rect x="640" y="124" width="480" height="240" rx="16" class="card"/>
+  <text x="664" y="162" class="label">Workgroup 1</text>
+  <text x="664" y="192" class="small">256 threads · 8 resident warps</text>
+  <rect x="664" y="216" width="432" height="48" rx="12" class="card"/>
+  <text x="880" y="247" class="label" text-anchor="middle">Warp 0 · 32 threads</text>
+  <text x="880" y="282" class="label" text-anchor="middle">⋮</text>
+  <rect x="664" y="300" width="432" height="48" rx="12" class="card"/>
+  <text x="880" y="330" class="small" text-anchor="middle">Warp 7 · 32 threads</text>
+
+  <!-- Issue path: eligible warps to schedulers to execution pipelines -->
+  <path d="M400 380 V428" class="arrow"/>
+  <path d="M800 380 V428" class="arrow"/>
+  <text x="600" y="407" class="small" text-anchor="middle">Ready warps</text>
+  <rect x="280" y="444" width="640" height="90" rx="16" class="card"/>
+  <text x="600" y="481" class="label" text-anchor="middle">Warp schedulers</text>
+  <text x="600" y="511" class="small" text-anchor="middle">Select eligible instructions</text>
+  <path d="M600 550 V598" class="arrow"/>
+  <text x="626" y="580" class="small">Issue</text>
+  <rect x="280" y="614" width="640" height="90" rx="16" class="card"/>
+  <text x="600" y="651" class="label" text-anchor="middle">Execution units</text>
+  <text x="600" y="681" class="small" text-anchor="middle">Arithmetic · load / store · other pipelines</text>
+
+  <!-- Storage allocations: logically private registers and per-group sharing -->
+  <text x="80" y="756" class="section">Storage for resident workgroups</text>
+  <rect x="80" y="784" width="480" height="224" rx="16" class="card"/>
+  <text x="104" y="822" class="label">Register file</text>
+  <text x="104" y="852" class="small">Private values for each thread</text>
+  <rect x="104" y="880" width="204" height="100" rx="12" class="memory"/>
+  <text x="206" y="915" class="label" text-anchor="middle">WG 0 · Thread 0</text>
+  <text x="206" y="948" class="small" text-anchor="middle">Private allocation</text>
+  <rect x="332" y="880" width="204" height="100" rx="12" class="memory"/>
+  <text x="434" y="915" class="label" text-anchor="middle">WG 0 · Thread 1</text>
+  <text x="434" y="948" class="small" text-anchor="middle">Private allocation</text>
+
+  <rect x="640" y="784" width="480" height="224" rx="16" class="card"/>
+  <text x="664" y="822" class="label">Shared memory</text>
+  <text x="664" y="852" class="small">One allocation per workgroup</text>
+  <rect x="664" y="880" width="204" height="100" rx="12" class="memory"/>
+  <text x="766" y="915" class="label" text-anchor="middle">WG 0 region</text>
+  <text x="766" y="948" class="small" text-anchor="middle">WG 0 shares it</text>
+  <rect x="892" y="880" width="204" height="100" rx="12" class="memory"/>
+  <text x="994" y="915" class="label" text-anchor="middle">WG 1 region</text>
+  <text x="994" y="948" class="small" text-anchor="middle">WG 1 shares it</text>
+</svg>

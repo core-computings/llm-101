@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 822" role="img" aria-labelledby="title desc">
+<title id="title">Each thread has private register values</title><desc id="desc">Inside a 128-thread workgroup, Warp 0 is expanded to show lanes 0, 1, 2 and 31. Each thread is connected to its own register allocation, with illustrative register names R0, R1 and R2. Matching register names in different threads refer to separate values. This shows logical ownership backed by the SM register file, not physical register banks inside threads.</desc>
+<defs>
+<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
+<style>
+text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+.section { font-size: 24px; font-weight: 700; }
+.label { font-size: 21px; font-weight: 680; }
+.small { font-size: 19px; fill: #586c5d; }
+.math { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 650; }
+.arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+</style></defs>
+<rect width="1200" height="822" rx="24" fill="#fbfdf8"/>
+<!-- Workgroup and warp provide context for private thread storage -->
+<rect x="48" y="48" width="1104" height="726" rx="22" fill="#f6f9fb" stroke="#8fa499" stroke-width="1.8"/>
+<text x="80" y="100" class="section" text-anchor="start">Workgroup (128 threads)</text>
+<rect x="80" y="142" width="1040" height="564" rx="18" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="104" y="186" class="section" text-anchor="start">Warp 0 · 32 threads</text>
+<text x="104" y="218" class="small" text-anchor="start">Four threads shown · Warps 1–3 omitted</text>
+<!-- Lane 0: one thread and its private allocation -->
+<rect x="104" y="242" width="224" height="104" rx="16" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="216" y="284" class="label" text-anchor="middle">Thread in lane 0</text>
+<text x="216" y="322" class="small" text-anchor="middle">Private state</text>
+<path d="M216 362 V434" fill="none" stroke="#63766a" stroke-width="2.2" stroke-dasharray="9 7"/>
+<rect x="104" y="450" width="224" height="210" rx="16" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="216" y="492" class="label" text-anchor="middle">Private registers</text>
+<rect x="120" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="148" y="558" class="label" text-anchor="middle">R0</text>
+<rect x="188" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="216" y="558" class="label" text-anchor="middle">R1</text>
+<rect x="256" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="284" y="558" class="label" text-anchor="middle">R2</text>
+<text x="216" y="625" class="small" text-anchor="middle">Only this thread</text>
+<!-- Lane 1: one thread and its private allocation -->
+<rect x="360" y="242" width="224" height="104" rx="16" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="472" y="284" class="label" text-anchor="middle">Thread in lane 1</text>
+<text x="472" y="322" class="small" text-anchor="middle">Private state</text>
+<path d="M472 362 V434" fill="none" stroke="#63766a" stroke-width="2.2" stroke-dasharray="9 7"/>
+<rect x="360" y="450" width="224" height="210" rx="16" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="472" y="492" class="label" text-anchor="middle">Private registers</text>
+<rect x="376" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="404" y="558" class="label" text-anchor="middle">R0</text>
+<rect x="444" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="472" y="558" class="label" text-anchor="middle">R1</text>
+<rect x="512" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="540" y="558" class="label" text-anchor="middle">R2</text>
+<text x="472" y="625" class="small" text-anchor="middle">Only this thread</text>
+<!-- Lane 2: one thread and its private allocation -->
+<rect x="616" y="242" width="224" height="104" rx="16" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="728" y="284" class="label" text-anchor="middle">Thread in lane 2</text>
+<text x="728" y="322" class="small" text-anchor="middle">Private state</text>
+<path d="M728 362 V434" fill="none" stroke="#63766a" stroke-width="2.2" stroke-dasharray="9 7"/>
+<rect x="616" y="450" width="224" height="210" rx="16" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="728" y="492" class="label" text-anchor="middle">Private registers</text>
+<rect x="632" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="660" y="558" class="label" text-anchor="middle">R0</text>
+<rect x="700" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="728" y="558" class="label" text-anchor="middle">R1</text>
+<rect x="768" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="796" y="558" class="label" text-anchor="middle">R2</text>
+<text x="728" y="625" class="small" text-anchor="middle">Only this thread</text>
+<!-- Lane 31: one thread and its private allocation -->
+<rect x="872" y="242" width="224" height="104" rx="16" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1.8"/>
+<text x="984" y="284" class="label" text-anchor="middle">Thread in lane 31</text>
+<text x="984" y="322" class="small" text-anchor="middle">Private state</text>
+<path d="M984 362 V434" fill="none" stroke="#63766a" stroke-width="2.2" stroke-dasharray="9 7"/>
+<rect x="872" y="450" width="224" height="210" rx="16" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="984" y="492" class="label" text-anchor="middle">Private registers</text>
+<rect x="888" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="916" y="558" class="label" text-anchor="middle">R0</text>
+<rect x="956" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="984" y="558" class="label" text-anchor="middle">R1</text>
+<rect x="1024" y="520" width="56" height="60" rx="8" fill="#fff" stroke="#d99c48" stroke-width="1.8"/>
+<text x="1052" y="558" class="label" text-anchor="middle">R2</text>
+<text x="984" y="625" class="small" text-anchor="middle">Only this thread</text>
+<text x="80" y="746" class="small" text-anchor="start">Logical ownership · Storage comes from the SM register file</text>
+</svg>

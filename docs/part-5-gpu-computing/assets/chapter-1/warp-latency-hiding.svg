@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 880" role="img" aria-labelledby="title desc">
+<title id="title">Latency hiding with two resident warps</title><desc id="desc">Two resident warps share one illustrated scheduler. Warp A issues a load, then waits for its result. Warp B supplies three compute instructions during the wait. When the data is ready, Warp A issues compute instructions. Time intervals are schematic, not measured cycles.</desc>
+<defs>
+<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
+<style>
+text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+.section { font-size: 24px; font-weight: 700; }
+.label { font-size: 21px; font-weight: 680; }
+.small { font-size: 19px; fill: #586c5d; }
+.math { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 650; }
+.arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+</style></defs>
+<rect width="1200" height="880" rx="24" fill="#fbfdf8"/>
+<text x="48" y="75" class="section" text-anchor="start">Two resident warps, one illustrated scheduler</text>
+<path d="M242 117 H1120" class="arrow"/>
+<text x="48" y="123" class="label" text-anchor="start">Time →</text>
+<text x="306" y="164" class="small" text-anchor="middle">t0</text>
+<text x="454" y="164" class="small" text-anchor="middle">t1</text>
+<text x="602" y="164" class="small" text-anchor="middle">t2</text>
+<text x="750" y="164" class="small" text-anchor="middle">t3</text>
+<text x="898" y="164" class="small" text-anchor="middle">t4</text>
+<text x="1046" y="164" class="small" text-anchor="middle">t5</text>
+<text x="48" y="240" class="label" text-anchor="start">Warp A</text>
+<text x="48" y="273" class="small" text-anchor="start">Workgroup 0</text>
+<text x="48" y="405" class="label" text-anchor="start">Warp B</text>
+<text x="48" y="438" class="small" text-anchor="start">Workgroup 1</text>
+<rect x="240" y="200" width="132" height="110" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="306" y="244" class="label" text-anchor="middle">Load</text>
+<text x="306" y="278" class="small" text-anchor="middle">issued</text>
+<rect x="240" y="365" width="132" height="110" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="306" y="427" class="label" text-anchor="middle">Ready</text>
+<rect x="388" y="365" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="454" y="409" class="label" text-anchor="middle">Compute</text>
+<text x="454" y="443" class="small" text-anchor="middle">issued</text>
+<rect x="536" y="365" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="602" y="409" class="label" text-anchor="middle">Compute</text>
+<text x="602" y="443" class="small" text-anchor="middle">issued</text>
+<rect x="684" y="365" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="750" y="409" class="label" text-anchor="middle">Compute</text>
+<text x="750" y="443" class="small" text-anchor="middle">issued</text>
+<rect x="832" y="200" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="898" y="244" class="label" text-anchor="middle">Compute</text>
+<text x="898" y="278" class="small" text-anchor="middle">issued</text>
+<rect x="832" y="365" width="132" height="110" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="898" y="427" class="label" text-anchor="middle">Ready</text>
+<rect x="980" y="200" width="132" height="110" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="1046" y="244" class="label" text-anchor="middle">Compute</text>
+<text x="1046" y="278" class="small" text-anchor="middle">issued</text>
+<rect x="980" y="365" width="132" height="110" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="1046" y="427" class="label" text-anchor="middle">Ready</text>
+<rect x="388" y="200" width="428" height="110" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text x="602" y="244" class="label" text-anchor="middle">Waiting for load result</text>
+<text x="602" y="278" class="small" text-anchor="middle">Still resident</text>
+<!-- Actual issue choices for this conceptual scheduler -->
+<rect x="48" y="534" width="1104" height="198" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="578" class="section" text-anchor="start">Scheduler issue trace</text>
+<rect x="240" y="610" width="132" height="76" rx="14" fill="#fff4e3" stroke="#d99c48" stroke-width="1.8"/>
+<text x="306" y="656" class="label" text-anchor="middle">A: load</text>
+<rect x="388" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="454" y="656" class="label" text-anchor="middle">B: math</text>
+<rect x="536" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="602" y="656" class="label" text-anchor="middle">B: math</text>
+<rect x="684" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="750" y="656" class="label" text-anchor="middle">B: math</text>
+<rect x="832" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="898" y="656" class="label" text-anchor="middle">A: math</text>
+<rect x="980" y="610" width="132" height="76" rx="14" fill="#edf7e6" stroke="#9dbb88" stroke-width="1.8"/>
+<text x="1046" y="656" class="label" text-anchor="middle">A: math</text>
+<text x="48" y="783" class="label" text-anchor="start">B supplies work while A waits. Both warps keep their allocated state.</text>
+<text x="48" y="815" class="small" text-anchor="start">Schematic issue opportunities, not measured cycles or a guaranteed scheduling order.</text>
+</svg>

@@ -14,6 +14,7 @@ The tutorial follows the path from a first language model to training a GPT:
 - **Part 2 — GPT2:** how to implement GPT-2, load its checkpoint, and train it efficiently.
 - **Part 3 — LLM Must-Knows:** essential concepts for understanding large language models, starting with Batch Normalization.
 - **Part 4 — Quantization:** lower-precision representations for inference, starting with Post-training Quantization.
+- **Part 5 — GPU Computing:** GPU architecture, Vulkan workgroups, hardware scheduling, and occupancy.
 
 The explanations are supported by small Python examples, real intermediate outputs, formulas, and visual diagrams. The goal is to make each step understandable before moving to the next one.
 

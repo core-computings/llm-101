@@ -1,0 +1,348 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1700" role="img" aria-labelledby="title desc">
+<title id="title">Vulkan built-in IDs on a dispatch grid</title><desc id="desc">A three by two workgroup dispatch has workgroup size eight by four by one. gl_NumWorkGroups and gl_WorkGroupSize label those dimensions. The selected workgroup has gl_WorkGroupID (1,1,0), and the selected invocation has gl_GlobalInvocationID (11,6,0). A local grid expands this invocation at gl_LocalInvocationID (3,2,0). Nineteen preceding cells explain gl_LocalInvocationIndex 19. Coordinate conversion and a separately computed global linear index 155 are shown below. All Z coordinates are zero.</desc>
+<defs>
+<marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L7,3.5 z" fill="#516559"/></marker>
+<style>
+text { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #243028; }
+.section { font-size: 24px; font-weight: 700; }
+.label { font-size: 21px; font-weight: 680; }
+.small { font-size: 19px; fill: #586c5d; }
+.math { font-family: Georgia, "Times New Roman", serif; font-size: 24px; font-weight: 650; }
+.arrow { fill: none; stroke: #516559; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+</style></defs>
+<rect width="1200" height="1700" rx="24" fill="#fbfdf8"/>
+<!-- Dispatch dimensions and global coordinates -->
+<rect x="48" y="48" width="1104" height="612" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="94" class="label" text-anchor="start">gl_NumWorkGroups</text>
+<text x="80" y="136" class="math" text-anchor="start">(3, 2, 1) workgroups</text>
+<text x="640" y="94" class="label" text-anchor="start">gl_WorkGroupSize</text>
+<text x="640" y="136" class="math" text-anchor="start">(8, 4, 1) invocations per workgroup</text>
+<text x="312" y="178" class="label" text-anchor="middle">Workgroup X = 0</text>
+<text x="600" y="178" class="label" text-anchor="middle">Workgroup X = 1</text>
+<text x="888" y="178" class="label" text-anchor="middle">Workgroup X = 2</text>
+<text x="186" y="214" class="small" text-anchor="middle">0</text>
+<text x="438" y="214" class="small" text-anchor="middle">7</text>
+<text x="474" y="214" class="small" text-anchor="middle">8</text>
+<text x="582" y="214" class="label" text-anchor="middle">11</text>
+<text x="726" y="214" class="small" text-anchor="middle">15</text>
+<text x="762" y="214" class="small" text-anchor="middle">16</text>
+<text x="1014" y="214" class="small" text-anchor="middle">23</text>
+<text x="143" y="253" class="small" text-anchor="end">0</text>
+<text x="143" y="289" class="small" text-anchor="end">1</text>
+<text x="143" y="325" class="small" text-anchor="end">2</text>
+<text x="143" y="361" class="small" text-anchor="end">3</text>
+<text x="143" y="397" class="small" text-anchor="end">4</text>
+<text x="143" y="433" class="small" text-anchor="end">5</text>
+<text x="143" y="469" class="label" text-anchor="end">6</text>
+<text x="143" y="505" class="small" text-anchor="end">7</text>
+<rect x="168" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="228" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="264" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="300" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="336" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="372" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="408" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="444" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="204" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="240" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="276" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="312" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="348" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="384" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="420" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="456" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="492" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="528" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="564" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="600" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="636" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="672" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="708" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="744" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="780" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="816" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="852" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="888" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="924" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="960" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="996" y="480" width="36" height="36" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="168" y="228" width="288" height="144" rx="0" fill="none" stroke="#63766a" stroke-width="2"/>
+<rect x="456" y="228" width="288" height="144" rx="0" fill="none" stroke="#63766a" stroke-width="2"/>
+<rect x="744" y="228" width="288" height="144" rx="0" fill="none" stroke="#63766a" stroke-width="2"/>
+<rect x="168" y="372" width="288" height="144" rx="0" fill="none" stroke="#63766a" stroke-width="2"/>
+<rect x="456" y="372" width="288" height="144" rx="0" fill="none" stroke="#4e789f" stroke-width="4"/>
+<rect x="744" y="372" width="288" height="144" rx="0" fill="none" stroke="#63766a" stroke-width="2"/>
+<rect x="564" y="444" width="36" height="36" rx="0" fill="#c6e0f3" stroke="#4e789f" stroke-width="3"/>
+<text x="91" y="289" class="label" text-anchor="middle">WG</text>
+<text x="91" y="321" class="small" text-anchor="middle">Y = 0</text>
+<text x="91" y="433" class="label" text-anchor="middle">WG</text>
+<text x="91" y="465" class="small" text-anchor="middle">Y = 1</text>
+<rect x="80" y="548" width="480" height="80" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="100" y="580" class="label" text-anchor="start">gl_WorkGroupID</text>
+<text x="540" y="580" class="math" text-anchor="end">(1, 1, 0)</text>
+<text x="100" y="611" class="small" text-anchor="start">outlined workgroup</text>
+<rect x="640" y="548" width="480" height="80" rx="14" fill="#fff" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="660" y="580" class="label" text-anchor="start">gl_GlobalInvocationID</text>
+<text x="1100" y="580" class="math" text-anchor="end">(11, 6, 0)</text>
+<text x="660" y="611" class="small" text-anchor="start">highlighted cell</text>
+<!-- Local coordinates and the order of X-fastest linear indexing -->
+<rect x="48" y="700" width="1104" height="550" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="744" class="section" text-anchor="start">Inside gl_WorkGroupID = (1, 1, 0)</text>
+<text x="130" y="793" class="small" text-anchor="middle">0</text>
+<text x="190" y="793" class="small" text-anchor="middle">1</text>
+<text x="250" y="793" class="small" text-anchor="middle">2</text>
+<text x="310" y="793" class="label" text-anchor="middle">3</text>
+<text x="370" y="793" class="small" text-anchor="middle">4</text>
+<text x="430" y="793" class="small" text-anchor="middle">5</text>
+<text x="490" y="793" class="small" text-anchor="middle">6</text>
+<text x="550" y="793" class="small" text-anchor="middle">7</text>
+<text x="84" y="848" class="small" text-anchor="end">0</text>
+<rect x="100" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="160" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="220" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="280" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="340" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="400" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="460" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="520" y="810" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<text x="84" y="908" class="small" text-anchor="end">1</text>
+<rect x="100" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="160" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="220" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="280" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="340" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="400" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="460" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="520" y="870" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<text x="84" y="968" class="label" text-anchor="end">2</text>
+<rect x="100" y="930" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="160" y="930" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="220" y="930" width="60" height="60" rx="0" fill="#edf7e6" stroke="#9dbb88" stroke-width="1"/>
+<rect x="280" y="930" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="340" y="930" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="400" y="930" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="460" y="930" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="520" y="930" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<text x="84" y="1028" class="small" text-anchor="end">3</text>
+<rect x="100" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="160" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="220" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="280" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="340" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="400" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="460" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="520" y="990" width="60" height="60" rx="0" fill="#eaf3fb" stroke="#8fb3d2" stroke-width="1"/>
+<rect x="280" y="930" width="60" height="60" rx="0" fill="#c6e0f3" stroke="#4e789f" stroke-width="3"/>
+<text x="130" y="848" class="label" text-anchor="middle">0</text>
+<text x="190" y="848" class="label" text-anchor="middle">1</text>
+<text x="250" y="848" class="label" text-anchor="middle">2</text>
+<text x="310" y="848" class="label" text-anchor="middle">3</text>
+<text x="370" y="848" class="label" text-anchor="middle">4</text>
+<text x="430" y="848" class="label" text-anchor="middle">5</text>
+<text x="490" y="848" class="label" text-anchor="middle">6</text>
+<text x="550" y="848" class="label" text-anchor="middle">7</text>
+<text x="130" y="908" class="label" text-anchor="middle">8</text>
+<text x="190" y="908" class="label" text-anchor="middle">9</text>
+<text x="250" y="908" class="label" text-anchor="middle">10</text>
+<text x="310" y="908" class="label" text-anchor="middle">11</text>
+<text x="370" y="908" class="label" text-anchor="middle">12</text>
+<text x="430" y="908" class="label" text-anchor="middle">13</text>
+<text x="490" y="908" class="label" text-anchor="middle">14</text>
+<text x="550" y="908" class="label" text-anchor="middle">15</text>
+<text x="130" y="968" class="label" text-anchor="middle">16</text>
+<text x="190" y="968" class="label" text-anchor="middle">17</text>
+<text x="250" y="968" class="label" text-anchor="middle">18</text>
+<text x="310" y="968" class="label" text-anchor="middle">19</text>
+<text x="370" y="968" class="label" text-anchor="middle">20</text>
+<text x="430" y="968" class="label" text-anchor="middle">21</text>
+<text x="490" y="968" class="label" text-anchor="middle">22</text>
+<text x="550" y="968" class="label" text-anchor="middle">23</text>
+<text x="130" y="1028" class="label" text-anchor="middle">24</text>
+<text x="190" y="1028" class="label" text-anchor="middle">25</text>
+<text x="250" y="1028" class="label" text-anchor="middle">26</text>
+<text x="310" y="1028" class="label" text-anchor="middle">27</text>
+<text x="370" y="1028" class="label" text-anchor="middle">28</text>
+<text x="430" y="1028" class="label" text-anchor="middle">29</text>
+<text x="490" y="1028" class="label" text-anchor="middle">30</text>
+<text x="550" y="1028" class="label" text-anchor="middle">31</text>
+<text x="660" y="848" class="label" text-anchor="start">gl_LocalInvocationID</text>
+<text x="660" y="890" class="math" text-anchor="start">(3, 2, 0)</text>
+<text x="660" y="948" class="label" text-anchor="start">gl_LocalInvocationIndex</text>
+<text x="660" y="990" class="math" text-anchor="start">19</text>
+<text x="660" y="1038" class="small" text-anchor="start">Green: 19 preceding invocations</text>
+<text x="660" y="1072" class="small" text-anchor="start">X advances first, then Y</text>
+<path d="M100 1066 V1080 H580 V1066" fill="none" stroke="#63766a" stroke-width="2.2"/>
+<text x="340" y="1114" class="label" text-anchor="middle">gl_WorkGroupSize.x = 8</text>
+<text x="80" y="1170" class="math" text-anchor="start">gl_LocalInvocationIndex = 2 × 8 + 3 = 19</text>
+<text x="80" y="1214" class="small" text-anchor="start">2 complete rows of 8, then 3 earlier cells in the current row</text>
+<!-- The same selected invocation expressed in global coordinates -->
+<rect x="48" y="1290" width="1104" height="362" rx="14" fill="#f6f9fb" stroke="#d1dfeb" stroke-width="1.8"/>
+<text x="80" y="1334" class="section" text-anchor="start">Local → global coordinate</text>
+<text x="80" y="1374" class="label" text-anchor="start">gl_GlobalInvocationID =</text>
+<text x="112" y="1410" class="label" text-anchor="start">gl_WorkGroupID × gl_WorkGroupSize + gl_LocalInvocationID</text>
+<text x="112" y="1454" class="math" text-anchor="start">(1, 1, 0) × (8, 4, 1) + (3, 2, 0) = (11, 6, 0)</text>
+<text x="80" y="1510" class="small" text-anchor="start">Global row width = gl_NumWorkGroups.x × gl_WorkGroupSize.x = 3 × 8 = 24</text>
+<text x="80" y="1554" class="math" text-anchor="start">Global linear index = 6 × 24 + 11 = 155</text>
+<text x="80" y="1606" class="small" text-anchor="start">Computed by your shader, not a GLSL built-in. All Z coordinates are zero.</text>
+</svg>
