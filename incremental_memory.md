@@ -125,3 +125,10 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Feedback:** When two formulas appear on the same line, place them on separate lines and center each one.
 - **Change made:** Split the maximum-magnitude and scale definitions into separate display blocks, and did the same for quantization and reconstruction.
 - **Rule for future work:** Give each distinct display formula its own centered line. Use separate `$$` blocks instead of placing independent formulas side by side with spacing commands such as `\qquad`.
+
+## 2026-11-01 — KV cache includes the current token
+
+- **Scope:** Part 3, Chapter 3, concrete decode equation, phase description, and `kv-cache-incremental-decoding.svg`.
+- **Correction:** The four-token decode example computed attention over only positions 1–3 and described the new K/V as saved only for later. In standard GPT-2 causal self-attention, the current token also attends to itself.
+- **Change made:** Extended the worked equation and diagram to K/V positions 1–4, aligned the decode explanation and table, and linked the pinned GPT-2 source that concatenates past and current K/V before attention.
+- **Rule for this example:** Distinguish the three-row incoming cache from the four-row K/V used by the current attention step. Include the current key in the Softmax normalization and the current value in its weighted sum; retaining K/V for future steps does not exclude them from the current step. This applies to the standard causal self-attention illustrated here, not every possible attention mask.

@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="2280" viewBox="0 0 1280 2280" role="img" aria-labelledby="title desc">
   <title id="title">KV cache with hello i am</title>
-  <desc id="desc">A spacious three-stage diagram. The text hello i am is tokenized by GPT-2. Prefill processes all three token embeddings and stores a key and value feature vector for every token at every Transformer layer. A subsequent decode step reads those cached matrices with a fresh query and appends a new key and value row.</desc>
+  <desc id="desc">A spacious three-stage diagram. The text hello i am is tokenized by GPT-2. Prefill processes all three token embeddings and stores a key and value feature vector for every token at every Transformer layer. A subsequent decode step appends the current key and value, then uses a fresh query to attend to all four positions, including the current token. The extended K/V cache is retained for later steps.</desc>
   <defs>
+    <marker id="cache-read" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,6 L6,3 z" fill="#557f40"/></marker>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#516559"/></marker>
     <marker id="green" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L0,8 L8,4 z" fill="#557f40"/></marker>
     <marker id="small-green" markerWidth="5" markerHeight="5" refX="4.5" refY="2.5" orient="auto"><path d="M0,0 L0,5 L5,2.5 z" fill="#557f40"/></marker>
@@ -86,7 +87,7 @@
 
   <!-- decode -->
   <rect x="44" y="1046" width="1192" height="1170" rx="20" fill="#fffaf2" stroke="#ecd7ae" stroke-width="1.7"/>
-  <text x="76" y="1092" class="section">3. Decode, read the K/V cache and append one new row</text>
+  <text x="76" y="1092" class="section">3. Decode, append current K/V and attend to all four rows</text>
   <text x="76" y="1120" class="small">The final prefill position predicts a next token. Assume sampling selects “ a”, GPT-2 token ID 257.</text>
 
   <rect x="100" y="1160" width="205" height="91" rx="15" fill="#fff0d9" stroke="#e8bd7c" stroke-width="1.6"/>
@@ -122,30 +123,33 @@
   <text x="222" y="1901" class="small" text-anchor="middle">history information</text>
 
   <path d="M255 1599 V1642 H466 V1678" class="blue"/>
-  <rect x="410" y="1680" width="548" height="370" rx="19" fill="#fff" stroke="#c6d3bd" stroke-width="1.7"/>
-  <text x="684" y="1720" class="label" text-anchor="middle">Only fresh q₄ reads the cached history</text>
+  <rect x="410" y="1680" width="548" height="390" rx="19" fill="#fff" stroke="#c6d3bd" stroke-width="1.7"/>
+  <text x="684" y="1720" class="label" text-anchor="middle">Fresh q₄ attends to past and current K/V</text>
   <rect x="450" y="1745" width="468" height="45" rx="10" fill="#e9f2fa" stroke="#aac4d8" stroke-width="1.3"/>
   <text x="684" y="1774" class="math" text-anchor="middle">x₄ (B, 1, C) → q₄ (B, 1, dₕ)</text>
-  <rect x="450" y="1810" width="468" height="52" rx="11" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.3"/>
-  <text x="684" y="1843" class="math" text-anchor="middle">K cache (B, 3, dₕ) = [k₁  k₂  k₃]</text>
-  <path d="M684 1862 V1888" class="arrow"/>
-  <text x="684" y="1917" class="math" text-anchor="middle">scores = q₄ K cacheᵀ</text>
-  <text x="684" y="1944" class="small" text-anchor="middle">one score for each earlier token</text>
-  <path d="M684 1954 V1978" class="arrow"/>
-  <text x="684" y="2008" class="math" text-anchor="middle">weights = softmax(scores)</text>
-  <text x="684" y="2035" class="small" text-anchor="middle">then use those weights on V, not K</text>
+  <rect x="450" y="1810" width="468" height="78" rx="11" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.3"/>
+  <text x="684" y="1841" class="math" text-anchor="middle">K₁:₄ = [k₁  k₂  k₃  k₄]</text>
+  <text x="684" y="1870" class="math" text-anchor="middle">V₁:₄ = [v₁  v₂  v₃  v₄]</text>
+  <path d="M684 1892 V1906" class="arrow"/>
+  <text x="684" y="1935" class="math" text-anchor="middle">scores = q₄ K₁:₄ᵀ / √dₕ</text>
+  <text x="684" y="1964" class="small" text-anchor="middle">four scores, including the current token</text>
+  <path d="M684 1974 V1990" class="arrow"/>
+  <text x="684" y="2017" class="math" text-anchor="middle">weights = softmax(scores)</text>
+  <text x="684" y="2045" class="small" text-anchor="middle">combine V₁:₄, including the current v₄</text>
 
-  <rect x="1000" y="1660" width="188" height="168" rx="17" fill="#e9f5df" stroke="#b8d3a8" stroke-width="1.6"/>
-  <text x="1094" y="1697" class="label" text-anchor="middle">append for later</text>
+  <rect x="1000" y="1660" width="188" height="228" rx="17" fill="#e9f5df" stroke="#b8d3a8" stroke-width="1.6"/>
+  <text x="1094" y="1697" class="label" text-anchor="middle">append K/V</text>
   <text x="1094" y="1733" class="math" text-anchor="middle">k₄</text>
   <text x="1094" y="1765" class="math" text-anchor="middle">v₄</text>
-  <text x="1094" y="1804" class="small" text-anchor="middle">extended K and V cache</text>
+  <text x="1094" y="1804" class="small" text-anchor="middle">shape (B, 4, dₕ)</text>
+  <text x="1094" y="1837" class="small" text-anchor="middle">use now, keep for later</text>
+  <path d="M988 1860 H970" fill="none" stroke="#557f40" stroke-width="2.1" marker-end="url(#cache-read)"/>
   <path d="M535 1599 V1640 H1094" class="green-line"/>
   <path d="M815 1599 V1640 H1094" class="green-line"/>
   <path d="M1094 1640 V1658" class="green-small"/>
 
-  <path d="M684 2050 V2080" class="arrow"/>
-  <rect x="410" y="2082" width="548" height="74" rx="16" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.6"/>
-  <text x="684" y="2114" class="math" text-anchor="middle">output = Σᵢ weightsᵢ · vᵢ</text>
-  <text x="684" y="2143" class="small" text-anchor="middle">weighted sum of the cached value feature vectors</text>
+  <path d="M684 2074 V2098" class="arrow"/>
+  <rect x="410" y="2110" width="548" height="74" rx="16" fill="#edf7e6" stroke="#b8d3a8" stroke-width="1.6"/>
+  <text x="684" y="2142" class="math" text-anchor="middle">weighted sum over all four values</text>
+  <text x="684" y="2171" class="small" text-anchor="middle">output = Σᵢ₌₁⁴ weightsᵢ · vᵢ</text>
 </svg>
