@@ -36,13 +36,13 @@ K_{\leq t}=[K_{\text{cache}}; k_t],
 V_{\leq t}=[V_{\text{cache}}; v_t].
 $$
 
-For a concrete cache read, let the processed prompt be `hello i am`, with three cached rows $k_1,k_2,k_3$ and $v_1,v_2,v_3$ at a given layer. During decode, only the newest token's hidden state enters the query projection. Its input has shape $(B, 1, C)$, not $(B, T, C)$, and it produces $q_4$ with shape $(B, 1, d_h)$. This fresh $q_4$ is the only query needed for the next attention row. It creates scores against the old keys, normalizes those scores, then uses the weights to combine the old values:
+For a concrete cache read, let the processed prompt be `hello i am`, with three cached rows $k_1,k_2,k_3$ and $v_1,v_2,v_3$ at a given layer. During decode, only the newest token's hidden state enters the query projection. Its input has shape $(B, 1, C)$, not $(B, T, C)$, and it produces $q_4$ with shape $(B, 1, d_h)$. This fresh $q_4$ is the only query needed for the next attention row. It scores all visible keys, including its own $k_4$, then uses the normalized weights to combine the corresponding values, including $v_4$:
 
 $$
-\operatorname{softmax}\left(\frac{q_4K_{1:3}^{\mathsf T}}{\sqrt{d_h}}\right)V_{1:3}.
+\operatorname{softmax}\left(\frac{q_4K_{1:4}^{\mathsf T}}{\sqrt{d_h}}\right)V_{1:4}.
 $$
 
-The old queries $q_1,q_2,q_3$ do not appear in this expression. They already produced their own output rows during prefill. The current $k_4$ and $v_4$ are appended so that a later query can read them.
+The old queries $q_1,q_2,q_3$ do not appear in this expression. They already produced their own output rows during prefill. Here $K_{1:4}=[k_1,k_2,k_3,k_4]$ and $V_{1:4}=[v_1,v_2,v_3,v_4]$. The current $k_4$ and $v_4$ participate in this attention step and remain cached for later queries. GPT-2’s [attention implementation](https://github.com/openai/gpt-2/blob/9b63575ef42771a015060c964af2c3da4cf7c8ab/src/model.py#L91-L99) concatenates past and current K/V before computing attention.
 
 This state exists at **every Transformer layer**. A cache from layer 4 cannot be used by layer 5, because layer 5 receives a different representation of the token. The output from each layer becomes the input to the next layer, which maintains its own K/V history.
 
@@ -50,7 +50,7 @@ This state exists at **every Transformer layer**. A cache from layer 4 cannot be
 
 Inference has two distinct phases. The example below follows the prompt `hello i am` through both of them.
 
-![A concrete KV cache example. The prompt hello i am is tokenized, prefill writes a key and value feature-vector row for every token at every layer, then decoding uses a new query to read the cached K and V rows before appending a new key and value row.](./assets/chapter-3/kv-cache-incremental-decoding.svg)
+![A concrete KV cache example. The prompt hello i am is tokenized, prefill writes a key and value feature-vector row for every token at every layer, then decoding appends the current key and value and uses a fresh query to attend to all four rows.](./assets/chapter-3/kv-cache-incremental-decoding.svg)
 
 ### 2.1 Prefill: process the prompt {#prefill-process-the-prompt}
 
@@ -64,14 +64,14 @@ The attention work of a full prompt grows roughly quadratically with prompt leng
 
 During **decode**, the model receives only the newest token. In the figure, the sampled token ` a` becomes one embedding row with shape $(B, 1, C)$. At layer $ell$, the query projection therefore produces only $q_4$ with shape $(B, 1, d_h)$, rather than queries for all earlier tokens.
 
-This new query scores the cached keys, producing one score for each earlier token. Softmax turns those scores into weights, and the weights combine the cached values. The historical queries are not read again. The new $k_4$ and $v_4$ are appended to that layer's cache, changing its shape from $(B, 3, d_h)$ to $(B, 4, d_h)$ for the next decode step. For a cache length $T$, each new token's attention reads $T$ cached positions, so its attention cost grows roughly linearly with the current context length.
+The new $k_4$ and $v_4$ extend that layer’s K/V history from $(B, 3, d_h)$ to $(B, 4, d_h)$. The fresh query scores all four keys, including $k_4$. Softmax turns those scores into weights, and the weights combine all four values, including $v_4$. The historical queries are not read again, and the four-row K/V cache remains available for the next decode step. For a cache length $T$, each new token's attention reads $T$ cached positions, so its attention cost grows roughly linearly with the current context length.
 
 Without a cache, generating token $t$ would rerun the entire $t$-token prefix through every layer. The cache avoids recomputing the projections and intermediate work for the first $t-1$ tokens. It does **not** make attention constant-time: the new query must still compare with the context that it is allowed to read.
 
 | Phase | Tokens processed per forward pass | Main job | Cache effect |
 | --- | ---: | --- | --- |
 | Prefill | Whole prompt | Build the initial cache | Write one K/V entry per prompt token and layer |
-| Decode | Usually one new token | Produce the next token | Read prior K/V entries, then append one entry |
+| Decode | Usually one new token | Produce the next token | Attend to prior and current K/V; retain the extended cache |
 
 ## 3. Cache layout and memory cost
 
