@@ -132,3 +132,10 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Correction:** The four-token decode example computed attention over only positions 1–3 and described the new K/V as saved only for later. In standard GPT-2 causal self-attention, the current token also attends to itself.
 - **Change made:** Extended the worked equation and diagram to K/V positions 1–4, aligned the decode explanation and table, and linked the pinned GPT-2 source that concatenates past and current K/V before attention.
 - **Rule for this example:** Distinguish the three-row incoming cache from the four-row K/V used by the current attention step. Include the current key in the Softmax normalization and the current value in its weighted sum; retaining K/V for future steps does not exclude them from the current step. This applies to the standard causal self-attention illustrated here, not every possible attention mask.
+
+## 2026-11-02 — Match the vocabulary output to the executed example
+
+- **Scope:** Part 1, Chapter 1, section 3 vocabulary output only.
+- **Correction:** The displayed output put the characters before a bare `62`, although the code prints `vocabulary size: 62` first. It also omitted the blank line produced by the corpus's leading sorted newline character.
+- **Change made:** Regenerated the output from the unchanged Python snippet and repository corpus; briefly explained the newline using Python's `print` documentation.
+- **Rule for this example:** Capture sample output from the adjacent code using the recorded corpus version. Preserve labels, print order, and significant blank lines; do not infer a new vocabulary or change the token IDs to repair a display mismatch.
