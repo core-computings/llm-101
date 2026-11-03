@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-11-03 — Preserve trained weights when extending the Bigram class
+
+- **Scope:** Part 1, Chapter 2, section 3 generation example.
+- **Correction:** Redefining `BigramLanguageModel` with a `generate` method left the trained `model` as an instance of the earlier class. Running the examples in order raised `AttributeError` at `model.generate`.
+- **Change made:** Saved the trained state, instantiated the extended class, and loaded that state before prediction. Linked Python's class-definition semantics and PyTorch's state-restoration documentation.
+- **Rule for this example:** When a later snippet redefines a model class, explicitly restore the trained parameters into an instance of that class before using its new methods. Verify sequential execution and parameter preservation; redefining a class name does not update existing instances.
+
 ## 2026-10-28 — GPU Computing section
 
 - **Local preview access (2026-10-31):** The user could not open the local site. The development server responded on IPv6 `::1` but IPv4 requests failed. Restarted it with `--host 127.0.0.1 --no-open` and verified the Memory Model route returned HTTP 200. For local preview in this environment, use an explicit loopback address and verify the exact link supplied to the user; do not infer IPv4 availability from a successful `localhost` check.
