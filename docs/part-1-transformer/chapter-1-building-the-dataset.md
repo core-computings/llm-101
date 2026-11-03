@@ -49,11 +49,12 @@ print("".join(chars))
 ```
 
 ```text
+vocabulary size: 62
+
  !"',-.:;?ABCDEFGHIJKLMNOPQRSTUVWYabcdefghijklmnopqrstuvwxyzé
-62
 ```
 
-Spaces, newlines, punctuation, and uppercase letters are all characters and therefore receive their own IDs. This vocabulary is specific to the corpus: a character that never appears in the training text cannot be encoded by this mapping.
+The blank line comes from the newline character in `chars`, rendered by Python’s [`print`](https://docs.python.org/3/library/functions.html#print). Spaces, newlines, punctuation, and uppercase letters are all characters and therefore receive their own IDs. This vocabulary is specific to the corpus: a character that never appears in the training text cannot be encoded by this mapping.
 
 ## 4. Encode and decode
 
