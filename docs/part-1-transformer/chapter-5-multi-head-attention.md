@@ -25,6 +25,8 @@ $$
 
 In this implementation, for example, if `n_embd = 64` and **4** heads use `head_size = 16`. Each `Head` turns an input of shape `(B, T, 64)` into `(B, T, 16)`. Concatenating the four results restores `(B, T, 64)`, and `self.proj` learns how information from the heads should be combined before the result continues through the Transformer block.
 
+The attention scale uses the projected query/key width, `k.shape[-1] = head_size`. With 16 channels per head, multiply the scores by `1 / √16 = 0.25` ([Vaswani et al., Section 3.2.1](https://arxiv.org/html/1706.03762v7#S3.SS2.SSS1)).
+
 The following example makes the tensor shapes in that diagram concrete.
 
 ![Four multi-head attention heads each map an input of shape B by T by 64 to B by T by 16. Their outputs are concatenated to B by T by 64, then an output projection mixes the heads.](./assets/chapter-5/multi-head-attention-example.svg)
@@ -44,14 +46,14 @@ class Head(nn.Module):
 
     def forward(self, x):
         B,T,C = x.shape
-        k = self.key(x)   # (B,T,C)
-        q = self.query(x) # (B,T,C)
-        wei = q @ k.transpose(-2,-1) * C**-0.5 # (B, T, C) @ (B, C, T) -> (B, T, T)
+        k = self.key(x)   # (B,T,head_size)
+        q = self.query(x) # (B,T,head_size)
+        wei = q @ k.transpose(-2,-1) * k.shape[-1]**-0.5 # (B, T, head_size) @ (B, head_size, T) -> (B, T, T)
         wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf')) # (B, T, T)
         wei = F.softmax(wei, dim=-1) # (B, T, T)
         wei = self.dropout(wei)
-        v = self.value(x) # (B,T,C)
-        out = wei @ v # (B, T, T) @ (B, T, C) -> (B, T, C)
+        v = self.value(x) # (B,T,head_size)
+        out = wei @ v # (B, T, T) @ (B, T, head_size) -> (B, T, head_size)
         return out
 
 class MultiHeadAttention(nn.Module):

@@ -139,3 +139,10 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Correction:** The displayed output put the characters before a bare `62`, although the code prints `vocabulary size: 62` first. It also omitted the blank line produced by the corpus's leading sorted newline character.
 - **Change made:** Regenerated the output from the unchanged Python snippet and repository corpus; briefly explained the newline using Python's `print` documentation.
 - **Rule for this example:** Capture sample output from the adjacent code using the recorded corpus version. Preserve labels, print order, and significant blank lines; do not infer a new vocabulary or change the token IDs to repair a display mismatch.
+
+## 2026-11-05 — Scale multi-head scores by the projected head width
+
+- **Scope:** Part 1, Chapters 5–6, the duplicated `Head` implementation and its shape annotations.
+- **Correction:** `C` from `x.shape` is the input embedding width, but the code used `C**-0.5` to scale dot products whose query/key width is `head_size`. With 64 input channels and 16 channels per head, it multiplied by 0.125 instead of 0.25.
+- **Change made:** Used `k.shape[-1]**-0.5` in both copies, aligned the projected tensor comments, and added a concise explanation linked to the original Transformer paper.
+- **Rule for these examples:** Derive the standard attention scale from the projected query/key dimension. Keep input width and head width distinct in code and comments, and synchronize repeated implementations of the same operation. This correction concerns the standard scaled dot-product attention taught here; it does not rule out explicitly specified alternative scales.
