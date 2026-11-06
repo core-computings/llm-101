@@ -114,9 +114,13 @@ class BigramLanguageModel(nn.Module):
         return idx
 ```
 
-After training, start with a one-token prompt and repeat that predict-and-append loop for as many new tokens as you want to generate:
+Redefining a [Python class](https://docs.python.org/3/reference/compound_stmts.html#class-definitions) does not add methods to existing instances. Create an instance of the extended class and restore the trained weights with [`load_state_dict`](https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended), then generate from a one-token prompt:
 
 ```python
+trained_weights = model.state_dict()
+model = BigramLanguageModel(vocab_size)
+model.load_state_dict(trained_weights)
+
 def predict(token_number):
     inputs = torch.zeros((1, 1), dtype=torch.long)
     outputs = model.generate(inputs, max_new_tokens=token_number)
