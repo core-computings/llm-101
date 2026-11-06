@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-11-06 — Loaded weight sharing does not establish checkpoint storage
+
+- **Scope:** Part 2, Chapter 8, section 1 explanation of `state_dict()` and `data_ptr()`.
+- **Correction:** The article inferred that the checkpoint file stores no duplicate weights from equal pointers in a loaded model's state dictionary. Transformers can tie weights during loading regardless of whether the file contains separate copies.
+- **Change made:** Limited the pointer result to shared storage in the loaded model, linked PyTorch's state-dictionary contract and pinned Transformers loading code, and aligned the introduction to the explicit tying assignment.
+- **Rule for this example:** Distinguish model parameter identity, state-dictionary storage sharing, and checkpoint representation on disk. A loaded model's pointers establish in-memory aliasing; inspect the serialized artifact separately before making claims about its storage. This correction leaves GPT-2's weight tying and the explicit assignment unchanged.
+
 ## 2026-11-03 — Preserve trained weights when extending the Bigram class
 
 - **Scope:** Part 1, Chapter 2, section 3 generation example.
