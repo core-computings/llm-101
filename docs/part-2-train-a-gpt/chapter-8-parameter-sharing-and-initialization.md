@@ -34,9 +34,9 @@ tensor(True)
 133296384950227
 ```
 
-The equality check returns `True`, showing that the two tensors contain the same values. More importantly, the two `data_ptr()` calls return the same memory address. This proves that the checkpoint does not merely store two identical copies: `lm_head.weight` and `transformer.wte.weight` point to the same underlying parameter, so an update through either path changes both uses simultaneously.
+The equality check returns `True`, showing that the two tensors contain the same values. The matching `data_ptr()` values show that these entries share storage in the loaded model. PyTorch's [`state_dict()`](https://docs.pytorch.org/docs/2.2/generated/torch.nn.Module.html#torch.nn.Module.state_dict) holds references to model parameters and buffers, and Transformers [ties the embedding and output weights during loading](https://github.com/huggingface/transformers/blob/v4.44.2/src/transformers/modeling_utils.py#L3643-L3644). These checks establish in-memory sharing, but do not prove how many copies the checkpoint file stores on disk.
 
-The checkpoint demonstrates the desired behavior; our own `GPT` implementation must explicitly create it. The two modules are constructed first because both need a weight with shape `[vocab_size, n_embd]`. We then replace the embedding module's independently initialized weight with the language-model head's weight.
+The loaded model demonstrates the desired behavior; our own `GPT` implementation must explicitly create it. The two modules are constructed first because both need a weight with shape `[vocab_size, n_embd]`. We then replace the embedding module's independently initialized weight with the language-model head's weight.
 
 ```python
 class GPT(nn.Module):
