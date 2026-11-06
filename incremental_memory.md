@@ -133,6 +133,13 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Change made:** Split the maximum-magnitude and scale definitions into separate display blocks, and did the same for quantization and reconstruction.
 - **Rule for future work:** Give each distinct display formula its own centered line. Use separate `$$` blocks instead of placing independent formulas side by side with spacing commands such as `\qquad`.
 
+## 2026-11-04 — Bigram logits follow the preceding batch dimensions
+
+- **Scope:** Part 1, Chapter 2, section 1 output shape and its explanation.
+- **Correction:** The example displayed `(32, 62)` logits, but the preceding chapter supplies a batch with `B = 2` and `T = 8`. The forward pass with targets flattens `(2, 8, 62)` to `(16, 62)`.
+- **Change made:** Corrected the displayed shape and linked PyTorch's `view` documentation in a concise explanation of the batch/time flattening. Kept the code and the separate training batch size unchanged.
+- **Rule for this example:** Derive the displayed dimensions from the batch actually passed to the model at that point in the sequential walkthrough. Distinguish lookup output `(B, T, C)` from the returned `(B * T, C)` when targets are supplied; later changes to `batch_size` do not resize an existing batch. This correction does not validate the sample loss values.
+
 ## 2026-11-01 — KV cache includes the current token
 
 - **Scope:** Part 3, Chapter 3, concrete decode equation, phase description, and `kv-cache-incremental-decoding.svg`.

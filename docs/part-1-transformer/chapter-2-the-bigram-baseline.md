@@ -45,9 +45,11 @@ print(loss)
 ```
 
 ```text
-torch.Size([32, 62])
+torch.Size([16, 62])
 tensor(4.7232, grad_fn=<NllLossBackward0>)
 ```
+
+With the previous chapter's batch (`B = 2`, `T = 8`), the lookup produces `(2, 8, 62)` logits. When targets are supplied, [`view(B * T, C)`](https://docs.pytorch.org/docs/2.2/generated/torch.Tensor.view.html) flattens the batch and time axes to `(16, 62)` for cross-entropy.
 
 ## 2. Train Bigram model
 
