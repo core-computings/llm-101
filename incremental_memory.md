@@ -153,3 +153,10 @@ Each entry records the date, scope, feedback, change made, and a concrete rule f
 - **Correction:** The displayed output put the characters before a bare `62`, although the code prints `vocabulary size: 62` first. It also omitted the blank line produced by the corpus's leading sorted newline character.
 - **Change made:** Regenerated the output from the unchanged Python snippet and repository corpus; briefly explained the newline using Python's `print` documentation.
 - **Rule for this example:** Capture sample output from the adjacent code using the recorded corpus version. Preserve labels, print order, and significant blank lines; do not infer a new vocabulary or change the token IDs to repair a display mismatch.
+
+## 2026-11-07 — Generation length is capped, not guaranteed
+
+- **Scope:** Part 2, Chapter 1, section 2 Hugging Face generation explanation.
+- **Correction:** The prose said generation continues until the requested number of new tokens has been produced. With the example's EOS-enabled generation, `max_new_tokens=30` is only an upper bound; an EOS token can end a continuation earlier.
+- **Change made:** Described EOS and the token limit as stopping conditions, explicitly called 30 an upper bound, and linked the versioned Transformers generation documentation. Kept the code and sample completions unchanged.
+- **Rule for this example:** Distinguish maximum generation length from a guaranteed output length. Check the configured EOS and stopping behavior before describing how long `generate` or a text-generation pipeline runs; do not apply this EOS behavior to custom fixed-step loops or configurations that disable EOS stopping.

@@ -36,9 +36,9 @@ transformer.h.0.ln_2.weight torch.Size([768])
 
 ## 2. Generate text
 
-Once the checkpoint is loaded, GPT-2 can generate text one token at a time. The `pipeline` helper bundles the GPT-2 model with its tokenizer: it converts the prompt into token IDs, runs the model, samples a next token, appends that token to the context, and repeats the process until the requested number of new tokens has been produced.
+Once the checkpoint is loaded, GPT-2 can generate text one token at a time. The `pipeline` helper bundles the GPT-2 model with its tokenizer: it converts the prompt into token IDs, runs the model, samples a next token, appends that token to the context, and repeats until an end-of-sequence (EOS) token is generated or the new-token limit is reached.
 
-Here `max_new_tokens=30` limits each completion to 30 newly generated tokens, while `num_return_sequences=3` asks for three independent continuations of the same prompt. Setting the random seed makes the sampling choices reproducible for this example; different library versions or generation settings may still produce slightly different text.
+Here [`max_new_tokens=30`](https://huggingface.co/docs/transformers/v4.44.2/en/main_classes/text_generation#transformers.GenerationConfig) sets an upper bound of 30 new tokens per completion, while `num_return_sequences=3` asks for three independent continuations of the same prompt. Setting the random seed makes the sampling choices reproducible for this example; different library versions or generation settings may still produce slightly different text.
 
 ```python
 from transformers import pipeline, set_seed
