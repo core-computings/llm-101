@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-11-08 — Distinguish GPT-2 parameter names from weight layouts
+
+- **Scope:** Part 2, Chapter 2, closing checkpoint-compatibility explanation.
+- **Correction:** Matching module names were said to give the custom model the same tensor shapes as pretrained GPT-2. Hugging Face's GPT-2 `Conv1D` stores projection weights in the opposite orientation to the example's `nn.Linear`; the QKV matrices are `[768, 2304]` and `[2304, 768]`, respectively.
+- **Change made:** Replaced the blanket shape-equivalence claim with the two layouts, the QKV example, primary-source links, and a reference to Chapter 3's existing transpose conversion. Code and diagrams are unchanged.
+- **Rule for this explanation:** Check storage orientation as well as parameter names when describing checkpoint compatibility. The four projection weights in each GPT-2 block need transposition for this conversion, including the square attention output matrix; matching shape alone does not establish matching orientation. This applies to the illustrated Hugging Face `Conv1D` to `nn.Linear` conversion.
+
 ## 2026-11-03 — Preserve trained weights when extending the Bigram class
 
 - **Scope:** Part 1, Chapter 2, section 3 generation example.
