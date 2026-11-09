@@ -50,6 +50,8 @@ For the first row, the model receives `[5962, 22307, 25]` and is trained to pred
 
 The `forward` function now accepts `targets` in addition to the input token IDs. Its logits have shape `[B, T, 50257]`: each of the `B × T` positions produces one score for every possible vocabulary token. The target tensor has shape `[B, T]`, containing the correct next-token ID for each corresponding position.
 
+Keep target-specific diagnostics inside the `targets is not None` branch so generation calls such as `model(x)` can still return `(logits, None)`, following the [reference forward method](https://github.com/karpathy/build-nanogpt/blob/6104ab1b53920f6e2159749676073ff7d815c1fa/train_gpt2.py#L100-L118).
+
 ```python
 class GPT(nn.Module):
 
@@ -74,8 +76,8 @@ class GPT(nn.Module):
         logits = self.lm_head(x) # (B, T, vocab_size)
         loss = None
         print("logits shape:", logits.shape)
-        print("targets shape:", targets.shape)
         if targets is not None:
+            print("targets shape:", targets.shape)
             loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1))
         return logits, loss
 ```
