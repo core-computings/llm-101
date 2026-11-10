@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-11-10 — Match the training-speed explanation to its displayed log
+
+- **Scope:** Part 2, Chapter 7, section 2 timing and throughput explanation.
+- **Correction:** The prose described later steps as 160–170 ms and roughly 3,000 tokens/s, while the displayed log reports 35.70–35.88 ms and roughly 14,300 tokens/s for 512 tokens per step.
+- **Change made:** Aligned the explanation with the displayed first-step and later logged timings, showed the tokens/s calculation, and linked PyTorch's CUDA synchronization documentation. Kept the code and sample log unchanged.
+- **Rule for this example:** Derive timing summaries from the adjacent log and verify `B * T / elapsed_seconds`, accounting for printed rounding. Scope these numbers to the displayed run; arithmetic consistency does not reproduce the benchmark, establish its hardware, or prove the cause of a slower first step.
+
 ## 2026-11-03 — Preserve trained weights when extending the Bigram class
 
 - **Scope:** Part 1, Chapter 2, section 3 generation example.
