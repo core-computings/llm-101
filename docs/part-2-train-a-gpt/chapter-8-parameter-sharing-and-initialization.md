@@ -120,7 +120,7 @@ std of x:  tensor(9.8059)
 std of y:  tensor(1.0004)
 ```
 
-The vector `x` adds 100 independent random updates with standard deviation 1. Variances add, so its variance grows from roughly 1 to roughly 100; its standard deviation therefore grows to `√100 ≈ 10`, matching the printed value `9.8059`. This is the same accumulation effect that can occur when every residual branch adds an unscaled update to the Transformer residual stream.
+The vector `x` starts as a [zero vector](https://github.com/pytorch/pytorch/blob/v2.2.2/torch/_torch_docs.py#L12276-L12302), so its initial variance is 0. Each independent [standard-normal update](https://github.com/pytorch/pytorch/blob/v2.2.2/torch/_torch_docs.py#L9202-L9215) adds 1 to the variance; after 100 updates, the theoretical variance is 100 and the standard deviation is `√100 = 10`, consistent with the sample value `9.8059`. This is the same accumulation effect that can occur when every residual branch adds an unscaled update to the Transformer residual stream.
 
 For `y`, each update is first multiplied by `n ** -0.5`, which is `1 / √100`. Each individual update now has variance `1 / 100`; after summing 100 of them, the total variance remains about 1, and the output standard deviation stays near 1. The printed `1.0004` demonstrates this directly.
 
