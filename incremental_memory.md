@@ -4,6 +4,13 @@ This file records user corrections and revision requests for generated work in t
 
 Each entry records the date, scope, feedback, change made, and a concrete rule for future work. Refine an existing entry for the same lesson instead of duplicating it. Keep preferences scoped to the context in which they were requested.
 
+## 2026-11-11 — Start the zero-initialized random-walk variance at zero
+
+- **Scope:** Part 2, Chapter 8, section 2's 100-update toy example.
+- **Correction:** The explanation said `x`'s variance grows from roughly 1, but `torch.zeros(768)` has variance 0 before any updates. Variance 1 applies after the first independent standard-normal update.
+- **Change made:** Stated the initial variance of 0 and the theoretical variance of 100 after 100 updates, distinguished the theoretical standard deviation from the displayed sample estimate, and linked pinned PyTorch definitions. Code and sample output are unchanged.
+- **Rule for this example:** Derive the variance from the actual initializer and update count. For independent unit-variance updates added to zero, the theoretical variance after `m` updates is `m`; keep this toy calculation separate from claims about a full Transformer's residual stream.
+
 ## 2026-11-03 — Preserve trained weights when extending the Bigram class
 
 - **Scope:** Part 1, Chapter 2, section 3 generation example.
