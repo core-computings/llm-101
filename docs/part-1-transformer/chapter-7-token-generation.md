@@ -10,7 +10,7 @@ class BigramLanguageModel(nn.Module):
 
     def __init__(self):
         super().__init__()
-        # each token directly reads off the logits for the next token from a lookup table
+        # each token ID looks up an n_embd-dimensional feature vector
         self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
         self.position_embedding_table = nn.Embedding(block_size, n_embd)
         self.blocks = nn.Sequential(*[Block(n_embd, n_head=n_head) for _ in range(n_layer)])
@@ -55,6 +55,8 @@ class BigramLanguageModel(nn.Module):
             idx = torch.cat((idx, idx_next), dim=1) # (B, T+1)
         return idx
 ```
+
+The [token embedding lookup](https://github.com/pytorch/pytorch/blob/v2.2.2/torch/nn/modules/sparse.py#L12-L38) returns `n_embd` features per token. After adding position embeddings, the Transformer blocks and final LayerNorm process these features before `lm_head` projects them to `vocab_size` logits.
 
 Token generation is an autoregressive loop. Start with the tokens generated so far and keep only the most recent `block_size` tokens, because that is the largest context the model was trained to read. The model produces logits for every position in that context, but the final row is the distribution for the token that comes **after the full context**. Softmax turns that row into probabilities, `torch.multinomial` samples one next token, and the token is appended to the sequence. Repeating this loop produces one token at a time.
 
